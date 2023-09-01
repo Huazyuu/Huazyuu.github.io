@@ -8,6 +8,27 @@
 ]]></content>
   </entry>
   <entry>
+    <title>9.1leetcode2240</title>
+    <url>/2023/09/01/leetcode9-1/</url>
+    <content><![CDATA[<p>一个整数 <code>total</code> ，表示你拥有的总钱数。同时给你两个整数 <code>cost1</code> 和 <code>cost2</code> ，分别表示一支钢笔和一支铅笔的价格。你可以花费你部分或者全部的钱，去买任意数目的两种笔。</p>
+<p>请你返回购买钢笔和铅笔的 <strong>不同方案数目</strong> 。</p>
+<span id="more"></span>
+
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">输入：total = 20, cost1 = 10, cost2 = 5</span><br><span class="line">输出：9</span><br><span class="line">解释：一支钢笔的价格为 10 ，一支铅笔的价格为 5 。</span><br><span class="line">- 如果你买 0 支钢笔，那么你可以买 0 ，1 ，2 ，3 或者 4 支铅笔。</span><br><span class="line">- 如果你买 1 支钢笔，那么你可以买 0 ，1 或者 2 支铅笔。</span><br><span class="line">- 如果你买 2 支钢笔，那么你没法买任何铅笔。</span><br><span class="line">所以买钢笔和铅笔的总方案数为 5 + 3 + 1 = 9 种。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">输入：total = 5, cost1 = 10, cost2 = 10</span><br><span class="line">输出：1</span><br><span class="line">解释：钢笔和铅笔的价格都为 10 ，都比拥有的钱数多，所以你没法购买任何文具。所以只有 1 种方案：买 0 支钢笔和 0 支铅笔。</span><br></pre></td></tr></table></figure>
+
+<p><strong>解答:</strong></p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="comment">// 2240  2023-09-01 09:08:04</span></span><br><span class="line"><span class="comment">// leetcode submit region begin(Prohibit modification and deletion)</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">waysToBuyPensPencils</span><span class="params">(total <span class="type">int</span>, cost1 <span class="type">int</span>, cost2 <span class="type">int</span>)</span></span> <span class="type">int64</span> &#123;</span><br><span class="line">	ret, nums := <span class="number">0</span>, <span class="number">0</span></span><br><span class="line">	<span class="keyword">for</span> nums*cost1 &lt;= total &#123;</span><br><span class="line">		ret += (total - nums*cost1) / cost2+<span class="number">1</span></span><br><span class="line">		nums++</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="type">int64</span>(ret)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//leetcode submit region end(Prohibit modification and deletion)</span></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <tags>
+        <tag>算法-数学问题</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>gin</title>
     <url>/2023/08/31/gin/</url>
     <content><![CDATA[<h1 id="Gin-框架的使用"><a href="#Gin-框架的使用" class="headerlink" title="Gin 框架的使用"></a>Gin 框架的使用</h1><p><strong>Gin</strong> 是一个用 <strong>Go (Golang)</strong> 编写的 HTTP Web 框架。 它具有类似 Martini 的 API，但性能比 Martini 快 40 倍。如果你需要极好的性能</p>
@@ -64,25 +85,6 @@
       <tags>
         <tag>GoWeb</tag>
         <tag>Gin</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>9.1leetcode2240</title>
-    <url>/2023/09/01/leetcode9-1/</url>
-    <content><![CDATA[<p>一个整数 <code>total</code> ，表示你拥有的总钱数。同时给你两个整数 <code>cost1</code> 和 <code>cost2</code> ，分别表示一支钢笔和一支铅笔的价格。你可以花费你部分或者全部的钱，去买任意数目的两种笔。</p>
-<p>请你返回购买钢笔和铅笔的 <strong>不同方案数目</strong> 。</p>
-<p><strong>示例 1：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">输入：total = 20, cost1 = 10, cost2 = 5</span><br><span class="line">输出：9</span><br><span class="line">解释：一支钢笔的价格为 10 ，一支铅笔的价格为 5 。</span><br><span class="line">- 如果你买 0 支钢笔，那么你可以买 0 ，1 ，2 ，3 或者 4 支铅笔。</span><br><span class="line">- 如果你买 1 支钢笔，那么你可以买 0 ，1 或者 2 支铅笔。</span><br><span class="line">- 如果你买 2 支钢笔，那么你没法买任何铅笔。</span><br><span class="line">所以买钢笔和铅笔的总方案数为 5 + 3 + 1 = 9 种。</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 2：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">输入：total = 5, cost1 = 10, cost2 = 10</span><br><span class="line">输出：1</span><br><span class="line">解释：钢笔和铅笔的价格都为 10 ，都比拥有的钱数多，所以你没法购买任何文具。所以只有 1 种方案：买 0 支钢笔和 0 支铅笔。</span><br></pre></td></tr></table></figure>
-
-<p><strong>解答:</strong></p>
-<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="comment">// 2240  2023-09-01 09:08:04</span></span><br><span class="line"><span class="comment">// leetcode submit region begin(Prohibit modification and deletion)</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">waysToBuyPensPencils</span><span class="params">(total <span class="type">int</span>, cost1 <span class="type">int</span>, cost2 <span class="type">int</span>)</span></span> <span class="type">int64</span> &#123;</span><br><span class="line">	ret, nums := <span class="number">0</span>, <span class="number">0</span></span><br><span class="line">	<span class="keyword">for</span> nums*cost1 &lt;= total &#123;</span><br><span class="line">		ret += (total - nums*cost1) / cost2+<span class="number">1</span></span><br><span class="line">		nums++</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="type">int64</span>(ret)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//leetcode submit region end(Prohibit modification and deletion)</span></span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <tags>
-        <tag>算法-数学问题</tag>
       </tags>
   </entry>
 </search>
