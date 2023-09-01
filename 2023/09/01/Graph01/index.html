@@ -20,22 +20,27 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideDownIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="图论图（Graph）是由顶点的有穷非空集合和顶点之间边的集合组成 通常表示为：**G(V,E)**，  G表示一个图V是图G中顶点的集合E是图G中边的集合 在图中的数据元素，我们称之为顶点（Vertex），顶点集合有穷非空。在图中，任意两个顶点之间都可能有关系，顶点之间的逻辑关系用边来表示，边集可以是空的。 图按照边的有无方向分为无向图和有向图。无向图由顶点和边组成，有向图由顶点和弧构成。弧有弧尾">
+  <meta name="description" content="图论开始图论的学习,主要参考书籍《Hello Algorithm》《代码随想录》">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Graph01">
-<meta property="og:url" content="http://example.com/2023/09/01/Graph/index.html">
+<meta property="og:url" content="http://example.com/2023/09/01/Graph01/index.html">
 <meta property="og:site_name" content="GolangLearn">
-<meta property="og:description" content="图论图（Graph）是由顶点的有穷非空集合和顶点之间边的集合组成 通常表示为：**G(V,E)**，  G表示一个图V是图G中顶点的集合E是图G中边的集合 在图中的数据元素，我们称之为顶点（Vertex），顶点集合有穷非空。在图中，任意两个顶点之间都可能有关系，顶点之间的逻辑关系用边来表示，边集可以是空的。 图按照边的有无方向分为无向图和有向图。无向图由顶点和边组成，有向图由顶点和弧构成。弧有弧尾">
+<meta property="og:description" content="图论开始图论的学习,主要参考书籍《Hello Algorithm》《代码随想录》">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/pic/graph01.png">
+<meta property="og:image" content="http://example.com/pic/Graph/graph01.png">
+<meta property="og:image" content="http://example.com/pic/Graph/graph02.png">
+<meta property="og:image" content="http://example.com/pic/Graph/graph03.png">
+<meta property="og:image" content="http://example.com/pic/Graph/graph04.png">
+<meta property="og:image" content="http://example.com/pic/Graph/graph05.png">
+<meta property="og:image" content="http://example.com/pic/Graph/graph06.png">
 <meta property="article:published_time" content="2023-09-01T05:29:59.000Z">
-<meta property="article:modified_time" content="2023-09-01T05:55:29.274Z">
+<meta property="article:modified_time" content="2023-09-01T10:23:32.851Z">
 <meta property="article:author" content="zyuu">
-<meta property="article:tag" content="graph">
+<meta property="article:tag" content="Graph">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/pic/graph01.png">
+<meta name="twitter:image" content="http://example.com/pic/Graph/graph01.png">
 
-<link rel="canonical" href="http://example.com/2023/09/01/Graph/">
+<link rel="canonical" href="http://example.com/2023/09/01/Graph01/">
 
 
 <script id="page-configurations">
@@ -196,7 +201,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/01/Graph/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/01/Graph01/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -220,7 +225,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2023-09-01 13:29:59 / 修改时间：13:55:29" itemprop="dateCreated datePublished" datetime="2023-09-01T13:29:59+08:00">2023-09-01</time>
+              <time title="创建时间：2023-09-01 13:29:59 / 修改时间：18:23:32" itemprop="dateCreated datePublished" datetime="2023-09-01T13:29:59+08:00">2023-09-01</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -228,7 +233,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a>
+                  <a href="/categories/Algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
                 </span>
             </span>
 
@@ -243,17 +248,54 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="图论"><a href="#图论" class="headerlink" title="图论"></a>图论</h1><p>图（Graph）是由顶点的有穷非空集合和顶点之间边的集合组成</p>
-<p>通常表示为：**G(V,E)**，</p>
-<p><img src="/./../pic/graph01.png" alt="graph01"></p>
+        <h1 id="图论"><a href="#图论" class="headerlink" title="图论"></a>图论</h1><p>开始图论的学习,主要参考书籍《Hello Algorithm》《代码随想录》</p>
+<span id="more"></span>
+
+<h2 id="图的简介"><a href="#图的简介" class="headerlink" title="图的简介"></a>图的简介</h2><p>图（Graph）是由顶点的有穷非空集合和顶点之间边的集合组成</p>
+<p><img src="/./../pic/Graph/graph01.png" alt="graph01"></p>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">V</span><span class="operator">=</span><span class="punctuation">&#123;</span><span class="number">1</span><span class="operator">,</span><span class="number">2</span><span class="operator">,</span><span class="number">3</span><span class="operator">,</span><span class="number">4</span><span class="operator">,</span><span class="number">5</span><span class="punctuation">&#125;</span></span><br><span class="line"><span class="built_in">E</span><span class="operator">=</span><span class="punctuation">&#123;</span><span class="punctuation">(</span><span class="number">1</span><span class="operator">,</span><span class="number">2</span><span class="punctuation">)</span><span class="operator">,</span><span class="punctuation">(</span><span class="number">1</span><span class="operator">,</span><span class="number">3</span><span class="punctuation">)</span><span class="operator">,</span><span class="punctuation">(</span><span class="number">1</span><span class="operator">,</span><span class="number">5</span><span class="punctuation">)</span><span class="operator">,</span><span class="punctuation">(</span><span class="number">2</span><span class="operator">,</span><span class="number">3</span><span class="punctuation">)</span><span class="operator">,</span><span class="punctuation">(</span><span class="number">2</span><span class="operator">,</span><span class="number">4</span><span class="punctuation">)</span><span class="operator">,</span><span class="punctuation">(</span><span class="number">2</span><span class="operator">,</span><span class="number">5</span><span class="punctuation">)</span><span class="operator">,</span><span class="punctuation">(</span><span class="number">4</span><span class="operator">,</span><span class="number">5</span><span class="punctuation">)</span><span class="punctuation">&#125;</span></span><br><span class="line"><span class="variable">G</span><span class="operator">=</span><span class="punctuation">&#123;</span><span class="variable">V</span><span class="operator">,</span><span class="built_in">E</span><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>通常表示为：<strong>G(V,E)</strong></p>
 <p><strong>G表示一个图</strong><br><strong>V是图G中顶点的集合</strong><br><strong>E是图G中边的集合</strong></p>
 <p>在图中的数据元素，我们称之为顶点（Vertex），顶点集合有穷非空。在图中，任意两个顶点之间都可能有关系，顶点之间的逻辑关系用边来表示，边集可以是空的。</p>
-<p>图按照边的有无方向分为<strong>无向图</strong>和<strong>有向图</strong>。无向图由顶点和边组成，有向图由顶点和弧构成。弧有弧尾和弧头之分，带箭头一端为弧头。</p>
-<p>图按照边或弧的多少分<strong>稀疏图</strong>和稠密图。如果图中的任意两个顶点之间都存在边叫做完全图，有向的叫有向完全图。若无重复的边或顶点到自身的边则叫简单图。</p>
-<p>图中顶点之间有邻接点、依附的概念。无向图顶点的边数叫做度。有向图顶点分为入度和出度。</p>
-<p>图上的边或弧带有权则称为网。</p>
-<p>图中顶点间存在路径，两顶点存在路径则说明是连通的，如果路径最终回到起始点则称为环，当中不重复的叫简单路径。若任意两顶点都是连通的，则图就是连通图，有向则称为强连通图。图中有子图，若子图极大连通则就是连通分量，有向的则称为强连通分量。</p>
-<p>无向图中连通且n个顶点n-1条边称为生成树。有向图中一顶点入度为0其余顶点入度为1的叫有向树。一个有向图由若干棵有向树构成生成森林。</p>
+<p>图按照边的有无方向分为<strong>无向图</strong>和<strong>有向图</strong>。</p>
+<ul>
+<li>无向图由顶点和边组成，</li>
+<li>有向图由顶点和弧构成。弧有弧尾和弧头之分，带箭头一端为弧头。</li>
+</ul>
+<p><img src="/./../pic/Graph/graph02.png" alt="graph02"></p>
+<p>根据顶点是否连通,分为<strong>连通图</strong> 和<strong>非连通图</strong> </p>
+<ul>
+<li><p>对于连通图，从某个顶点出发，可以到达其余任意顶点。</p>
+</li>
+<li><p>对于非连通图，从某个顶点出发，至少有一个顶点无法到达。</p>
+<p><img src="/./../pic/Graph/graph03.png" alt="image-20230901180215803"></p>
+</li>
+</ul>
+<p>根据权重分为<strong>有权图</strong>和<strong>无权图</strong></p>
+<p>权就是权重,每条path所携带的权重不同,好比路的长短就是路的权重</p>
+<p><img src="/./../pic/Graph/graph04.png" alt="image-20230901180544716"></p>
+<p>图数据结构包含以下常用术语。</p>
+<ul>
+<li>「邻接 adjacency」：当两顶点之间存在边相连时，称这两顶点“邻接”。在图 9-4 中，顶点 1 的邻接顶点为顶点 2、3、5。</li>
+<li>「路径 path」：从顶点 A 到顶点 B 经过的边构成的序列被称为从 A 到 B 的“路径”。在图 9-4 中，边序列 1-5-2-4 是顶点 1 到顶点 4 的一条路径。</li>
+<li>「度 degree」：一个顶点拥有的边数。对于有向图，「入度 In-Degree」表示有多少条边指向该顶点，「出度 Out-Degree」表示有多少条边从该顶点指出。</li>
+</ul>
+<h2 id="图的表示"><a href="#图的表示" class="headerlink" title="图的表示"></a>图的表示</h2><p>图的常用表示方式包括<strong>邻接矩阵</strong>和<strong>邻接表</strong></p>
+<h3 id="邻接矩阵"><a href="#邻接矩阵" class="headerlink" title="邻接矩阵"></a>邻接矩阵</h3><p>设图的顶点数量为 <code>n</code>，邻接矩阵使用一个 <code>n*n</code> 大小的矩阵来表示图，每一行（列）代表一个顶点，矩阵元素代表边，用 <code>1</code> 或 <code>0</code> 表示两个顶点之间是否存在边。</p>
+<p>如图所示，设邻接矩阵为 <code>M</code>、顶点列表为 <code>V</code> ，那么矩阵元素 <code>M[i,j]=1</code> 表示顶点 <code>V[i] </code>到顶点 <code>V[j]</code> 之间存在边，反之 <code>M[i,j]=0</code> 表示两顶点之间无边</p>
+<p><img src="/./../pic/Graph/graph05.png" alt="image-20230901181201339"></p>
+<p>邻接矩阵具有以下特性。</p>
+<ul>
+<li>顶点不能与自身相连，因此邻接矩阵主对角线元素没有意义。</li>
+<li>对于无向图，两个方向的边等价，此时邻接矩阵关于主对角线对称。</li>
+<li>将邻接矩阵的元素从 1 和 0 替换为权重，则可表示有权图。</li>
+</ul>
+<p>使用邻接矩阵表示图时，我们可以直接访问矩阵元素以获取边，因此增删查操作的效率很高，时间复杂度均为 <code>O(1)</code> 。然而，矩阵的空间复杂度为 <code>O(n^2)</code> ，内存占用较多。</p>
+<h3 id="邻接表"><a href="#邻接表" class="headerlink" title="邻接表"></a>邻接表</h3><p>「邻接表 adjacency list」使用 <code>n</code>个链表来表示图，链表节点表示顶点。第 <code>i</code> 条链表对应顶点 <code>i</code> ，其中存储了该顶点的所有邻接顶点（即与该顶点相连的顶点）。</p>
+<p><img src="/./../pic/Graph/graph06.png" alt="image-20230901181618572"></p>
+<p>邻接表仅存储实际存在的边，而边的总数通常远小于 <code>O(n^2)</code> ，因此它更加节省空间。然而，在邻接表中需要通过遍历链表来查找边，因此其时间效率不如邻接矩阵。</p>
+<p>邻接表结构与哈希表中的“链式地址”非常相似，因此我们也可以采用类似方法来优化效率。比如当链表较长时，可以将链表转化为 AVL 树或红黑树，从而将时间效率从<code>O(n)</code>优化至 <code>O(log⁡N)</code> ；还可以把链表转换为哈希表，从而将时间复杂度降低至 <code>O(1)</code> 。</p>
 
     </div>
 
@@ -263,7 +305,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/graph/" rel="tag"># graph</a>
+              <a href="/tags/Graph/" rel="tag"># Graph</a>
           </div>
 
         
@@ -275,7 +317,10 @@
     <a href="/2023/09/01/MySQL01/" rel="prev" title="MySQL01">
       <i class="fa fa-chevron-left"></i> MySQL01
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2023/09/01/Graph02/" rel="next" title="Graph02-图的基础操作">
+      Graph02-图的基础操作 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -334,7 +379,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%BE%E8%AE%BA"><span class="nav-number">1.</span> <span class="nav-text">图论</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%BE%E8%AE%BA"><span class="nav-number">1.</span> <span class="nav-text">图论</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E7%9A%84%E7%AE%80%E4%BB%8B"><span class="nav-number">1.1.</span> <span class="nav-text">图的简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E7%9A%84%E8%A1%A8%E7%A4%BA"><span class="nav-number">1.2.</span> <span class="nav-text">图的表示</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%82%BB%E6%8E%A5%E7%9F%A9%E9%98%B5"><span class="nav-number">1.2.1.</span> <span class="nav-text">邻接矩阵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%82%BB%E6%8E%A5%E8%A1%A8"><span class="nav-number">1.2.2.</span> <span class="nav-text">邻接表</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -350,7 +395,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-count">6</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -402,7 +447,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共17.6k字</span>
+  <span class="post-count">博客全站共19.3k字</span>
 </div>
 
 

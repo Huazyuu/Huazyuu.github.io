@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Monaco:300,300italic,400,400italic,700,700italic|Monaco monaco:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideDownIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="图的基础操作这篇blog将使用Golang使用矩阵和链表两种方式来实现图的构建">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Graph02-图的基础操作">
+<meta property="og:url" content="http://example.com/2023/09/01/Graph02/index.html">
+<meta property="og:site_name" content="GolangLearn">
+<meta property="og:description" content="图的基础操作这篇blog将使用Golang使用矩阵和链表两种方式来实现图的构建">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-09-01T10:21:26.000Z">
+<meta property="article:modified_time" content="2023-09-01T11:24:01.713Z">
+<meta property="article:author" content="zyuu">
+<meta property="article:tag" content="Graph">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2023/09/01/Graph02/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Graph02-图的基础操作 | GolangLearn</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">GolangLearn</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/01/Graph02/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="zyuu">
+      <meta itemprop="description" content="迷惘的灵魂啊 安静的运转吧">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="GolangLearn">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Graph02-图的基础操作
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-09-01 18:21:26 / 修改时间：19:24:01" itemprop="dateCreated datePublished" datetime="2023-09-01T18:21:26+08:00">2023-09-01</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="图的基础操作"><a href="#图的基础操作" class="headerlink" title="图的基础操作"></a>图的基础操作</h1><p>这篇blog将使用<code>Golang</code>使用矩阵和链表两种方式来实现图的构建</p>
+<span id="more"></span>
+
+<h2 id="邻接矩阵"><a href="#邻接矩阵" class="headerlink" title="邻接矩阵"></a>邻接矩阵</h2><p>给定一个顶点数量为<code>n</code> 的无向图</p>
+<ul>
+<li><strong>添加或删除边</strong>：直接在邻接矩阵中修改指定的边即可，使用 <code>O(1)</code> 时间。而由于是无向图，因此需要同时更新两个方向的边。</li>
+<li><strong>添加顶点</strong>：在邻接矩阵的尾部添加一行一列，并全部填 0 即可，使用<code>O(n)</code> 时间。</li>
+<li><strong>删除顶点</strong>：在邻接矩阵中删除一行一列。当删除首行首列时达到最差情况，需要将 <code>(n-1)^2</code>个元素“向左上移动”，从而使用 <code>O(n^2) </code>时间。<ul>
+<li><strong>初始化</strong>：传入 <code>n</code> 个顶点，初始化长度为 <code>n</code>的顶点列表 <code>vertices</code> ，使用 <code>O(n)</code> 时间；初始化<code>n*n</code> 大小的邻接矩阵 <code>adjMat</code> ，使用 <code>O(n^2)</code> 时间。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 基于邻接矩阵的实现无向图</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// graphArray</span></span><br><span class="line"><span class="keyword">type</span> graphArray <span class="keyword">struct</span> &#123;</span><br><span class="line">	<span class="comment">//顶点列表</span></span><br><span class="line">	vertices []<span class="type">int</span></span><br><span class="line">	<span class="comment">//矩阵</span></span><br><span class="line">	adjMat [][]<span class="type">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// newGraphArray 构造函数</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">newGraphArray</span><span class="params">(vertices []<span class="type">int</span>, edges [][]<span class="type">int</span>)</span></span> *graphArray &#123;</span><br><span class="line">	<span class="comment">// 构建矩阵</span></span><br><span class="line">	n := <span class="built_in">len</span>(vertices)</span><br><span class="line">	adjMat := <span class="built_in">make</span>([][]<span class="type">int</span>, n)</span><br><span class="line">	<span class="keyword">for</span> i := <span class="keyword">range</span> adjMat &#123;</span><br><span class="line">		adjMat[i] = <span class="built_in">make</span>([]<span class="type">int</span>, n)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 初始化图</span></span><br><span class="line">	g := &amp;graphArray&#123;</span><br><span class="line">		vertices: vertices,</span><br><span class="line">		adjMat:   adjMat,</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 添加边edges</span></span><br><span class="line">	<span class="keyword">for</span> i := <span class="keyword">range</span> edges &#123;</span><br><span class="line">		g.addEdge(edges[i][<span class="number">0</span>], edges[i][<span class="number">1</span>])</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> g</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// size 获取顶点数量</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(g *graphArray)</span></span> size() <span class="type">int</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">len</span>(g.vertices)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// addVertex 添加顶点</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(g *graphArray)</span></span> addVertex(val <span class="type">int</span>) &#123;</span><br><span class="line">	n := g.size()</span><br><span class="line">	<span class="comment">//顶点列表添加新值</span></span><br><span class="line">	g.vertices = <span class="built_in">append</span>(g.vertices, val)</span><br><span class="line">	<span class="comment">//添加一行</span></span><br><span class="line">	newRow := <span class="built_in">make</span>([]<span class="type">int</span>, n)</span><br><span class="line">	g.adjMat = <span class="built_in">append</span>(g.adjMat, newRow)</span><br><span class="line">	<span class="comment">//添加一列</span></span><br><span class="line">	<span class="keyword">for</span> i := <span class="keyword">range</span> g.adjMat &#123;</span><br><span class="line">		g.adjMat[i] = <span class="built_in">append</span>(g.adjMat[i], <span class="number">0</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// removeVertex 删除顶点</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(g *graphArray)</span></span> removeVertex(idx <span class="type">int</span>) &#123;</span><br><span class="line">	<span class="keyword">if</span> idx &gt;= g.size() &#123;</span><br><span class="line">		fmt.Println(<span class="string">&quot;index不存在,移除失败&quot;</span>)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//移除顶点</span></span><br><span class="line">	g.vertices = <span class="built_in">append</span>(g.vertices[:idx], g.vertices[idx+<span class="number">1</span>:]...)</span><br><span class="line">	<span class="comment">//移除行</span></span><br><span class="line">	g.adjMat = <span class="built_in">append</span>(g.adjMat[:idx], g.adjMat[idx+<span class="number">1</span>:]...)</span><br><span class="line">	<span class="comment">//移除列</span></span><br><span class="line">	<span class="keyword">for</span> i := <span class="keyword">range</span> g.adjMat &#123;</span><br><span class="line">		g.adjMat[i] = <span class="built_in">append</span>(g.adjMat[i][:idx], g.adjMat[i][idx+<span class="number">1</span>:]...)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// addEdge 添加边</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(g *graphArray)</span></span> addEdge(i, j <span class="type">int</span>) &#123;</span><br><span class="line">	<span class="comment">// 索引越界 i==j</span></span><br><span class="line">	<span class="keyword">if</span> i &lt; <span class="number">0</span> || j &lt; <span class="number">0</span> || i &gt;= g.size() || j &gt;= g.size() || i == j &#123;</span><br><span class="line">		fmt.Println(<span class="string">&quot;错误,索引越界或者两边重合&quot;</span>)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	g.adjMat[i][j] = <span class="number">1</span></span><br><span class="line">	g.adjMat[j][i] = <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// removeEdge 删除边</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(g *graphArray)</span></span> removeEdge(i, j <span class="type">int</span>) &#123;</span><br><span class="line">	<span class="comment">// 索引越界 i==j</span></span><br><span class="line">	<span class="keyword">if</span> i &lt; <span class="number">0</span> || j &lt; <span class="number">0</span> || i &gt;= g.size() || j &gt;= g.size() || i == j &#123;</span><br><span class="line">		fmt.Println(<span class="string">&quot;错误,索引越界或者两边重合&quot;</span>)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	g.adjMat[i][j] = <span class="number">0</span></span><br><span class="line">	g.adjMat[j][i] = <span class="number">0</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// print 打印</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(g *graphArray)</span></span> <span class="built_in">print</span>() &#123;</span><br><span class="line">	fmt.Printf(<span class="string">&quot;\t顶点列表%v\n&quot;</span>, g.vertices)</span><br><span class="line">	fmt.Printf(<span class="string">&quot;\t矩阵\n&quot;</span>)</span><br><span class="line">	<span class="keyword">for</span> i := <span class="keyword">range</span> g.adjMat &#123;</span><br><span class="line">		fmt.Printf(<span class="string">&quot;\t\t%v\n&quot;</span>, g.adjMat[i])</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// 创建顶点列表和边</span></span><br><span class="line">	vertices := []<span class="type">int</span>&#123;<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;</span><br><span class="line">	edges := [][]<span class="type">int</span>&#123;</span><br><span class="line">		&#123;<span class="number">0</span>, <span class="number">1</span>&#125;,</span><br><span class="line">		&#123;<span class="number">0</span>, <span class="number">2</span>&#125;,</span><br><span class="line">		&#123;<span class="number">1</span>, <span class="number">2</span>&#125;,</span><br><span class="line">		&#123;<span class="number">2</span>, <span class="number">3</span>&#125;,</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 创建无向图对象</span></span><br><span class="line">	g := newGraphArray(vertices, edges)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 打印初始图</span></span><br><span class="line">	fmt.Println(<span class="string">&quot;初始图：&quot;</span>)</span><br><span class="line">	g.<span class="built_in">print</span>()</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 添加新顶点和边</span></span><br><span class="line">	g.addVertex(<span class="number">4</span>)</span><br><span class="line">	g.addEdge(<span class="number">4</span>, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 打印更新后的图</span></span><br><span class="line">	fmt.Println(<span class="string">&quot;\n更新后的图：&quot;</span>)</span><br><span class="line">	g.<span class="built_in">print</span>()</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 移除顶点和边</span></span><br><span class="line">	g.removeVertex(<span class="number">2</span>)</span><br><span class="line">	<span class="comment">//g.removeEdge(0, 1)</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// 打印最终图</span></span><br><span class="line">	fmt.Println(<span class="string">&quot;\n最终图：&quot;</span>)</span><br><span class="line">	g.<span class="built_in">print</span>()</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">go run main.go</span></span><br><span class="line"></span><br><span class="line">初始图：</span><br><span class="line">        顶点列表[0 1 2 3]</span><br><span class="line">        矩阵</span><br><span class="line">                [0 1 1 0]</span><br><span class="line">                [1 0 1 0]</span><br><span class="line">                [1 1 0 1]</span><br><span class="line">                [0 0 1 0]</span><br><span class="line"></span><br><span class="line">更新后的图：</span><br><span class="line">        顶点列表[0 1 2 3 4]</span><br><span class="line">        矩阵</span><br><span class="line">                [0 1 1 0 0]</span><br><span class="line">                [1 0 1 0 1]</span><br><span class="line">                [1 1 0 1 0]</span><br><span class="line">                [0 0 1 0 0]</span><br><span class="line">                [0 1 0 0 0]</span><br><span class="line"></span><br><span class="line">最终图：</span><br><span class="line">        顶点列表[0 1 3 4]</span><br><span class="line">        矩阵</span><br><span class="line">                [0 1 0 0]</span><br><span class="line">                [1 0 0 1]</span><br><span class="line">                [0 0 0 0]</span><br><span class="line">                [0 1 0 0]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="邻接链表"><a href="#邻接链表" class="headerlink" title="邻接链表"></a>邻接链表</h2><p>设无向图的顶点总数为 <code>n</code>、边总数为 <code>m</code> </p>
+<ul>
+<li><strong>添加边</strong>：在顶点对应链表的末尾添加边即可，使用<code>O(1)</code> 时间。因为是无向图，所以需要同时添加两个方向的边。</li>
+<li><strong>删除边</strong>：在顶点对应链表中查找并删除指定边，使用 <code>O(m)</code> 时间。在无向图中，需要同时删除两个方向的边。</li>
+<li><strong>添加顶点</strong>：在邻接表中添加一个链表，并将新增顶点作为链表头节点，使用 <code>O(1)</code> 时间。</li>
+<li><strong>删除顶点</strong>：需遍历整个邻接表，删除包含指定顶点的所有边，使用 <code>O(m+n)</code> 时间。</li>
+<li><strong>初始化</strong>：在邻接表中创建 <code>m</code> 个顶点和 <code>2m</code> 条边，使用 <code>O(m+n)</code> 时间。</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Graph/" rel="tag"># Graph</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/09/01/Graph01/" rel="prev" title="Graph01">
+      <i class="fa fa-chevron-left"></i> Graph01
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%BE%E7%9A%84%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C"><span class="nav-number">1.</span> <span class="nav-text">图的基础操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%82%BB%E6%8E%A5%E7%9F%A9%E9%98%B5"><span class="nav-number">1.1.</span> <span class="nav-text">邻接矩阵</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%82%BB%E6%8E%A5%E9%93%BE%E8%A1%A8"><span class="nav-number">1.2.</span> <span class="nav-text">邻接链表</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="zyuu"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">zyuu</p>
+  <div class="site-description" itemprop="description">迷惘的灵魂啊 安静的运转吧</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zyuu</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共19.3k字</span>
+</div>
+
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: 'unset',
+  left: '32px',
+  time: '0.5s',
+  mixColor: '#fff',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#fff',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌹',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+</body>
+</html>
