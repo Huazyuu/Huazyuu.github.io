@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>0X10Plan</title>
+    <url>/2023/09/02/0X10Plan/</url>
+    <content><![CDATA[<p>💮学习 Graph<br>💮学习 Gin Gorm<br>💮os 前两章<br>💮go 书籍阅读<br>💮跑步3天以上<br>💮每日一题<br>💮每日学习成果打卡到markdown文档</p>
+]]></content>
+      <categories>
+        <category>Planing</category>
+      </categories>
+      <tags>
+        <tag>Planing</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Graph01</title>
     <url>/2023/09/01/Graph01/</url>
     <content><![CDATA[<h1 id="图论"><a href="#图论" class="headerlink" title="图论"></a>图论</h1><p>开始图论的学习,主要参考书籍《Hello Algorithm》《代码随想录》</p>
@@ -53,7 +65,7 @@
 <p>邻接表结构与哈希表中的“链式地址”非常相似，因此我们也可以采用类似方法来优化效率。比如当链表较长时，可以将链表转化为 AVL 树或红黑树，从而将时间效率从<code>O(n)</code>优化至 <code>O(log⁡N)</code> ；还可以把链表转换为哈希表，从而将时间复杂度降低至 <code>O(1)</code> 。</p>
 ]]></content>
       <categories>
-        <category>Algorithm</category>
+        <category>algorithm</category>
       </categories>
       <tags>
         <tag>Graph</tag>
@@ -92,22 +104,10 @@
 </ul>
 ]]></content>
       <categories>
-        <category>Algorithm</category>
+        <category>algorithm</category>
       </categories>
       <tags>
         <tag>Graph</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>0X10Plan</title>
-    <url>/2023/09/02/0X10Plan/</url>
-    <content><![CDATA[<p>💮学习 Graph<br>💮学习 Gin Gorm<br>💮os 前两章<br>💮go 书籍阅读<br>💮跑步3天以上<br>💮每日一题<br>💮每日学习成果打卡到markdown文档</p>
-]]></content>
-      <categories>
-        <category>Planing</category>
-      </categories>
-      <tags>
-        <tag>Planing</tag>
       </tags>
   </entry>
   <entry>
@@ -176,6 +176,30 @@
       </categories>
       <tags>
         <tag>Gin</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>9.1leetcode2240</title>
+    <url>/2023/09/01/leetcode9-1/</url>
+    <content><![CDATA[<p>一个整数 <code>total</code> ，表示你拥有的总钱数。同时给你两个整数 <code>cost1</code> 和 <code>cost2</code> ，分别表示一支钢笔和一支铅笔的价格。你可以花费你部分或者全部的钱，去买任意数目的两种笔。</p>
+<p>请你返回购买钢笔和铅笔的 <strong>不同方案数目</strong> 。</p>
+<span id="more"></span>
+
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">输入：total = 20, cost1 = 10, cost2 = 5</span><br><span class="line">输出：9</span><br><span class="line">解释：一支钢笔的价格为 10 ，一支铅笔的价格为 5 。</span><br><span class="line">- 如果你买 0 支钢笔，那么你可以买 0 ，1 ，2 ，3 或者 4 支铅笔。</span><br><span class="line">- 如果你买 1 支钢笔，那么你可以买 0 ，1 或者 2 支铅笔。</span><br><span class="line">- 如果你买 2 支钢笔，那么你没法买任何铅笔。</span><br><span class="line">所以买钢笔和铅笔的总方案数为 5 + 3 + 1 = 9 种。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">输入：total = 5, cost1 = 10, cost2 = 10</span><br><span class="line">输出：1</span><br><span class="line">解释：钢笔和铅笔的价格都为 10 ，都比拥有的钱数多，所以你没法购买任何文具。所以只有 1 种方案：买 0 支钢笔和 0 支铅笔。</span><br></pre></td></tr></table></figure>
+
+<p><strong>解答:</strong></p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="comment">// 2240  2023-09-01 09:08:04</span></span><br><span class="line"><span class="comment">// leetcode submit region begin(Prohibit modification and deletion)</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">waysToBuyPensPencils</span><span class="params">(total <span class="type">int</span>, cost1 <span class="type">int</span>, cost2 <span class="type">int</span>)</span></span> <span class="type">int64</span> &#123;</span><br><span class="line">	ret, nums := <span class="number">0</span>, <span class="number">0</span></span><br><span class="line">	<span class="keyword">for</span> nums*cost1 &lt;= total &#123;</span><br><span class="line">		ret += (total - nums*cost1) / cost2+<span class="number">1</span></span><br><span class="line">		nums++</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="type">int64</span>(ret)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//leetcode submit region end(Prohibit modification and deletion)</span></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>algorithm</category>
+      </categories>
+      <tags>
+        <tag>Math</tag>
       </tags>
   </entry>
   <entry>
@@ -1685,30 +1709,6 @@
       </categories>
       <tags>
         <tag>MySQL</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>9.1leetcode2240</title>
-    <url>/2023/09/01/leetcode9-1/</url>
-    <content><![CDATA[<p>一个整数 <code>total</code> ，表示你拥有的总钱数。同时给你两个整数 <code>cost1</code> 和 <code>cost2</code> ，分别表示一支钢笔和一支铅笔的价格。你可以花费你部分或者全部的钱，去买任意数目的两种笔。</p>
-<p>请你返回购买钢笔和铅笔的 <strong>不同方案数目</strong> 。</p>
-<span id="more"></span>
-
-<p><strong>示例 1：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">输入：total = 20, cost1 = 10, cost2 = 5</span><br><span class="line">输出：9</span><br><span class="line">解释：一支钢笔的价格为 10 ，一支铅笔的价格为 5 。</span><br><span class="line">- 如果你买 0 支钢笔，那么你可以买 0 ，1 ，2 ，3 或者 4 支铅笔。</span><br><span class="line">- 如果你买 1 支钢笔，那么你可以买 0 ，1 或者 2 支铅笔。</span><br><span class="line">- 如果你买 2 支钢笔，那么你没法买任何铅笔。</span><br><span class="line">所以买钢笔和铅笔的总方案数为 5 + 3 + 1 = 9 种。</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 2：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">输入：total = 5, cost1 = 10, cost2 = 10</span><br><span class="line">输出：1</span><br><span class="line">解释：钢笔和铅笔的价格都为 10 ，都比拥有的钱数多，所以你没法购买任何文具。所以只有 1 种方案：买 0 支钢笔和 0 支铅笔。</span><br></pre></td></tr></table></figure>
-
-<p><strong>解答:</strong></p>
-<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="comment">// 2240  2023-09-01 09:08:04</span></span><br><span class="line"><span class="comment">// leetcode submit region begin(Prohibit modification and deletion)</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">waysToBuyPensPencils</span><span class="params">(total <span class="type">int</span>, cost1 <span class="type">int</span>, cost2 <span class="type">int</span>)</span></span> <span class="type">int64</span> &#123;</span><br><span class="line">	ret, nums := <span class="number">0</span>, <span class="number">0</span></span><br><span class="line">	<span class="keyword">for</span> nums*cost1 &lt;= total &#123;</span><br><span class="line">		ret += (total - nums*cost1) / cost2+<span class="number">1</span></span><br><span class="line">		nums++</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="type">int64</span>(ret)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//leetcode submit region end(Prohibit modification and deletion)</span></span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>Algorithm</category>
-      </categories>
-      <tags>
-        <tag>Math</tag>
       </tags>
   </entry>
 </search>
