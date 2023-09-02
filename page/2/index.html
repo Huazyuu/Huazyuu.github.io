@@ -190,6 +190,83 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/01/MySQL01/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="zyuu">
+      <meta itemprop="description" content="迷惘的灵魂啊 安静的运转吧">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Accompany You Through World">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/09/01/MySQL01/" class="post-title-link" itemprop="url">MySQL01</a>
+        </h2>
+
+        <div class="post-meta">
+
+	    
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2023-09-01 09:23:59 / Modified: 09:32:06" itemprop="dateCreated datePublished" datetime="2023-09-01T09:23:59+08:00">2023-09-01</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SQL/" itemprop="url" rel="index"><span itemprop="name">SQL</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h1><p><strong>SQL (Structured Query Language:结构化查询语言) 是用于管理关系数据库管理系统（RDBMS）。 SQL 的范围包括数据插入、查询、更新和删除，数据库模式创建和修改，以及数据访问控制。</strong></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/09/01/MySQL01/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/01/leetcode9-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -208,7 +285,8 @@
         </h2>
 
         <div class="post-meta">
-           
+
+	    
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-calendar"></i>
@@ -222,7 +300,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-09-02 15:20:11" itemprop="dateModified" datetime="2023-09-02T15:20:11+08:00">2023-09-02</time>
+                <time title="Modified: 2023-09-02 23:41:18" itemprop="dateModified" datetime="2023-09-02T23:41:18+08:00">2023-09-02</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -247,15 +325,6 @@
       
           <p>You are given an integer <code>total</code> indicating the amount of money you have. You are also given two integers <code>cost1</code> and <code>cost2</code> indicating the price of a pen and pencil respectively. You can spend <strong>part or all</strong> of your money to buy multiple quantities (or none) of each kind of writing utensil.</p>
 <p>Return <em>the <strong>number of distinct ways</strong> you can buy some number of pens and pencils.</em></p>
-<p><strong>Example 1:</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Input: total = 20, cost1 = 10, cost2 = 5</span><br><span class="line">Output: 9</span><br><span class="line">Explanation: The price of a pen is 10 and the price of a pencil is 5.</span><br><span class="line">- If you buy 0 pens, you can buy 0, 1, 2, 3, or 4 pencils.</span><br><span class="line">- If you buy 1 pen, you can buy 0, 1, or 2 pencils.</span><br><span class="line">- If you buy 2 pens, you cannot buy any pencils.</span><br><span class="line">The total number of ways to buy pens and pencils is 5 + 3 + 1 = 9.</span><br></pre></td></tr></table></figure>
-
-<p><strong>Example 2:</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: total = 5, cost1 = 10, cost2 = 10</span><br><span class="line">Output: 1</span><br><span class="line">Explanation: The price of both pens and pencils are 10, which cost more than total, so you cannot buy any writing utensils. Therefore, there is only 1 way: buy 0 pens and 0 pencils.</span><br></pre></td></tr></table></figure>
-
-<p><strong>Constraints:</strong></p>
-<ul>
-<li><p><code>1 &lt;= total, cost1, cost2 &lt;= 106</code></p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2023/09/01/leetcode9-1/#more" rel="contents">
@@ -300,7 +369,8 @@
         </h2>
 
         <div class="post-meta">
-           
+
+	    
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-calendar"></i>
@@ -341,6 +411,91 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2023/08/31/gin/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/08/24/leetcode8-24/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="zyuu">
+      <meta itemprop="description" content="迷惘的灵魂啊 安静的运转吧">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Accompany You Through World">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/08/24/leetcode8-24/" class="post-title-link" itemprop="url">8.24leetcode1267</a>
+        </h2>
+
+        <div class="post-meta">
+
+	    
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-08-24 00:30:13" itemprop="dateCreated datePublished" datetime="2023-08-24T00:30:13+08:00">2023-08-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-09-03 00:45:58" itemprop="dateModified" datetime="2023-09-03T00:45:58+08:00">2023-09-03</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="1267-Count-Servers-that-Communicate"><a href="#1267-Count-Servers-that-Communicate" class="headerlink" title="1267.Count Servers that Communicate"></a>1267.Count Servers that Communicate</h1><p>You are given a map of a server center,<br> represented as a <code>m * n</code> integer matrix <code>grid</code>,<br>where 1 means that on that cell there is a server and 0 means that it is no server.<br>Two servers are said to communicate if they are on the same row or on the same column.</p>
+<p>Return the number of servers that communicate with any other server.</p>
+<p><img src="/./../pic/leetcode8-24/image-20230903003258130.png" alt="image-20230903003258130"></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/08/24/leetcode8-24/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -431,7 +586,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-count">14</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -444,7 +599,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -483,7 +638,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共21.6k字</span>
+  <span class="post-count">博客全站共22.2k字</span>
 </div>
 
 

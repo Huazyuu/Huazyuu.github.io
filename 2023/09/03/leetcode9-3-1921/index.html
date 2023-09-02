@@ -20,20 +20,20 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideDownIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="You are given an integer total indicating the amount of money you have. You are also given two integers cost1 and cost2 indicating the price of a pen and pencil respectively. You can spend part or all">
+  <meta name="description" content="LeetCode1921-Eliminate Max nums of MonstersYou are playing a video gamewhere you are defending your city from a group of n monsters. You are given a 0-indexed integer array dist of size n,where dist[i">
 <meta property="og:type" content="article">
-<meta property="og:title" content="9.1leetcode2240">
-<meta property="og:url" content="http://example.com/2023/09/01/leetcode9-1/index.html">
+<meta property="og:title" content="9.3leetcode1921">
+<meta property="og:url" content="http://example.com/2023/09/03/leetcode9-3-1921/index.html">
 <meta property="og:site_name" content="Accompany You Through World">
-<meta property="og:description" content="You are given an integer total indicating the amount of money you have. You are also given two integers cost1 and cost2 indicating the price of a pen and pencil respectively. You can spend part or all">
+<meta property="og:description" content="LeetCode1921-Eliminate Max nums of MonstersYou are playing a video gamewhere you are defending your city from a group of n monsters. You are given a 0-indexed integer array dist of size n,where dist[i">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-09-01T01:06:06.000Z">
-<meta property="article:modified_time" content="2023-09-02T15:41:18.254Z">
+<meta property="article:published_time" content="2023-09-02T16:05:45.000Z">
+<meta property="article:modified_time" content="2023-09-02T16:28:57.350Z">
 <meta property="article:author" content="zyuu">
-<meta property="article:tag" content="Math">
+<meta property="article:tag" content="Greedy">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/2023/09/01/leetcode9-1/">
+<link rel="canonical" href="http://example.com/2023/09/03/leetcode9-3-1921/">
 
 
 <script id="page-configurations">
@@ -46,7 +46,7 @@
   };
 </script>
 
-  <title>9.1leetcode2240 | Accompany You Through World</title>
+  <title>9.3leetcode1921 | Accompany You Through World</title>
   
 
 
@@ -194,7 +194,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/01/leetcode9-1/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/03/leetcode9-3-1921/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -207,7 +207,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          9.1leetcode2240
+          9.3leetcode1921
         </h1>
 
         <div class="post-meta">
@@ -218,16 +218,10 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2023-09-01 09:06:06" itemprop="dateCreated datePublished" datetime="2023-09-01T09:06:06+08:00">2023-09-01</time>
+              <time title="Created: 2023-09-03 00:05:45 / Modified: 00:28:57" itemprop="dateCreated datePublished" datetime="2023-09-03T00:05:45+08:00">2023-09-03</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-09-02 23:41:18" itemprop="dateModified" datetime="2023-09-02T23:41:18+08:00">2023-09-02</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -249,24 +243,30 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>You are given an integer <code>total</code> indicating the amount of money you have. You are also given two integers <code>cost1</code> and <code>cost2</code> indicating the price of a pen and pencil respectively. You can spend <strong>part or all</strong> of your money to buy multiple quantities (or none) of each kind of writing utensil.</p>
-<p>Return <em>the <strong>number of distinct ways</strong> you can buy some number of pens and pencils.</em></p>
+        <h1 id="LeetCode1921-Eliminate-Max-nums-of-Monsters"><a href="#LeetCode1921-Eliminate-Max-nums-of-Monsters" class="headerlink" title="LeetCode1921-Eliminate Max nums of Monsters"></a>LeetCode1921-Eliminate Max nums of Monsters</h1><p>You are playing a video game<br>where you are defending your city from a group of <code>n</code> monsters.<br> You are given a <strong>0-indexed</strong> integer array <code>dist</code> of size <code>n</code>,<br>where <code>dist[i]</code> is the <strong>initial distance</strong> in kilometers of the <code>ith</code> monster from the city.</p>
+<p>The monsters walk toward the city at a <strong>constant</strong> speed.<br>The speed of each monster is given to you in an integer array <code>speed</code> of size <code>n</code>,<br>where <code>speed[i]</code> is the speed of the <code>ith</code> monster in kilometers per minute.</p>
+<p>You have a weapon that, can kill a <strong>single</strong> monster.<br>However, the weapon takes <strong>one minute</strong> to charge.<br>The weapon is fully charged at the very start.</p>
+<p>You lose when any monster reaches your city.<br>If a monster reaches the city at the exact moment the weapon is fully charged,<br>it counts as a <strong>loss</strong>,<br>and the game ends before you can use your weapon.</p>
+<p>Return the <strong>maximum</strong> number of monsters<br>that you can kill before you lose,<br><em>or</em> <code>n</code> if you can kill all the monsters before they reach the city.</p>
 <span id="more"></span>
 
 <p><strong>Example 1:</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Input: total = 20, cost1 = 10, cost2 = 5</span><br><span class="line">Output: 9</span><br><span class="line">Explanation: The price of a pen is 10 and the price of a pencil is 5.</span><br><span class="line">- If you buy 0 pens, you can buy 0, 1, 2, 3, or 4 pencils.</span><br><span class="line">- If you buy 1 pen, you can buy 0, 1, or 2 pencils.</span><br><span class="line">- If you buy 2 pens, you cannot buy any pencils.</span><br><span class="line">The total number of ways to buy pens and pencils is 5 + 3 + 1 = 9.</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Input: dist = [1,3,4], speed = [1,1,1]</span><br><span class="line">Output: 3</span><br><span class="line">Explanation:</span><br><span class="line">In the beginning, the distances of the monsters are [1,3,4]. You eliminate the first monster.</span><br><span class="line">After a minute, the distances of the monsters are [X,2,3]. You eliminate the second monster.</span><br><span class="line">After a minute, the distances of the monsters are [X,X,2]. You eliminate the thrid monster.</span><br><span class="line">All 3 monsters can be eliminated.</span><br></pre></td></tr></table></figure>
 
 <p><strong>Example 2:</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: total = 5, cost1 = 10, cost2 = 10</span><br><span class="line">Output: 1</span><br><span class="line">Explanation: The price of both pens and pencils are 10, which cost more than total, so you cannot buy any writing utensils. Therefore, there is only 1 way: buy 0 pens and 0 pencils.</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Input: dist = [1,1,2,3], speed = [1,1,1,1]</span><br><span class="line">Output: 1</span><br><span class="line">Explanation:</span><br><span class="line">In the beginning, the distances of the monsters are [1,1,2,3]. You eliminate the first monster.</span><br><span class="line">After a minute, the distances of the monsters are [X,0,1,2], so you lose.</span><br><span class="line">You can only eliminate 1 monster.</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 3:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Input: dist = [3,2,4], speed = [5,3,2]</span><br><span class="line">Output: 1</span><br><span class="line">Explanation:</span><br><span class="line">In the beginning, the distances of the monsters are [3,2,4]. You eliminate the first monster.</span><br><span class="line">After a minute, the distances of the monsters are [X,0,2], so you lose.</span><br><span class="line">You can only eliminate 1 monster. </span><br></pre></td></tr></table></figure>
 
 <p><strong>Constraints:</strong></p>
 <ul>
-<li><code>1 &lt;= total, cost1, cost2 &lt;= 106</code></li>
+<li><code>n == dist.length == speed.length</code></li>
+<li><code>1 &lt;= n &lt;= 105</code></li>
+<li><code>1 &lt;= dist[i], speed[i] &lt;= 105</code></li>
 </ul>
-<p>一个整数 <code>total</code> ，表示你拥有的总钱数。同时给你两个整数 <code>cost1</code> 和 <code>cost2</code> ，分别表示一支钢笔和一支铅笔的价格。你可以花费你部分或者全部的钱，去买任意数目的两种笔。</p>
-<p>请你返回购买钢笔和铅笔的 <strong>不同方案数目</strong> 。</p>
-<p>Resolution</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="comment">// 2240  2023-09-01 09:08:04</span></span><br><span class="line"><span class="comment">// leetcode submit region begin(Prohibit modification and deletion)</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">waysToBuyPensPencils</span><span class="params">(total <span class="type">int</span>, cost1 <span class="type">int</span>, cost2 <span class="type">int</span>)</span></span> <span class="type">int64</span> &#123;</span><br><span class="line">	ret, nums := <span class="number">0</span>, <span class="number">0</span></span><br><span class="line">	<span class="keyword">for</span> nums*cost1 &lt;= total &#123;</span><br><span class="line">		ret += (total - nums*cost1) / cost2+<span class="number">1</span></span><br><span class="line">		nums++</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="type">int64</span>(ret)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//leetcode submit region end(Prohibit modification and deletion)</span></span><br></pre></td></tr></table></figure>
+<h2 id="Resolution"><a href="#Resolution" class="headerlink" title="Resolution"></a>Resolution</h2><p>greedy algorithm</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;sort&quot;</span></span><br><span class="line"><span class="comment">// leetcode submit region begin(Prohibit modification and deletion)</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">eliminateMaximum</span><span class="params">(dist []<span class="type">int</span>, speed []<span class="type">int</span>)</span></span> <span class="type">int</span> &#123;</span><br><span class="line">	n:=<span class="built_in">len</span>(dist)</span><br><span class="line">	comeTime := <span class="built_in">make</span>([]<span class="type">int</span>, n)</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; n; i++ &#123;</span><br><span class="line">		<span class="keyword">if</span> dist[i]%speed[i]==<span class="number">0</span>&#123;</span><br><span class="line">			comeTime[i]=dist[i]/speed[i]</span><br><span class="line">		&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">			comeTime[i]=dist[i]/speed[i]+<span class="number">1</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	sort.Ints(comeTime)</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; n; i++ &#123;</span><br><span class="line">		<span class="keyword">if</span> comeTime[i]&gt;=i+<span class="number">1</span>&#123;</span><br><span class="line">			<span class="keyword">continue</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> i</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> n</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//leetcode submit region end(Prohibit modification and deletion)</span></span><br></pre></td></tr></table></figure>
 
 
     </div>
@@ -277,7 +277,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Math/" rel="tag"># Math</a>
+              <a href="/tags/Greedy/" rel="tag"># Greedy</a>
           </div>
 
         
@@ -286,13 +286,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2023/08/31/gin/" rel="prev" title="Gin">
-      <i class="fa fa-chevron-left"></i> Gin
+    <a href="/2023/09/02/Graph-LC200/" rel="prev" title="Graph-LC200">
+      <i class="fa fa-chevron-left"></i> Graph-LC200
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2023/09/01/MySQL01/" rel="next" title="MySQL01">
-      MySQL01 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -351,6 +348,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#LeetCode1921-Eliminate-Max-nums-of-Monsters"><span class="nav-number">1.</span> <span class="nav-text">LeetCode1921-Eliminate Max nums of Monsters</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Resolution"><span class="nav-number">1.1.</span> <span class="nav-text">Resolution</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
