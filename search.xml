@@ -13,6 +13,29 @@
       </tags>
   </entry>
   <entry>
+    <title>Graph-bfs</title>
+    <url>/2023/09/02/Graph-bfs/</url>
+    <content><![CDATA[<h1 id="BreadthFirstSearch"><a href="#BreadthFirstSearch" class="headerlink" title="BreadthFirstSearch"></a>BreadthFirstSearch</h1><h2 id="Quote-and-translate-from-Code-Caprice"><a href="#Quote-and-translate-from-Code-Caprice" class="headerlink" title="Quote and translate from  Code Caprice"></a>Quote and translate from  <em><strong><a href="https://programmercarl.com/">Code Caprice</a></strong></em></h2><p>BFS is always used to solve the shortest path problem between two vertices.<br>BFS starts from the starting vertex, the starting vertexis the center of the circle of search,<br>once the end point is encountered, the record of the previous node is the shortest road.</p>
+<span id="more"></span>
+
+<h2 id="The-process-of-BFS"><a href="#The-process-of-BFS" class="headerlink" title="The process of BFS"></a>The process of BFS</h2><p>BFS is a round-by-circle search process<br>using a square map,each direction of search is <code>up/down/right/left</code><br>then a start location is given,so BFS can take a step to the four directions</p>
+<p><img src="/./../pic/Graph-bfs/image-20230902144715129.png" alt="image-20230902144715129"></p>
+<p>Now set an <code>end</code> location,the process of <code>BFS</code> is following<br>From the start vertex,search circle by circle and inside out<br>the first step is the vertex holding <code>1</code><br>the second step is the vertex holding <code>2</code><br>when stepNum is <code>4</code>,has found the <code>end</code></p>
+<p><img src="/./../pic/Graph-bfs/image-20230902144812331.png" alt="image-20230902144812331"></p>
+<p>The way BFS traverses round by circle,<br>so once it encounters the <code>end</code> point, it must be the shortest path.<br>And the map can also have obstacles, as shown in the image:</p>
+<p><img src="/./../pic/Graph-bfs/image-20230902150649652.png" alt="image-20230902150649652"></p>
+<p>In the <code>5th</code> step, the <code>6th</code> step only dyed the key nodes<br>and the other directions did not dye<br>only needs to pay attention to the logic of dyeing in key places<br>As we can see from the pic, if obstacles are added,<br>the <code>6th</code> step to reach the end </p>
+<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">bfs</span><span class="params">(grid [][]<span class="type">byte</span>, visited [][]<span class="type">bool</span>, x <span class="type">int</span>, y <span class="type">int</span>)</span></span> &#123;</span><br><span class="line">    <span class="comment">// grid --&gt;map</span></span><br><span class="line">    <span class="comment">// vistied --&gt; value has been traverse</span></span><br><span class="line">    <span class="comment">// x,y --&gt; the start SearchNode&#x27;s index </span></span><br><span class="line">    <span class="comment">// Representing four directions (up left down right)</span></span><br><span class="line">	dir := [<span class="number">4</span>][<span class="number">2</span>]<span class="type">int</span>&#123;&#123;<span class="number">0</span>, <span class="number">1</span>&#125;, &#123;<span class="number">1</span>, <span class="number">0</span>&#125;, &#123;<span class="number">-1</span>, <span class="number">0</span>&#125;, &#123;<span class="number">0</span>, <span class="number">-1</span>&#125;&#125;</span><br><span class="line"></span><br><span class="line">	queue := <span class="built_in">make</span>([][<span class="number">2</span>]<span class="type">int</span>, <span class="number">0</span>)          <span class="comment">// Define a queue</span></span><br><span class="line">	queue = <span class="built_in">append</span>(queue, [<span class="number">2</span>]<span class="type">int</span>&#123;x, y&#125;) <span class="comment">// Add the starting node to the queue</span></span><br><span class="line">	visited[x][y] = <span class="literal">true</span>                <span class="comment">// Mark the starting visitednode</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// Start traversing elements in the queue</span></span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">len</span>(queue) &gt; <span class="number">0</span> &#123; </span><br><span class="line">		cur := queue[<span class="number">0</span>]</span><br><span class="line">		queue = queue[<span class="number">1</span>:]            <span class="comment">// get an element from the queue</span></span><br><span class="line">		curx, cury := cur[<span class="number">0</span>], cur[<span class="number">1</span>] <span class="comment">// Current node coordinates</span></span><br><span class="line">		</span><br><span class="line">        <span class="comment">// Start traversing in four directions - left, right, up, and down</span></span><br><span class="line">		<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">4</span>; i++ &#123; </span><br><span class="line">            <span class="comment">// Get coordinates of the adjacent nodes</span></span><br><span class="line">			nextx := curx + dir[i][<span class="number">0</span>]</span><br><span class="line">			nexty := cury + dir[i][<span class="number">1</span>] </span><br><span class="line">            </span><br><span class="line">            <span class="comment">// Skip if the coordinate indexs are out of bounds</span></span><br><span class="line">			<span class="keyword">if</span> nextx &lt; <span class="number">0</span> || nextx &gt;= <span class="built_in">len</span>(grid) || nexty &lt; <span class="number">0</span> || nexty &gt;= <span class="built_in">len</span>(grid[<span class="number">0</span>]) &#123;</span><br><span class="line">				<span class="keyword">continue</span> </span><br><span class="line">			&#125;</span><br><span class="line">            </span><br><span class="line">			<span class="comment">// If the node hasn&#x27;t been visited</span></span><br><span class="line">			<span class="keyword">if</span> !visited[nextx][nexty] &#123; </span><br><span class="line">                <span class="comment">// Add the node to the queue for the next round of traversal</span></span><br><span class="line">				queue = <span class="built_in">append</span>(queue, [<span class="number">2</span>]<span class="type">int</span>&#123;nextx, nexty&#125;) </span><br><span class="line">                <span class="comment">// Mark it as visited immediately to avoid duplicates</span></span><br><span class="line">				visited[nextx][nexty] = <span class="literal">true</span>                </span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>algorithm</category>
+      </categories>
+      <tags>
+        <tag>Graph</tag>
+        <tag>bfs</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Graph-dfs</title>
     <url>/2023/09/02/Graph-dfs/</url>
     <content><![CDATA[<h1 id="DepthFirstSearch"><a href="#DepthFirstSearch" class="headerlink" title="DepthFirstSearch"></a>DepthFirstSearch</h1><h2 id="Quote-and-translate-from-Code-Caprice"><a href="#Quote-and-translate-from-Code-Caprice" class="headerlink" title="Quote and translate from  Code Caprice"></a>Quote and translate from  <em><strong><a href="https://programmercarl.com/">Code Caprice</a></strong></em></h2><p><strong>A</strong> undirected graph that we want to search all pths form <code>vertex1</code> to <code>vertex6</code></p>
@@ -152,8 +175,8 @@
       </categories>
       <tags>
         <tag>Graph</tag>
-        <tag>dfs</tag>
         <tag>bfs</tag>
+        <tag>dfs</tag>
       </tags>
   </entry>
   <entry>
@@ -258,17 +281,22 @@
   <entry>
     <title>9.1leetcode2240</title>
     <url>/2023/09/01/leetcode9-1/</url>
-    <content><![CDATA[<p>一个整数 <code>total</code> ，表示你拥有的总钱数。同时给你两个整数 <code>cost1</code> 和 <code>cost2</code> ，分别表示一支钢笔和一支铅笔的价格。你可以花费你部分或者全部的钱，去买任意数目的两种笔。</p>
+    <content><![CDATA[<p>You are given an integer <code>total</code> indicating the amount of money you have. You are also given two integers <code>cost1</code> and <code>cost2</code> indicating the price of a pen and pencil respectively. You can spend <strong>part or all</strong> of your money to buy multiple quantities (or none) of each kind of writing utensil.</p>
+<p>Return <em>the <strong>number of distinct ways</strong> you can buy some number of pens and pencils.</em></p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: total = 20, cost1 = 10, cost2 = 5</span><br><span class="line">Output: 9</span><br><span class="line">Explanation: The price of a pen is 10 and the price of a pencil is 5.</span><br><span class="line">- If you buy 0 pens, you can buy 0, 1, 2, 3, or 4 pencils.</span><br><span class="line">- If you buy 1 pen, you can buy 0, 1, or 2 pencils.</span><br><span class="line">- If you buy 2 pens, you cannot buy any pencils.</span><br><span class="line">The total number of ways to buy pens and pencils is 5 + 3 + 1 = 9.</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: total = 5, cost1 = 10, cost2 = 10</span><br><span class="line">Output: 1</span><br><span class="line">Explanation: The price of both pens and pencils are 10, which cost more than total, so you cannot buy any writing utensils. Therefore, there is only 1 way: buy 0 pens and 0 pencils.</span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><p><code>1 &lt;= total, cost1, cost2 &lt;= 106</code></p>
+<span id="more"></span></li>
+</ul>
+<p>一个整数 <code>total</code> ，表示你拥有的总钱数。同时给你两个整数 <code>cost1</code> 和 <code>cost2</code> ，分别表示一支钢笔和一支铅笔的价格。你可以花费你部分或者全部的钱，去买任意数目的两种笔。</p>
 <p>请你返回购买钢笔和铅笔的 <strong>不同方案数目</strong> 。</p>
-<span id="more"></span>
-
-<p><strong>示例 1：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">输入：total = 20, cost1 = 10, cost2 = 5</span><br><span class="line">输出：9</span><br><span class="line">解释：一支钢笔的价格为 10 ，一支铅笔的价格为 5 。</span><br><span class="line">- 如果你买 0 支钢笔，那么你可以买 0 ，1 ，2 ，3 或者 4 支铅笔。</span><br><span class="line">- 如果你买 1 支钢笔，那么你可以买 0 ，1 或者 2 支铅笔。</span><br><span class="line">- 如果你买 2 支钢笔，那么你没法买任何铅笔。</span><br><span class="line">所以买钢笔和铅笔的总方案数为 5 + 3 + 1 = 9 种。</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 2：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">输入：total = 5, cost1 = 10, cost2 = 10</span><br><span class="line">输出：1</span><br><span class="line">解释：钢笔和铅笔的价格都为 10 ，都比拥有的钱数多，所以你没法购买任何文具。所以只有 1 种方案：买 0 支钢笔和 0 支铅笔。</span><br></pre></td></tr></table></figure>
-
-<p><strong>解答:</strong></p>
+<p>Resolution</p>
 <figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="comment">// 2240  2023-09-01 09:08:04</span></span><br><span class="line"><span class="comment">// leetcode submit region begin(Prohibit modification and deletion)</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">waysToBuyPensPencils</span><span class="params">(total <span class="type">int</span>, cost1 <span class="type">int</span>, cost2 <span class="type">int</span>)</span></span> <span class="type">int64</span> &#123;</span><br><span class="line">	ret, nums := <span class="number">0</span>, <span class="number">0</span></span><br><span class="line">	<span class="keyword">for</span> nums*cost1 &lt;= total &#123;</span><br><span class="line">		ret += (total - nums*cost1) / cost2+<span class="number">1</span></span><br><span class="line">		nums++</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="type">int64</span>(ret)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//leetcode submit region end(Prohibit modification and deletion)</span></span><br></pre></td></tr></table></figure>
 
 ]]></content>
@@ -277,49 +305,6 @@
       </categories>
       <tags>
         <tag>Math</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>9.2leetcode2511</title>
-    <url>/2023/09/02/leetcode9-2/</url>
-    <content><![CDATA[<p>给你一个长度为 <code>n</code> ，下标从 <strong>0</strong> 开始的整数数组 <code>forts</code> ，表示一些城堡。<code>forts[i]</code> 可以是 <code>-1</code> ，<code>0</code> 或者 <code>1</code> ，其中：</p>
-<ul>
-<li><code>-1</code> 表示第 <code>i</code> 个位置 <strong>没有</strong> 城堡。</li>
-<li><code>0</code> 表示第 <code>i</code> 个位置有一个 <strong>敌人</strong> 的城堡。</li>
-<li><code>1</code> 表示第 <code>i</code> 个位置有一个你控制的城堡。</li>
-</ul>
-<p>现在，你需要决定，将你的军队从某个你控制的城堡位置 <code>i</code> 移动到一个空的位置 <code>j</code> ，满足：</p>
-<ul>
-<li><code>0 &lt;= i, j &lt;= n - 1</code></li>
-<li>军队经过的位置 <strong>只有</strong> 敌人的城堡。正式的，对于所有 <code>min(i,j) &lt; k &lt; max(i,j)</code> 的 <code>k</code> ，都满足 <code>forts[k] == 0</code> 。</li>
-</ul>
-<p>当军队移动时，所有途中经过的敌人城堡都会被 <strong>摧毁</strong> 。</p>
-<p>请你返回 <strong>最多</strong> 可以摧毁的敌人城堡数目。如果 <strong>无法</strong> 移动你的军队，或者没有你控制的城堡，请返回 <code>0</code> 。</p>
-<span id="more"></span>
-
-<p><strong>示例 1：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">输入：forts = [1,0,0,-1,0,0,0,0,1]</span><br><span class="line">输出：4</span><br><span class="line">解释：</span><br><span class="line">- 将军队从位置 0 移动到位置 3 ，摧毁 2 个敌人城堡，位置分别在 1 和 2 。</span><br><span class="line">- 将军队从位置 8 移动到位置 3 ，摧毁 4 个敌人城堡。</span><br><span class="line">4 是最多可以摧毁的敌人城堡数目，所以我们返回 4 。</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 2：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">输入：forts = [0,0,1,-1]</span><br><span class="line">输出：0</span><br><span class="line">解释：由于无法摧毁敌人的城堡，所以返回 0 。</span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>提示：</strong></p>
-<ul>
-<li><code>1 &lt;= forts.length &lt;= 1000</code></li>
-<li><code>-1 &lt;= forts[i] &lt;= 1</code></li>
-</ul>
-<p><strong>Resolution</strong></p>
-<p>计算-1和1之间全是0情况下最大的0的数量</p>
-<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;math&quot;</span></span><br><span class="line"><span class="comment">// 2511  2023-09-02 00:02:31</span></span><br><span class="line"><span class="comment">// leetcode submit region begin(Prohibit modification and deletion)</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">captureForts</span><span class="params">(forts []<span class="type">int</span>)</span></span> <span class="type">int</span> &#123;</span><br><span class="line">	pre := math.MinInt <span class="comment">//pre non-0 element</span></span><br><span class="line">	ret := <span class="number">0</span></span><br><span class="line">	<span class="keyword">for</span> idx, val := <span class="keyword">range</span> forts &#123;</span><br><span class="line">		<span class="keyword">if</span> val != <span class="number">0</span> &#123;</span><br><span class="line">			<span class="comment">//The subscript of the current non-0 element is idx, </span></span><br><span class="line">			<span class="comment">//and the subscript of the previous non-0 element is pre</span></span><br><span class="line">			<span class="comment">//forts[i] != forts[pre] means one is -1 and another is 1</span></span><br><span class="line">			<span class="keyword">if</span> pre &gt;= <span class="number">0</span> &amp;&amp; forts[idx] != forts[pre] &#123;</span><br><span class="line">				ret = max(ret, idx-pre<span class="number">-1</span>)</span><br><span class="line">			&#125;</span><br><span class="line">			pre = idx</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ret</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">max</span><span class="params">(a, b <span class="type">int</span>)</span></span> <span class="type">int</span> &#123;<span class="keyword">if</span> b &gt; a &#123;<span class="keyword">return</span> b&#125;;<span class="keyword">return</span> a&#125;</span><br><span class="line"><span class="comment">//leetcode submit region end(Prohibit modification and deletion)</span></span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>algorithm</category>
-      </categories>
-      <tags>
-        <tag>Traverse</tag>
       </tags>
   </entry>
   <entry>
@@ -1829,6 +1814,56 @@
       </categories>
       <tags>
         <tag>MySQL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>9.2leetcode2511</title>
+    <url>/2023/09/02/leetcode9-2/</url>
+    <content><![CDATA[<p>You are given a <strong>0-indexed</strong> integer array <code>forts</code> of length <code>n</code> representing the positions of several forts. <code>forts[i]</code> can be <code>-1</code>, <code>0</code>, or <code>1</code> where:</p>
+<ul>
+<li><code>-1</code> represents there is <strong>no fort</strong> at the <code>ith</code> position.</li>
+<li><code>0</code> indicates there is an <strong>enemy</strong> fort at the <code>ith</code> position.</li>
+<li><code>1</code> indicates the fort at the <code>ith</code> the position is under your command.</li>
+</ul>
+<p>Now you have decided to move your army from one of your forts at position <code>i</code> to an empty position <code>j</code> such that:</p>
+<ul>
+<li><code>0 &lt;= i, j &lt;= n - 1</code></li>
+<li>The army travels over enemy forts <strong>only</strong>. Formally, for all <code>k</code> where <code>min(i,j) &lt; k &lt; max(i,j)</code>, <code>forts[k] == 0.</code></li>
+</ul>
+<p>While moving the army, all the enemy forts that come in the way are <strong>captured</strong>.</p>
+<p>Return <em>the <strong>maximum</strong> number of enemy forts that can be captured</em>. In case it is <strong>impossible</strong> to move your army, or you do not have any fort under your command, return <code>0</code><em>.</em></p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: forts = [1,0,0,-1,0,0,0,0,1]</span><br><span class="line">Output: 4</span><br><span class="line">Explanation:</span><br><span class="line">- Moving the army from position 0 to position 3 captures 2 enemy forts, at 1 and 2.</span><br><span class="line">- Moving the army from position 8 to position 3 captures 4 enemy forts.</span><br><span class="line">Since 4 is the maximum number of enemy forts that can be captured, we return 4.</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: forts = [0,0,1,-1]</span><br><span class="line">Output: 0</span><br><span class="line">Explanation: Since no enemy fort can be captured, 0 is returned.</span><br></pre></td></tr></table></figure>
+
+
+
+<span id="more"></span>
+
+<p>给你一个长度为 <code>n</code> ，下标从 <strong>0</strong> 开始的整数数组 <code>forts</code> ，表示一些城堡。<code>forts[i]</code> 可以是 <code>-1</code> ，<code>0</code> 或者 <code>1</code> ，其中：</p>
+<ul>
+<li><code>-1</code> 表示第 <code>i</code> 个位置 <strong>没有</strong> 城堡。</li>
+<li><code>0</code> 表示第 <code>i</code> 个位置有一个 <strong>敌人</strong> 的城堡。</li>
+<li><code>1</code> 表示第 <code>i</code> 个位置有一个你控制的城堡。</li>
+</ul>
+<p>现在，你需要决定，将你的军队从某个你控制的城堡位置 <code>i</code> 移动到一个空的位置 <code>j</code> ，满足：</p>
+<ul>
+<li><code>0 &lt;= i, j &lt;= n - 1</code></li>
+<li>军队经过的位置 <strong>只有</strong> 敌人的城堡。正式的，对于所有 <code>min(i,j) &lt; k &lt; max(i,j)</code> 的 <code>k</code> ，都满足 <code>forts[k] == 0</code> 。</li>
+</ul>
+<p>当军队移动时，所有途中经过的敌人城堡都会被 <strong>摧毁</strong> 。</p>
+<p><strong>Resolution</strong></p>
+<p>计算-1和1之间全是0情况下最大的0的数量</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;math&quot;</span></span><br><span class="line"><span class="comment">// 2511  2023-09-02 00:02:31</span></span><br><span class="line"><span class="comment">// leetcode submit region begin(Prohibit modification and deletion)</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">captureForts</span><span class="params">(forts []<span class="type">int</span>)</span></span> <span class="type">int</span> &#123;</span><br><span class="line">	pre := math.MinInt <span class="comment">//pre non-0 element</span></span><br><span class="line">	ret := <span class="number">0</span></span><br><span class="line">	<span class="keyword">for</span> idx, val := <span class="keyword">range</span> forts &#123;</span><br><span class="line">		<span class="keyword">if</span> val != <span class="number">0</span> &#123;</span><br><span class="line">			<span class="comment">//The subscript of the current non-0 element is idx, </span></span><br><span class="line">			<span class="comment">//and the subscript of the previous non-0 element is pre</span></span><br><span class="line">			<span class="comment">//forts[i] != forts[pre] means one is -1 and another is 1</span></span><br><span class="line">			<span class="keyword">if</span> pre &gt;= <span class="number">0</span> &amp;&amp; forts[idx] != forts[pre] &#123;</span><br><span class="line">				ret = max(ret, idx-pre<span class="number">-1</span>)</span><br><span class="line">			&#125;</span><br><span class="line">			pre = idx</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ret</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">max</span><span class="params">(a, b <span class="type">int</span>)</span></span> <span class="type">int</span> &#123;<span class="keyword">if</span> b &gt; a &#123;<span class="keyword">return</span> b&#125;;<span class="keyword">return</span> a&#125;</span><br><span class="line"><span class="comment">//leetcode submit region end(Prohibit modification and deletion)</span></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>algorithm</category>
+      </categories>
+      <tags>
+        <tag>Traverse</tag>
       </tags>
   </entry>
 </search>

@@ -20,27 +20,25 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideDownIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="GraphStart learning of Graph.Mainly refer to the following books《Hello Algorithm》《代码随想录》">
+  <meta name="description" content="BreadthFirstSearchQuote and translate from  Code CapriceBFS is always used to solve the shortest path problem between two vertices.BFS starts from the starting vertex, the starting vertexis the center">
 <meta property="og:type" content="article">
-<meta property="og:title" content="GraphIntroduce">
-<meta property="og:url" content="http://example.com/2023/09/01/Graph01/index.html">
+<meta property="og:title" content="Graph-bfs">
+<meta property="og:url" content="http://example.com/2023/09/02/Graph-bfs/index.html">
 <meta property="og:site_name" content="陪你路过这个世界">
-<meta property="og:description" content="GraphStart learning of Graph.Mainly refer to the following books《Hello Algorithm》《代码随想录》">
+<meta property="og:description" content="BreadthFirstSearchQuote and translate from  Code CapriceBFS is always used to solve the shortest path problem between two vertices.BFS starts from the starting vertex, the starting vertexis the center">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/pic/Graph/graph01.png">
-<meta property="og:image" content="http://example.com/pic/Graph/graph02.png">
-<meta property="og:image" content="http://example.com/pic/Graph/graph03.png">
-<meta property="og:image" content="http://example.com/pic/Graph/graph04.png">
-<meta property="og:image" content="http://example.com/pic/Graph/graph05.png">
-<meta property="og:image" content="http://example.com/pic/Graph/graph06.png">
-<meta property="article:published_time" content="2023-09-01T05:29:59.000Z">
-<meta property="article:modified_time" content="2023-09-02T02:44:34.026Z">
+<meta property="og:image" content="http://example.com/pic/Graph-bfs/image-20230902144715129.png">
+<meta property="og:image" content="http://example.com/pic/Graph-bfs/image-20230902144812331.png">
+<meta property="og:image" content="http://example.com/pic/Graph-bfs/image-20230902150649652.png">
+<meta property="article:published_time" content="2023-09-02T06:39:46.000Z">
+<meta property="article:modified_time" content="2023-09-02T07:32:27.218Z">
 <meta property="article:author" content="zyuu">
 <meta property="article:tag" content="Graph">
+<meta property="article:tag" content="bfs">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/pic/Graph/graph01.png">
+<meta name="twitter:image" content="http://example.com/pic/Graph-bfs/image-20230902144715129.png">
 
-<link rel="canonical" href="http://example.com/2023/09/01/Graph01/">
+<link rel="canonical" href="http://example.com/2023/09/02/Graph-bfs/">
 
 
 <script id="page-configurations">
@@ -53,7 +51,7 @@
   };
 </script>
 
-  <title>GraphIntroduce | 陪你路过这个世界</title>
+  <title>Graph-bfs | 陪你路过这个世界</title>
   
 
 
@@ -201,7 +199,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/01/Graph01/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/02/Graph-bfs/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -214,7 +212,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          GraphIntroduce
+          Graph-bfs
         </h1>
 
         <div class="post-meta">
@@ -224,16 +222,10 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2023-09-01 13:29:59" itemprop="dateCreated datePublished" datetime="2023-09-01T13:29:59+08:00">2023-09-01</time>
+              <time title="创建时间：2023-09-02 14:39:46 / 修改时间：15:32:27" itemprop="dateCreated datePublished" datetime="2023-09-02T14:39:46+08:00">2023-09-02</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-09-02 10:44:34" itemprop="dateModified" datetime="2023-09-02T10:44:34+08:00">2023-09-02</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -255,54 +247,17 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="Graph"><a href="#Graph" class="headerlink" title="Graph"></a>Graph</h1><p>Start learning of Graph.<br>Mainly refer to the following books《Hello Algorithm》《代码随想录》</p>
+        <h1 id="BreadthFirstSearch"><a href="#BreadthFirstSearch" class="headerlink" title="BreadthFirstSearch"></a>BreadthFirstSearch</h1><h2 id="Quote-and-translate-from-Code-Caprice"><a href="#Quote-and-translate-from-Code-Caprice" class="headerlink" title="Quote and translate from  Code Caprice"></a>Quote and translate from  <em><strong><a target="_blank" rel="noopener" href="https://programmercarl.com/">Code Caprice</a></strong></em></h2><p>BFS is always used to solve the shortest path problem between two vertices.<br>BFS starts from the starting vertex, the starting vertexis the center of the circle of search,<br>once the end point is encountered, the record of the previous node is the shortest road.</p>
 <span id="more"></span>
 
-<h2 id="Introduce"><a href="#Introduce" class="headerlink" title="Introduce"></a>Introduce</h2><p><strong>Graph</strong><br>consists of an infinite non-empty set of vertices and a set of edges between vertices</p>
-<p><img src="/./../pic/Graph/graph01.png" alt="graph01"></p>
-<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">V</span><span class="operator">=</span><span class="punctuation">&#123;</span><span class="number">1</span><span class="operator">,</span><span class="number">2</span><span class="operator">,</span><span class="number">3</span><span class="operator">,</span><span class="number">4</span><span class="operator">,</span><span class="number">5</span><span class="punctuation">&#125;</span></span><br><span class="line"><span class="built_in">E</span><span class="operator">=</span><span class="punctuation">&#123;</span><span class="punctuation">(</span><span class="number">1</span><span class="operator">,</span><span class="number">2</span><span class="punctuation">)</span><span class="operator">,</span><span class="punctuation">(</span><span class="number">1</span><span class="operator">,</span><span class="number">3</span><span class="punctuation">)</span><span class="operator">,</span><span class="punctuation">(</span><span class="number">1</span><span class="operator">,</span><span class="number">5</span><span class="punctuation">)</span><span class="operator">,</span><span class="punctuation">(</span><span class="number">2</span><span class="operator">,</span><span class="number">3</span><span class="punctuation">)</span><span class="operator">,</span><span class="punctuation">(</span><span class="number">2</span><span class="operator">,</span><span class="number">4</span><span class="punctuation">)</span><span class="operator">,</span><span class="punctuation">(</span><span class="number">2</span><span class="operator">,</span><span class="number">5</span><span class="punctuation">)</span><span class="operator">,</span><span class="punctuation">(</span><span class="number">4</span><span class="operator">,</span><span class="number">5</span><span class="punctuation">)</span><span class="punctuation">&#125;</span></span><br><span class="line"><span class="variable">G</span><span class="operator">=</span><span class="punctuation">&#123;</span><span class="variable">V</span><span class="operator">,</span><span class="built_in">E</span><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
-
-<p>通常表示为：<strong>G(V,E)</strong></p>
-<p><strong>G represents a graph</strong><br><strong>V is the set of vertices in figure G</strong><br><strong>E is the set of edges in Figure G</strong></p>
-<p>In the data elements in the graph, we call them Vertex, the set of vertices is infinite and not empty. In a graph, there may be a relationship between any two vertices, the logical relationship between the vertices is represented by edges, and the edge set can be empty.</p>
-<p>Graphs are divided into <strong>undirected graphs</strong> and <strong>directed graphs</strong> according to the direction of the edges.</p>
-<ul>
-<li>an undirected graph consists of vertices and edges,</li>
-<li>A directed graph consists of vertices and arcs(弧). The arc is divided into an arc tail and an arc head, and the end with an arrow is the arc head.<img src="/./../pic/Graph/graph02.png" alt="graph02"></li>
-</ul>
-<p>According to whether the vertices are connected or not, it is divided into<br><strong>connected graph</strong> and  <strong>non-connected graph</strong> </p>
-<ul>
-<li><p>For connected graphs, from one vertex, you can reach any of the other vertices.</p>
-</li>
-<li><p>For non-connected graphs, at least one vertex is unreachable from a vertex.</p>
-</li>
-<li><p><img src="/./../pic/Graph/graph03.png" alt="image-20230901180215803"></p>
-</li>
-</ul>
-<p>According to the weight, it is divided into <strong>power graph</strong> and  <strong>nopwer graph</strong></p>
-<p><img src="/./../pic/Graph/graph04.png" alt="image-20230901180544716"></p>
-<p>图数据结构包含以下常用术语。</p>
-<ul>
-<li><p>adjacency：in two vertices connect。</p>
-</li>
-<li><p>path：the path from VertexA to VertexB   </p>
-</li>
-<li><p>degree：The number of edges owned by a vertex</p>
-</li>
-</ul>
-<h2 id="Representation-of-the-figure"><a href="#Representation-of-the-figure" class="headerlink" title="Representation of the figure"></a>Representation of the figure</h2><p>Common representations of graphs include <strong>adjacency matrices</strong> and <strong>adjacency list</strong></p>
-<h3 id="Adjacency-matrices"><a href="#Adjacency-matrices" class="headerlink" title="Adjacency matrices"></a>Adjacency matrices</h3><p>A graph holds vertices <code>n</code>，adjacency matrices use <code>n*n</code> matrices implement graph，Each row (column) represents a vertex,using element <code>1</code> or <code>0</code> denote wether vertices holding a path</p>
-<p>adjacency matrices <code>M</code>、<code>vertices:V</code> ，matrices element <code>M[i,j]=1</code> denote  vertex<code>V[i] </code> to vertex <code>V[j]</code> has a path<br>,so <code>M[i,j]=0</code>means there is no path in two vertices.</p>
-<p><img src="/./../pic/Graph/graph05.png" alt="image-20230901181201339"></p>
-<p>adjacency matrices has the following characteristics</p>
-<ul>
-<li>Vertices cannot be connected to themselves, so adjacency matrix main diagonal elements have no meaning.</li>
-<li>For undirected graphs, the edges in both directions are the same power, where the adjacency matrix is symmetric with respect to the principal diagonal.<br>Replacing the elements of the adjacency matrix with weights from 1 and 0 represents a weight graph.</li>
-</ul>
-<h3 id="Adjacency-list"><a href="#Adjacency-list" class="headerlink" title="Adjacency list"></a>Adjacency list</h3><p> adjacency list use <code>n</code> linklist to implement graph，whose node is used to implement vertex.<br>the <code>ith</code>linklisr is reflect the vertex <code>i</code> </p>
-<p><img src="/./../pic/Graph/graph06.png" alt="image-20230901181618572"></p>
-<p>The adjacency table only stores the edges that actually exist, and the total number of edges is usually much smaller than  ‘ <code>O(n^2) </code>, so it is more space-efficient. However, in the adjacency table, it is necessary to traverse the linked list to find edges, so it is not as time-efficient as the adjacency matrix.</p>
-<p>The adjacency table structure is very similar to the “chained address” in the hash table,<br> so we can also take a similar approach to optimize efficiency.<br>For example, when the linked list is long, the linked list can be converted into an <strong>AVL tree</strong> or a red-black tree,<br>thereby optimizing the time efficiency from <code>O(n) </code>to <code>O(logN)</code><br> It is also possible to convert a linked list to a hash table, thereby reducing the time complexity to <code>O(1)</code></p>
+<h2 id="The-process-of-BFS"><a href="#The-process-of-BFS" class="headerlink" title="The process of BFS"></a>The process of BFS</h2><p>BFS is a round-by-circle search process<br>using a square map,each direction of search is <code>up/down/right/left</code><br>then a start location is given,so BFS can take a step to the four directions</p>
+<p><img src="/./../pic/Graph-bfs/image-20230902144715129.png" alt="image-20230902144715129"></p>
+<p>Now set an <code>end</code> location,the process of <code>BFS</code> is following<br>From the start vertex,search circle by circle and inside out<br>the first step is the vertex holding <code>1</code><br>the second step is the vertex holding <code>2</code><br>when stepNum is <code>4</code>,has found the <code>end</code></p>
+<p><img src="/./../pic/Graph-bfs/image-20230902144812331.png" alt="image-20230902144812331"></p>
+<p>The way BFS traverses round by circle,<br>so once it encounters the <code>end</code> point, it must be the shortest path.<br>And the map can also have obstacles, as shown in the image:</p>
+<p><img src="/./../pic/Graph-bfs/image-20230902150649652.png" alt="image-20230902150649652"></p>
+<p>In the <code>5th</code> step, the <code>6th</code> step only dyed the key nodes<br>and the other directions did not dye<br>only needs to pay attention to the logic of dyeing in key places<br>As we can see from the pic, if obstacles are added,<br>the <code>6th</code> step to reach the end </p>
+<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">bfs</span><span class="params">(grid [][]<span class="type">byte</span>, visited [][]<span class="type">bool</span>, x <span class="type">int</span>, y <span class="type">int</span>)</span></span> &#123;</span><br><span class="line">    <span class="comment">// grid --&gt;map</span></span><br><span class="line">    <span class="comment">// vistied --&gt; value has been traverse</span></span><br><span class="line">    <span class="comment">// x,y --&gt; the start SearchNode&#x27;s index </span></span><br><span class="line">    <span class="comment">// Representing four directions (up left down right)</span></span><br><span class="line">	dir := [<span class="number">4</span>][<span class="number">2</span>]<span class="type">int</span>&#123;&#123;<span class="number">0</span>, <span class="number">1</span>&#125;, &#123;<span class="number">1</span>, <span class="number">0</span>&#125;, &#123;<span class="number">-1</span>, <span class="number">0</span>&#125;, &#123;<span class="number">0</span>, <span class="number">-1</span>&#125;&#125;</span><br><span class="line"></span><br><span class="line">	queue := <span class="built_in">make</span>([][<span class="number">2</span>]<span class="type">int</span>, <span class="number">0</span>)          <span class="comment">// Define a queue</span></span><br><span class="line">	queue = <span class="built_in">append</span>(queue, [<span class="number">2</span>]<span class="type">int</span>&#123;x, y&#125;) <span class="comment">// Add the starting node to the queue</span></span><br><span class="line">	visited[x][y] = <span class="literal">true</span>                <span class="comment">// Mark the starting visitednode</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// Start traversing elements in the queue</span></span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">len</span>(queue) &gt; <span class="number">0</span> &#123; </span><br><span class="line">		cur := queue[<span class="number">0</span>]</span><br><span class="line">		queue = queue[<span class="number">1</span>:]            <span class="comment">// get an element from the queue</span></span><br><span class="line">		curx, cury := cur[<span class="number">0</span>], cur[<span class="number">1</span>] <span class="comment">// Current node coordinates</span></span><br><span class="line">		</span><br><span class="line">        <span class="comment">// Start traversing in four directions - left, right, up, and down</span></span><br><span class="line">		<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">4</span>; i++ &#123; </span><br><span class="line">            <span class="comment">// Get coordinates of the adjacent nodes</span></span><br><span class="line">			nextx := curx + dir[i][<span class="number">0</span>]</span><br><span class="line">			nexty := cury + dir[i][<span class="number">1</span>] </span><br><span class="line">            </span><br><span class="line">            <span class="comment">// Skip if the coordinate indexs are out of bounds</span></span><br><span class="line">			<span class="keyword">if</span> nextx &lt; <span class="number">0</span> || nextx &gt;= <span class="built_in">len</span>(grid) || nexty &lt; <span class="number">0</span> || nexty &gt;= <span class="built_in">len</span>(grid[<span class="number">0</span>]) &#123;</span><br><span class="line">				<span class="keyword">continue</span> </span><br><span class="line">			&#125;</span><br><span class="line">            </span><br><span class="line">			<span class="comment">// If the node hasn&#x27;t been visited</span></span><br><span class="line">			<span class="keyword">if</span> !visited[nextx][nexty] &#123; </span><br><span class="line">                <span class="comment">// Add the node to the queue for the next round of traversal</span></span><br><span class="line">				queue = <span class="built_in">append</span>(queue, [<span class="number">2</span>]<span class="type">int</span>&#123;nextx, nexty&#125;) </span><br><span class="line">                <span class="comment">// Mark it as visited immediately to avoid duplicates</span></span><br><span class="line">				visited[nextx][nexty] = <span class="literal">true</span>                </span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -313,6 +268,7 @@
       <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/Graph/" rel="tag"># Graph</a>
+              <a href="/tags/bfs/" rel="tag"># bfs</a>
           </div>
 
         
@@ -321,13 +277,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2023/09/01/MySQL01/" rel="prev" title="MySQL01">
-      <i class="fa fa-chevron-left"></i> MySQL01
+    <a href="/2023/09/02/GraphDfs-LC797/" rel="prev" title="GraphDfs-LC797">
+      <i class="fa fa-chevron-left"></i> GraphDfs-LC797
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2023/09/01/Graph02/" rel="next" title="Graph-The basic operation of Graph">
-      Graph-The basic operation of Graph <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -386,7 +339,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Graph"><span class="nav-number">1.</span> <span class="nav-text">Graph</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduce"><span class="nav-number">1.1.</span> <span class="nav-text">Introduce</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Representation-of-the-figure"><span class="nav-number">1.2.</span> <span class="nav-text">Representation of the figure</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Adjacency-matrices"><span class="nav-number">1.2.1.</span> <span class="nav-text">Adjacency matrices</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Adjacency-list"><span class="nav-number">1.2.2.</span> <span class="nav-text">Adjacency list</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#BreadthFirstSearch"><span class="nav-number">1.</span> <span class="nav-text">BreadthFirstSearch</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quote-and-translate-from-Code-Caprice"><span class="nav-number">1.1.</span> <span class="nav-text">Quote and translate from  Code Caprice</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-process-of-BFS"><span class="nav-number">1.2.</span> <span class="nav-text">The process of BFS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Code"><span class="nav-number">1.3.</span> <span class="nav-text">Code</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
