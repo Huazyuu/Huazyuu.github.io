@@ -20,17 +20,28 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideDownIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="迷惘的灵魂啊 安静的运转吧">
-<meta property="og:type" content="website">
-<meta property="og:title" content="陪你路过这个世界">
-<meta property="og:url" content="http://example.com/tags/Traverse/index.html">
+  <meta name="description" content="DepthFirstSearchQuote and translate from  Code CapriceA undirected graph that we want to search all pths form vertex1 to vertex6">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Graph-dfs">
+<meta property="og:url" content="http://example.com/2023/09/02/Graph-dfs/index.html">
 <meta property="og:site_name" content="陪你路过这个世界">
-<meta property="og:description" content="迷惘的灵魂啊 安静的运转吧">
+<meta property="og:description" content="DepthFirstSearchQuote and translate from  Code CapriceA undirected graph that we want to search all pths form vertex1 to vertex6">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/pic/Graph-dfs/image01.png">
+<meta property="og:image" content="http://example.com/pic/Graph-dfs/image-20230902105329872.png">
+<meta property="og:image" content="http://example.com/pic/Graph-dfs/image-20230902105518919.png">
+<meta property="og:image" content="http://example.com/pic/Graph-dfs/image-20230902110148371.png">
+<meta property="og:image" content="http://example.com/pic/Graph-dfs/image-20230902110506611.png">
+<meta property="og:image" content="http://example.com/pic/Graph-dfs/image-20230902110709419.png">
+<meta property="article:published_time" content="2023-09-02T02:44:11.000Z">
+<meta property="article:modified_time" content="2023-09-02T03:12:21.562Z">
 <meta property="article:author" content="zyuu">
+<meta property="article:tag" content="Graph">
+<meta property="article:tag" content="dfs">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/pic/Graph-dfs/image01.png">
 
-<link rel="canonical" href="http://example.com/tags/Traverse/">
+<link rel="canonical" href="http://example.com/2023/09/02/Graph-dfs/">
 
 
 <script id="page-configurations">
@@ -38,12 +49,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>标签: Traverse | 陪你路过这个世界</title>
+  <title>Graph-dfs | 陪你路过这个世界</title>
   
 
 
@@ -184,51 +195,107 @@
         <div class="content-wrap">
           
 
-          <div class="content tag">
+          <div class="content post posts-expand">
             
 
+    
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <h2 class="collection-header">Traverse
-          <small>标签</small>
-        </h2>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/02/Graph-dfs/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="zyuu">
+      <meta itemprop="description" content="迷惘的灵魂啊 安静的运转吧">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陪你路过这个世界">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Graph-dfs
+        </h1>
+
+        <div class="post-meta">
+           
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-09-02 10:44:11 / 修改时间：11:12:21" itemprop="dateCreated datePublished" datetime="2023-09-02T10:44:11+08:00">2023-09-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2023</span>
+        <h1 id="DepthFirstSearch"><a href="#DepthFirstSearch" class="headerlink" title="DepthFirstSearch"></a>DepthFirstSearch</h1><h2 id="Quote-and-translate-from-Code-Caprice"><a href="#Quote-and-translate-from-Code-Caprice" class="headerlink" title="Quote and translate from  Code Caprice"></a>Quote and translate from  <em><strong><a target="_blank" rel="noopener" href="https://programmercarl.com/">Code Caprice</a></strong></em></h2><p><strong>A</strong> undirected graph that we want to search all pths form <code>vertex1</code> to <code>vertex6</code></p>
+<p><img src="/./../pic/Graph-dfs/image01.png" alt="image-20230902105209987"></p>
+<span id="more"></span>
+
+<p><strong>T</strong>hen the first path of DFS search looks like this:<br>Assuming that the first time you extend the default direction, you find <code>vertex6</code></p>
+<p><img src="/./../pic/Graph-dfs/image-20230902105329872.png" alt="image-20230902105329872"></p>
+<p><strong>A</strong>t this time, we found <code>vertex6</code>, then we should search for other directions<br>so <code>Path2</code> reversed, changed direction, took <code>path3</code><br>and then also found the end <code>vertex6</code>. Then reversing <code>path2</code> and<br> changing it to <code>path3</code> is  the process of backtracking in DFS </p>
+<p><img src="/./../pic/Graph-dfs/image-20230902105518919.png" alt="image-20230902105518919"></p>
+<p><strong>F</strong>ind a path from <code>vertex1</code> to <code>vertex</code>6,<br>and then to the direction, and then turned back,<br> <code>path4</code> was withdrawn (the process of backtracking) and changed to <code>path5</code>.</p>
+<p><img src="/./../pic/Graph-dfs/image-20230902110148371.png" alt="image-20230902110148371"></p>
+<p><strong>F</strong>ind a path from <code>vertex1</code> to <code>vertex6</code>,<br>and then to the direction, at this time turned back,<br><code>path6</code> was undone (the process of backtracking),<br>changed to <code>path7</code>, <code>path8</code> and <code>path7</code>, <code>path9</code>,<br>and found that there was a dead end, all of which came to the node they walked.</p>
+<p><img src="/./../pic/Graph-dfs/image-20230902110506611.png" alt="image-20230902110506611"></p>
+<p><strong>T</strong>hen the path connected by <code>vertex2</code> and the path linked by <code>vertex3</code> have passed,<br>and the undo path can only be reversed upwards to choose to cancel the original choice of <code>vertex4</code>,<br>that is, cancel <code>path5</code> and change it to <code>path10</code></p>
+<p><img src="/./../pic/Graph-dfs/image-20230902110709419.png" alt="image-20230902110709419"></p>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+    
+    
+    
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2023-09-02T00:03:04+08:00"
-              content="2023-09-02">
-          09-02
-        </time>
-      </div>
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Graph/" rel="tag"># Graph</a>
+              <a href="/tags/dfs/" rel="tag"># dfs</a>
+          </div>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2023/09/02/leetcode9-2/" itemprop="url">
-            <span itemprop="name">9.2leetcode2511</span>
-          </a>
-      </div>
+        
 
-    </header>
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/09/02/Graph03-Traverse/" rel="prev" title="Graph-Search">
+      <i class="fa fa-chevron-left"></i> Graph-Search
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2023/09/02/GraphDfs-LC797/" rel="next" title="GraphDfs-LC797">
+      GraphDfs-LC797 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
   </article>
-
-    </div>
-  </div>
   
   
-  
-
   
 
 
@@ -281,6 +348,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#DepthFirstSearch"><span class="nav-number">1.</span> <span class="nav-text">DepthFirstSearch</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quote-and-translate-from-Code-Caprice"><span class="nav-number">1.1.</span> <span class="nav-text">Quote and translate from  Code Caprice</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

@@ -13,14 +13,33 @@
       </tags>
   </entry>
   <entry>
-    <title>Hello</title>
-    <url>/2023/08/31/Hello/</url>
-    <content><![CDATA[<h1 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello World"></a>Hello World</h1><figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;hello golang&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    <title>Graph-dfs</title>
+    <url>/2023/09/02/Graph-dfs/</url>
+    <content><![CDATA[<h1 id="DepthFirstSearch"><a href="#DepthFirstSearch" class="headerlink" title="DepthFirstSearch"></a>DepthFirstSearch</h1><h2 id="Quote-and-translate-from-Code-Caprice"><a href="#Quote-and-translate-from-Code-Caprice" class="headerlink" title="Quote and translate from  Code Caprice"></a>Quote and translate from  <em><strong><a href="https://programmercarl.com/">Code Caprice</a></strong></em></h2><p><strong>A</strong> undirected graph that we want to search all pths form <code>vertex1</code> to <code>vertex6</code></p>
+<p><img src="/./../pic/Graph-dfs/image01.png" alt="image-20230902105209987"></p>
+<span id="more"></span>
 
+<p><strong>T</strong>hen the first path of DFS search looks like this:<br>Assuming that the first time you extend the default direction, you find <code>vertex6</code></p>
+<p><img src="/./../pic/Graph-dfs/image-20230902105329872.png" alt="image-20230902105329872"></p>
+<p><strong>A</strong>t this time, we found <code>vertex6</code>, then we should search for other directions<br>so <code>Path2</code> reversed, changed direction, took <code>path3</code><br>and then also found the end <code>vertex6</code>. Then reversing <code>path2</code> and<br> changing it to <code>path3</code> is  the process of backtracking in DFS </p>
+<p><img src="/./../pic/Graph-dfs/image-20230902105518919.png" alt="image-20230902105518919"></p>
+<p><strong>F</strong>ind a path from <code>vertex1</code> to <code>vertex</code>6,<br>and then to the direction, and then turned back,<br> <code>path4</code> was withdrawn (the process of backtracking) and changed to <code>path5</code>.</p>
+<p><img src="/./../pic/Graph-dfs/image-20230902110148371.png" alt="image-20230902110148371"></p>
+<p><strong>F</strong>ind a path from <code>vertex1</code> to <code>vertex6</code>,<br>and then to the direction, at this time turned back,<br><code>path6</code> was undone (the process of backtracking),<br>changed to <code>path7</code>, <code>path8</code> and <code>path7</code>, <code>path9</code>,<br>and found that there was a dead end, all of which came to the node they walked.</p>
+<p><img src="/./../pic/Graph-dfs/image-20230902110506611.png" alt="image-20230902110506611"></p>
+<p><strong>T</strong>hen the path connected by <code>vertex2</code> and the path linked by <code>vertex3</code> have passed,<br>and the undo path can only be reversed upwards to choose to cancel the original choice of <code>vertex4</code>,<br>that is, cancel <code>path5</code> and change it to <code>path10</code></p>
+<p><img src="/./../pic/Graph-dfs/image-20230902110709419.png" alt="image-20230902110709419"></p>
 ]]></content>
+      <categories>
+        <category>algorithm</category>
+      </categories>
+      <tags>
+        <tag>Graph</tag>
+        <tag>dfs</tag>
+      </tags>
   </entry>
   <entry>
-    <title>Graph01</title>
+    <title>GraphIntroduce</title>
     <url>/2023/09/01/Graph01/</url>
     <content><![CDATA[<h1 id="Graph"><a href="#Graph" class="headerlink" title="Graph"></a>Graph</h1><p>Start learning of Graph.<br>Mainly refer to the following books《Hello Algorithm》《代码随想录》</p>
 <span id="more"></span>
@@ -79,7 +98,7 @@
       </tags>
   </entry>
   <entry>
-    <title>Graph02-The basic operation of Graph</title>
+    <title>Graph-The basic operation of Graph</title>
     <url>/2023/09/01/Graph02/</url>
     <content><![CDATA[<h1 id="The-basic-operation-of-Graph"><a href="#The-basic-operation-of-Graph" class="headerlink" title="The basic operation of Graph"></a>The basic operation of Graph</h1><p>This Blog   use <strong>adjacency matrices</strong> and <strong>adjacency list</strong> to implement <strong>Graph</strong> in <code>Golang</code></p>
 <span id="more"></span>
@@ -119,6 +138,60 @@
       </categories>
       <tags>
         <tag>Graph</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Graph-Search</title>
+    <url>/2023/09/02/Graph03-Traverse/</url>
+    <content><![CDATA[<h1 id="Search-Graph"><a href="#Search-Graph" class="headerlink" title="Search  Graph"></a>Search  Graph</h1><p>To traverse a graph ,we always hold <code>DepthFirstSearch(dfs)</code>and <code>BreadthFirstSearch(bfs)</code></p>
+<p><code>dfs</code>: Search in one direction, until can not search, and then change direction<br>        the process of changing direction involves backtracking</p>
+<p><code>bfs</code>: Traverse all  vertices connected by this vertex,<br>         and when you go to the next vertex then traverse all the vertices connected to the vertex,<br>         and the search direction is more like a breadth, a search process in all directions.</p>
+]]></content>
+      <categories>
+        <category>algorithm</category>
+      </categories>
+      <tags>
+        <tag>Graph</tag>
+        <tag>dfs</tag>
+        <tag>bfs</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>GraphDfs-LC797</title>
+    <url>/2023/09/02/GraphDfs-LC797/</url>
+    <content><![CDATA[<h1 id="Leetcode-797"><a href="#Leetcode-797" class="headerlink" title="Leetcode-797"></a>Leetcode-797</h1><p><strong>给你一个有 <code>n</code> 个节点的 有向无环图（DAG），请你找出所有从节点 <code>0</code> 到节点 <code>n-1</code> 的路径并输出（不要求按特定顺序）</strong><br>Given a directed acyclic graph (DAG) of <strong>n</strong> nodes labeled from <strong>0</strong> to <strong>n - 1</strong>,<br>find all possible paths from node <strong>0</strong> to node <strong>n - 1</strong> and return them in <strong>any order</strong>.</p>
+<p><strong><code>graph[i]</code> 是一个从节点 <code>i</code> 可以访问的所有节点的列表（即从节点 <code>i</code> 到节点 <code>graph[i][j]</code>存在一条有向边）。</strong><br>The graph is given as follows: <code>graph[i]</code> is a list of all nodes you can visit from node <code>i</code><br>(i.e., there is a directed edge from node <code>i</code> to node <code>graph[i][j]</code>).</p>
+<span id="more"></span>
+
+<p><strong>Example 1</strong></p>
+<p><img src="/./../pic/GraphDfs-LC797/image-20230902111802810.png" alt="image-20230902111802810"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: graph = [[1,2],[3],[3],[]]</span><br><span class="line">Output: [[0,1,3],[0,2,3]]</span><br><span class="line">Explanation: There are two paths: 0 -&gt; 1 -&gt; 3 and 0 -&gt; 2 -&gt; 3.</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2</strong></p>
+<p><img src="/./../pic/GraphDfs-LC797/image-20230902112111869.png" alt="image-20230902112111869"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: graph = [[4,3,1],[3,2,4],[3],[4],[]]</span><br><span class="line">Output: [[0,4],[0,3,4],[0,1,3,4],[0,1,2,3,4],[0,1,4]]</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>n == graph.length</code></li>
+<li><code>2 &lt;= n &lt;= 15</code></li>
+<li><code>0 &lt;= graph[i][j] &lt; n</code></li>
+<li><code>graph[i][j] != i</code> (i.e., there will be no self-loops).</li>
+<li>All the elements of <code>graph[i]</code> are <strong>unique</strong>.</li>
+<li>The input graph is <strong>guaranteed</strong> to be a <strong>DAG</strong>.</li>
+</ul>
+<p><strong>Resolution</strong></p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="comment">// 797  2023-09-02 11:15:28</span></span><br><span class="line"><span class="comment">// leetcode submit region begin(Prohibit modification and deletion)</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">allPathsSourceTarget</span><span class="params">(graph [][]<span class="type">int</span>)</span></span> [][]<span class="type">int</span> &#123;</span><br><span class="line">	<span class="keyword">var</span> ret [][]<span class="type">int</span></span><br><span class="line">	<span class="keyword">var</span> path []<span class="type">int</span></span><br><span class="line">	<span class="keyword">var</span> dfs <span class="function"><span class="keyword">func</span><span class="params">(<span class="type">int</span>)</span></span></span><br><span class="line">	dfs = <span class="function"><span class="keyword">func</span><span class="params">(x <span class="type">int</span>)</span></span> &#123;</span><br><span class="line">		<span class="keyword">if</span> x == <span class="built_in">len</span>(graph)<span class="number">-1</span> &#123;</span><br><span class="line">			<span class="comment">// get a path</span></span><br><span class="line">			tmp := <span class="built_in">make</span>([]<span class="type">int</span>, <span class="built_in">len</span>(path))</span><br><span class="line">			<span class="built_in">copy</span>(tmp, path)</span><br><span class="line">			ret = <span class="built_in">append</span>(ret, tmp)</span><br><span class="line">			<span class="keyword">return</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//find the nodeX link all nodes</span></span><br><span class="line">		<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="built_in">len</span>(graph[x]); i++ &#123;</span><br><span class="line">			<span class="comment">// add to path</span></span><br><span class="line">			path = <span class="built_in">append</span>(path, graph[x][i])</span><br><span class="line">			dfs(graph[x][i])</span><br><span class="line">			<span class="comment">// traverse</span></span><br><span class="line">			path = path[:<span class="built_in">len</span>(path)<span class="number">-1</span>]</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	path = <span class="built_in">append</span>(path, <span class="number">0</span>)</span><br><span class="line">	dfs(<span class="number">0</span>)</span><br><span class="line">	<span class="keyword">return</span> ret</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//leetcode submit region end(Prohibit modification and deletion)</span></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>algorithm</category>
+      </categories>
+      <tags>
+        <tag>Graph</tag>
+        <tag>dfs</tag>
       </tags>
   </entry>
   <entry>
@@ -204,49 +277,6 @@
       </categories>
       <tags>
         <tag>Math</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>9.2leetcode2511</title>
-    <url>/2023/09/02/leetcode9-2/</url>
-    <content><![CDATA[<p>给你一个长度为 <code>n</code> ，下标从 <strong>0</strong> 开始的整数数组 <code>forts</code> ，表示一些城堡。<code>forts[i]</code> 可以是 <code>-1</code> ，<code>0</code> 或者 <code>1</code> ，其中：</p>
-<ul>
-<li><code>-1</code> 表示第 <code>i</code> 个位置 <strong>没有</strong> 城堡。</li>
-<li><code>0</code> 表示第 <code>i</code> 个位置有一个 <strong>敌人</strong> 的城堡。</li>
-<li><code>1</code> 表示第 <code>i</code> 个位置有一个你控制的城堡。</li>
-</ul>
-<p>现在，你需要决定，将你的军队从某个你控制的城堡位置 <code>i</code> 移动到一个空的位置 <code>j</code> ，满足：</p>
-<ul>
-<li><code>0 &lt;= i, j &lt;= n - 1</code></li>
-<li>军队经过的位置 <strong>只有</strong> 敌人的城堡。正式的，对于所有 <code>min(i,j) &lt; k &lt; max(i,j)</code> 的 <code>k</code> ，都满足 <code>forts[k] == 0</code> 。</li>
-</ul>
-<p>当军队移动时，所有途中经过的敌人城堡都会被 <strong>摧毁</strong> 。</p>
-<p>请你返回 <strong>最多</strong> 可以摧毁的敌人城堡数目。如果 <strong>无法</strong> 移动你的军队，或者没有你控制的城堡，请返回 <code>0</code> 。</p>
-<span id="more"></span>
-
-<p><strong>示例 1：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">输入：forts = [1,0,0,-1,0,0,0,0,1]</span><br><span class="line">输出：4</span><br><span class="line">解释：</span><br><span class="line">- 将军队从位置 0 移动到位置 3 ，摧毁 2 个敌人城堡，位置分别在 1 和 2 。</span><br><span class="line">- 将军队从位置 8 移动到位置 3 ，摧毁 4 个敌人城堡。</span><br><span class="line">4 是最多可以摧毁的敌人城堡数目，所以我们返回 4 。</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 2：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">输入：forts = [0,0,1,-1]</span><br><span class="line">输出：0</span><br><span class="line">解释：由于无法摧毁敌人的城堡，所以返回 0 。</span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>提示：</strong></p>
-<ul>
-<li><code>1 &lt;= forts.length &lt;= 1000</code></li>
-<li><code>-1 &lt;= forts[i] &lt;= 1</code></li>
-</ul>
-<p><strong>Resolution</strong></p>
-<p>计算-1和1之间全是0情况下最大的0的数量</p>
-<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;math&quot;</span></span><br><span class="line"><span class="comment">// 2511  2023-09-02 00:02:31</span></span><br><span class="line"><span class="comment">// leetcode submit region begin(Prohibit modification and deletion)</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">captureForts</span><span class="params">(forts []<span class="type">int</span>)</span></span> <span class="type">int</span> &#123;</span><br><span class="line">	pre := math.MinInt <span class="comment">//pre non-0 element</span></span><br><span class="line">	ret := <span class="number">0</span></span><br><span class="line">	<span class="keyword">for</span> idx, val := <span class="keyword">range</span> forts &#123;</span><br><span class="line">		<span class="keyword">if</span> val != <span class="number">0</span> &#123;</span><br><span class="line">			<span class="comment">//The subscript of the current non-0 element is idx, </span></span><br><span class="line">			<span class="comment">//and the subscript of the previous non-0 element is pre</span></span><br><span class="line">			<span class="comment">//forts[i] != forts[pre] means one is -1 and another is 1</span></span><br><span class="line">			<span class="keyword">if</span> pre &gt;= <span class="number">0</span> &amp;&amp; forts[idx] != forts[pre] &#123;</span><br><span class="line">				ret = max(ret, idx-pre<span class="number">-1</span>)</span><br><span class="line">			&#125;</span><br><span class="line">			pre = idx</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ret</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">max</span><span class="params">(a, b <span class="type">int</span>)</span></span> <span class="type">int</span> &#123;<span class="keyword">if</span> b &gt; a &#123;<span class="keyword">return</span> b&#125;;<span class="keyword">return</span> a&#125;</span><br><span class="line"><span class="comment">//leetcode submit region end(Prohibit modification and deletion)</span></span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>algorithm</category>
-      </categories>
-      <tags>
-        <tag>Traverse</tag>
       </tags>
   </entry>
   <entry>
@@ -1756,6 +1786,49 @@
       </categories>
       <tags>
         <tag>MySQL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>9.2leetcode2511</title>
+    <url>/2023/09/02/leetcode9-2/</url>
+    <content><![CDATA[<p>给你一个长度为 <code>n</code> ，下标从 <strong>0</strong> 开始的整数数组 <code>forts</code> ，表示一些城堡。<code>forts[i]</code> 可以是 <code>-1</code> ，<code>0</code> 或者 <code>1</code> ，其中：</p>
+<ul>
+<li><code>-1</code> 表示第 <code>i</code> 个位置 <strong>没有</strong> 城堡。</li>
+<li><code>0</code> 表示第 <code>i</code> 个位置有一个 <strong>敌人</strong> 的城堡。</li>
+<li><code>1</code> 表示第 <code>i</code> 个位置有一个你控制的城堡。</li>
+</ul>
+<p>现在，你需要决定，将你的军队从某个你控制的城堡位置 <code>i</code> 移动到一个空的位置 <code>j</code> ，满足：</p>
+<ul>
+<li><code>0 &lt;= i, j &lt;= n - 1</code></li>
+<li>军队经过的位置 <strong>只有</strong> 敌人的城堡。正式的，对于所有 <code>min(i,j) &lt; k &lt; max(i,j)</code> 的 <code>k</code> ，都满足 <code>forts[k] == 0</code> 。</li>
+</ul>
+<p>当军队移动时，所有途中经过的敌人城堡都会被 <strong>摧毁</strong> 。</p>
+<p>请你返回 <strong>最多</strong> 可以摧毁的敌人城堡数目。如果 <strong>无法</strong> 移动你的军队，或者没有你控制的城堡，请返回 <code>0</code> 。</p>
+<span id="more"></span>
+
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">输入：forts = [1,0,0,-1,0,0,0,0,1]</span><br><span class="line">输出：4</span><br><span class="line">解释：</span><br><span class="line">- 将军队从位置 0 移动到位置 3 ，摧毁 2 个敌人城堡，位置分别在 1 和 2 。</span><br><span class="line">- 将军队从位置 8 移动到位置 3 ，摧毁 4 个敌人城堡。</span><br><span class="line">4 是最多可以摧毁的敌人城堡数目，所以我们返回 4 。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">输入：forts = [0,0,1,-1]</span><br><span class="line">输出：0</span><br><span class="line">解释：由于无法摧毁敌人的城堡，所以返回 0 。</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= forts.length &lt;= 1000</code></li>
+<li><code>-1 &lt;= forts[i] &lt;= 1</code></li>
+</ul>
+<p><strong>Resolution</strong></p>
+<p>计算-1和1之间全是0情况下最大的0的数量</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;math&quot;</span></span><br><span class="line"><span class="comment">// 2511  2023-09-02 00:02:31</span></span><br><span class="line"><span class="comment">// leetcode submit region begin(Prohibit modification and deletion)</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">captureForts</span><span class="params">(forts []<span class="type">int</span>)</span></span> <span class="type">int</span> &#123;</span><br><span class="line">	pre := math.MinInt <span class="comment">//pre non-0 element</span></span><br><span class="line">	ret := <span class="number">0</span></span><br><span class="line">	<span class="keyword">for</span> idx, val := <span class="keyword">range</span> forts &#123;</span><br><span class="line">		<span class="keyword">if</span> val != <span class="number">0</span> &#123;</span><br><span class="line">			<span class="comment">//The subscript of the current non-0 element is idx, </span></span><br><span class="line">			<span class="comment">//and the subscript of the previous non-0 element is pre</span></span><br><span class="line">			<span class="comment">//forts[i] != forts[pre] means one is -1 and another is 1</span></span><br><span class="line">			<span class="keyword">if</span> pre &gt;= <span class="number">0</span> &amp;&amp; forts[idx] != forts[pre] &#123;</span><br><span class="line">				ret = max(ret, idx-pre<span class="number">-1</span>)</span><br><span class="line">			&#125;</span><br><span class="line">			pre = idx</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ret</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">max</span><span class="params">(a, b <span class="type">int</span>)</span></span> <span class="type">int</span> &#123;<span class="keyword">if</span> b &gt; a &#123;<span class="keyword">return</span> b&#125;;<span class="keyword">return</span> a&#125;</span><br><span class="line"><span class="comment">//leetcode submit region end(Prohibit modification and deletion)</span></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>algorithm</category>
+      </categories>
+      <tags>
+        <tag>Traverse</tag>
       </tags>
   </entry>
 </search>

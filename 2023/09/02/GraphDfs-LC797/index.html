@@ -20,17 +20,24 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideDownIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="迷惘的灵魂啊 安静的运转吧">
-<meta property="og:type" content="website">
-<meta property="og:title" content="陪你路过这个世界">
-<meta property="og:url" content="http://example.com/tags/Traverse/index.html">
+  <meta name="description" content="Leetcode-797给你一个有 n 个节点的 有向无环图（DAG），请你找出所有从节点 0 到节点 n-1 的路径并输出（不要求按特定顺序）Given a directed acyclic graph (DAG) of n nodes labeled from 0 to n - 1,find all possible paths from node 0 to node n - 1 and re">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GraphDfs-LC797">
+<meta property="og:url" content="http://example.com/2023/09/02/GraphDfs-LC797/index.html">
 <meta property="og:site_name" content="陪你路过这个世界">
-<meta property="og:description" content="迷惘的灵魂啊 安静的运转吧">
+<meta property="og:description" content="Leetcode-797给你一个有 n 个节点的 有向无环图（DAG），请你找出所有从节点 0 到节点 n-1 的路径并输出（不要求按特定顺序）Given a directed acyclic graph (DAG) of n nodes labeled from 0 to n - 1,find all possible paths from node 0 to node n - 1 and re">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/pic/GraphDfs-LC797/image-20230902111802810.png">
+<meta property="og:image" content="http://example.com/pic/GraphDfs-LC797/image-20230902112111869.png">
+<meta property="article:published_time" content="2023-09-02T03:13:50.000Z">
+<meta property="article:modified_time" content="2023-09-02T03:42:13.143Z">
 <meta property="article:author" content="zyuu">
+<meta property="article:tag" content="Graph">
+<meta property="article:tag" content="dfs">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/pic/GraphDfs-LC797/image-20230902111802810.png">
 
-<link rel="canonical" href="http://example.com/tags/Traverse/">
+<link rel="canonical" href="http://example.com/2023/09/02/GraphDfs-LC797/">
 
 
 <script id="page-configurations">
@@ -38,12 +45,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>标签: Traverse | 陪你路过这个世界</title>
+  <title>GraphDfs-LC797 | 陪你路过这个世界</title>
   
 
 
@@ -184,51 +191,116 @@
         <div class="content-wrap">
           
 
-          <div class="content tag">
+          <div class="content post posts-expand">
             
 
+    
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <h2 class="collection-header">Traverse
-          <small>标签</small>
-        </h2>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/02/GraphDfs-LC797/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="zyuu">
+      <meta itemprop="description" content="迷惘的灵魂啊 安静的运转吧">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陪你路过这个世界">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          GraphDfs-LC797
+        </h1>
+
+        <div class="post-meta">
+           
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-09-02 11:13:50 / 修改时间：11:42:13" itemprop="dateCreated datePublished" datetime="2023-09-02T11:13:50+08:00">2023-09-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2023</span>
+        <h1 id="Leetcode-797"><a href="#Leetcode-797" class="headerlink" title="Leetcode-797"></a>Leetcode-797</h1><p><strong>给你一个有 <code>n</code> 个节点的 有向无环图（DAG），请你找出所有从节点 <code>0</code> 到节点 <code>n-1</code> 的路径并输出（不要求按特定顺序）</strong><br>Given a directed acyclic graph (DAG) of <strong>n</strong> nodes labeled from <strong>0</strong> to <strong>n - 1</strong>,<br>find all possible paths from node <strong>0</strong> to node <strong>n - 1</strong> and return them in <strong>any order</strong>.</p>
+<p><strong><code>graph[i]</code> 是一个从节点 <code>i</code> 可以访问的所有节点的列表（即从节点 <code>i</code> 到节点 <code>graph[i][j]</code>存在一条有向边）。</strong><br>The graph is given as follows: <code>graph[i]</code> is a list of all nodes you can visit from node <code>i</code><br>(i.e., there is a directed edge from node <code>i</code> to node <code>graph[i][j]</code>).</p>
+<span id="more"></span>
+
+<p><strong>Example 1</strong></p>
+<p><img src="/./../pic/GraphDfs-LC797/image-20230902111802810.png" alt="image-20230902111802810"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: graph = [[1,2],[3],[3],[]]</span><br><span class="line">Output: [[0,1,3],[0,2,3]]</span><br><span class="line">Explanation: There are two paths: 0 -&gt; 1 -&gt; 3 and 0 -&gt; 2 -&gt; 3.</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2</strong></p>
+<p><img src="/./../pic/GraphDfs-LC797/image-20230902112111869.png" alt="image-20230902112111869"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: graph = [[4,3,1],[3,2,4],[3],[4],[]]</span><br><span class="line">Output: [[0,4],[0,3,4],[0,1,3,4],[0,1,2,3,4],[0,1,4]]</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>n == graph.length</code></li>
+<li><code>2 &lt;= n &lt;= 15</code></li>
+<li><code>0 &lt;= graph[i][j] &lt; n</code></li>
+<li><code>graph[i][j] != i</code> (i.e., there will be no self-loops).</li>
+<li>All the elements of <code>graph[i]</code> are <strong>unique</strong>.</li>
+<li>The input graph is <strong>guaranteed</strong> to be a <strong>DAG</strong>.</li>
+</ul>
+<p><strong>Resolution</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="comment">// 797  2023-09-02 11:15:28</span></span><br><span class="line"><span class="comment">// leetcode submit region begin(Prohibit modification and deletion)</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">allPathsSourceTarget</span><span class="params">(graph [][]<span class="type">int</span>)</span></span> [][]<span class="type">int</span> &#123;</span><br><span class="line">	<span class="keyword">var</span> ret [][]<span class="type">int</span></span><br><span class="line">	<span class="keyword">var</span> path []<span class="type">int</span></span><br><span class="line">	<span class="keyword">var</span> dfs <span class="function"><span class="keyword">func</span><span class="params">(<span class="type">int</span>)</span></span></span><br><span class="line">	dfs = <span class="function"><span class="keyword">func</span><span class="params">(x <span class="type">int</span>)</span></span> &#123;</span><br><span class="line">		<span class="keyword">if</span> x == <span class="built_in">len</span>(graph)<span class="number">-1</span> &#123;</span><br><span class="line">			<span class="comment">// get a path</span></span><br><span class="line">			tmp := <span class="built_in">make</span>([]<span class="type">int</span>, <span class="built_in">len</span>(path))</span><br><span class="line">			<span class="built_in">copy</span>(tmp, path)</span><br><span class="line">			ret = <span class="built_in">append</span>(ret, tmp)</span><br><span class="line">			<span class="keyword">return</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//find the nodeX link all nodes</span></span><br><span class="line">		<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="built_in">len</span>(graph[x]); i++ &#123;</span><br><span class="line">			<span class="comment">// add to path</span></span><br><span class="line">			path = <span class="built_in">append</span>(path, graph[x][i])</span><br><span class="line">			dfs(graph[x][i])</span><br><span class="line">			<span class="comment">// traverse</span></span><br><span class="line">			path = path[:<span class="built_in">len</span>(path)<span class="number">-1</span>]</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	path = <span class="built_in">append</span>(path, <span class="number">0</span>)</span><br><span class="line">	dfs(<span class="number">0</span>)</span><br><span class="line">	<span class="keyword">return</span> ret</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//leetcode submit region end(Prohibit modification and deletion)</span></span><br></pre></td></tr></table></figure>
+
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+    
+    
+    
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2023-09-02T00:03:04+08:00"
-              content="2023-09-02">
-          09-02
-        </time>
-      </div>
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Graph/" rel="tag"># Graph</a>
+              <a href="/tags/dfs/" rel="tag"># dfs</a>
+          </div>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2023/09/02/leetcode9-2/" itemprop="url">
-            <span itemprop="name">9.2leetcode2511</span>
-          </a>
-      </div>
+        
 
-    </header>
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/09/02/Graph-dfs/" rel="prev" title="Graph-dfs">
+      <i class="fa fa-chevron-left"></i> Graph-dfs
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
   </article>
-
-    </div>
-  </div>
   
   
-  
-
   
 
 
@@ -281,6 +353,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Leetcode-797"><span class="nav-number">1.</span> <span class="nav-text">Leetcode-797</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
