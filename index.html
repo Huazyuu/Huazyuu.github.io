@@ -263,6 +263,94 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/02/Graph-LC200/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="zyuu">
+      <meta itemprop="description" content="迷惘的灵魂啊 安静的运转吧">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Accompany You Through World">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/09/02/Graph-LC200/" class="post-title-link" itemprop="url">Graph-LC200</a>
+        </h2>
+
+        <div class="post-meta">
+           
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2023-09-02 20:20:55 / Modified: 21:44:04" itemprop="dateCreated datePublished" datetime="2023-09-02T20:20:55+08:00">2023-09-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Leetcode-200-dfs-and-bfs"><a href="#Leetcode-200-dfs-and-bfs" class="headerlink" title="Leetcode 200-dfs and bfs"></a>Leetcode 200-<code>dfs</code> and <code>bfs</code></h1><h2 id="Number-of-Islands"><a href="#Number-of-Islands" class="headerlink" title="Number of Islands"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/number-of-islands/">Number of Islands</a></h2><p>Given an <code>m x n</code> 2D binary <code>grid</code> which represents a map of <code>1</code> (land) and <code>0</code> (water), return <em>the number of islands</em>.</p>
+<p>An <strong>island</strong> is surrounded by water and is formed by connecting adjacent(邻近的) lands horizontally(水平) or vertically(垂直). You may assume all four edges of the grid are all surrounded by water.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Input: grid = [</span><br><span class="line">  [&quot;1&quot;,&quot;1&quot;,&quot;1&quot;,&quot;1&quot;,&quot;0&quot;],</span><br><span class="line">  [&quot;1&quot;,&quot;1&quot;,&quot;0&quot;,&quot;1&quot;,&quot;0&quot;],</span><br><span class="line">  [&quot;1&quot;,&quot;1&quot;,&quot;0&quot;,&quot;0&quot;,&quot;0&quot;],</span><br><span class="line">  [&quot;0&quot;,&quot;0&quot;,&quot;0&quot;,&quot;0&quot;,&quot;0&quot;]</span><br><span class="line">]</span><br><span class="line">Output: 1</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Input: grid = [</span><br><span class="line">  [&quot;1&quot;,&quot;1&quot;,&quot;0&quot;,&quot;0&quot;,&quot;0&quot;],</span><br><span class="line">  [&quot;1&quot;,&quot;1&quot;,&quot;0&quot;,&quot;0&quot;,&quot;0&quot;],</span><br><span class="line">  [&quot;0&quot;,&quot;0&quot;,&quot;1&quot;,&quot;0&quot;,&quot;0&quot;],</span><br><span class="line">  [&quot;0&quot;,&quot;0&quot;,&quot;0&quot;,&quot;1&quot;,&quot;1&quot;]</span><br><span class="line">]</span><br><span class="line">Output: 3 </span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>m == grid.length</code></li>
+<li><code>n == grid[i].length</code></li>
+<li><code>1 &lt;= m, n &lt;= 300</code></li>
+<li><code>grid[i][j]</code> is <code>&#39;0&#39;</code> or <code>&#39;1&#39;</code>.</li>
+</ul>
+<h2 id="resolution"><a href="#resolution" class="headerlink" title="resolution"></a>resolution</h2><h3 id="DFS"><a href="#DFS" class="headerlink" title="DFS"></a><strong><code>DFS</code></strong></h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="comment">// 200  2023-09-02 20:21:35</span></span><br><span class="line"><span class="comment">// leetcode submit region begin(Prohibit modification and deletion)</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">numIslands</span><span class="params">(grid [][]<span class="type">byte</span>)</span></span> <span class="type">int</span> &#123;</span><br><span class="line">	n, m := <span class="built_in">len</span>(grid), <span class="built_in">len</span>(grid[<span class="number">0</span>])</span><br><span class="line">	visied := <span class="built_in">make</span>([][]<span class="type">bool</span>, n)</span><br><span class="line">	<span class="keyword">for</span> i := <span class="keyword">range</span> visied &#123;</span><br><span class="line">		visied[i] = <span class="built_in">make</span>([]<span class="type">bool</span>, m)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// four directions</span></span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">		&#123;0, 1&#125;  to right: col+1</span></span><br><span class="line"><span class="comment">		&#123;1, 0&#125; 	to down: row+1</span></span><br><span class="line"><span class="comment">		&#123;-1, 0&#125;	to up: row-1。</span></span><br><span class="line"><span class="comment">		&#123;0, -1&#125; to left: col-1</span></span><br><span class="line"><span class="comment">	*/</span></span><br><span class="line">	<span class="keyword">var</span> dir = [<span class="number">4</span>][<span class="number">2</span>]<span class="type">int</span>&#123;&#123;<span class="number">0</span>, <span class="number">1</span>&#125;, &#123;<span class="number">1</span>, <span class="number">0</span>&#125;, &#123;<span class="number">-1</span>, <span class="number">0</span>&#125;, &#123;<span class="number">0</span>, <span class="number">-1</span>&#125;&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//dfs function</span></span><br><span class="line">	<span class="keyword">var</span> dfs <span class="function"><span class="keyword">func</span><span class="params">(x, y <span class="type">int</span>)</span></span></span><br><span class="line">	dfs = <span class="function"><span class="keyword">func</span><span class="params">(x, y <span class="type">int</span>)</span></span> &#123;</span><br><span class="line">		<span class="comment">// has been visited or the point is ocean</span></span><br><span class="line">		<span class="keyword">if</span> visied[x][y]==<span class="literal">true</span> || grid[x][y] == <span class="string">&#x27;0&#x27;</span> &#123;</span><br><span class="line">			<span class="keyword">return</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">// has been visited</span></span><br><span class="line">		visied[x][y] = <span class="literal">true</span></span><br><span class="line">		<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">4</span>; i++ &#123;</span><br><span class="line">			<span class="comment">//right down up left</span></span><br><span class="line">			nextX := x + dir[i][<span class="number">0</span>]</span><br><span class="line">			nextY := y + dir[i][<span class="number">1</span>]</span><br><span class="line">			<span class="keyword">if</span> nextX &lt; <span class="number">0</span> || nextX &gt;= n || nextY &lt; <span class="number">0</span> || nextY &gt;= m &#123;</span><br><span class="line">				<span class="keyword">continue</span></span><br><span class="line">			&#125;</span><br><span class="line">			dfs(nextX, nextY)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	ret := <span class="number">0</span></span><br><span class="line">	<span class="comment">// traverse the grip</span></span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; n; i++ &#123;</span><br><span class="line">		<span class="keyword">for</span> j := <span class="number">0</span>; j &lt; m; j++ &#123;</span><br><span class="line">			<span class="comment">//this point is not visited and is land</span></span><br><span class="line">			<span class="keyword">if</span> visied[i][j]==<span class="literal">false</span> &amp;&amp; grid[i][j] == <span class="string">&#x27;1&#x27;</span> &#123;</span><br><span class="line">				ret++</span><br><span class="line">				<span class="comment">//from this point tarvers all linked land</span></span><br><span class="line">				dfs(i, j)</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ret</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//leetcode submit region end(Prohibit modification and deletion)</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="BFS"><a href="#BFS" class="headerlink" title="BFS"></a><strong><code>BFS</code></strong></h3><p>ues queue</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;container/list&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 200  2023-09-02 20:21:35</span></span><br><span class="line"><span class="comment">// leetcode submit region begin(Prohibit modification and deletion)</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">numIslands</span><span class="params">(grid [][]<span class="type">byte</span>)</span></span> <span class="type">int</span> &#123;</span><br><span class="line">	n, m := <span class="built_in">len</span>(grid), <span class="built_in">len</span>(grid[<span class="number">0</span>])</span><br><span class="line">	visited := <span class="built_in">make</span>([][]<span class="type">bool</span>, n)</span><br><span class="line">	<span class="keyword">for</span> i := <span class="keyword">range</span> visited &#123;</span><br><span class="line">		visited[i] = <span class="built_in">make</span>([]<span class="type">bool</span>, m)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">var</span> dir = [<span class="number">4</span>][<span class="number">2</span>]<span class="type">int</span>&#123;&#123;<span class="number">0</span>, <span class="number">1</span>&#125;, &#123;<span class="number">1</span>, <span class="number">0</span>&#125;, &#123;<span class="number">-1</span>, <span class="number">0</span>&#125;, &#123;<span class="number">0</span>, <span class="number">-1</span>&#125;&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">var</span> bfs <span class="function"><span class="keyword">func</span><span class="params">(x, y <span class="type">int</span>)</span></span></span><br><span class="line">	bfs = <span class="function"><span class="keyword">func</span><span class="params">(x, y <span class="type">int</span>)</span></span> &#123;</span><br><span class="line">		que := list.New()</span><br><span class="line">		que.PushBack([<span class="number">2</span>]<span class="type">int</span>&#123;x, y&#125;)</span><br><span class="line">		visited[x][y] = <span class="literal">true</span></span><br><span class="line">		<span class="keyword">for</span> que.Len() != <span class="number">0</span> &#123;</span><br><span class="line">			cur := que.Remove(que.Front()).([<span class="number">2</span>]<span class="type">int</span>)</span><br><span class="line">			curx, cury := cur[<span class="number">0</span>], cur[<span class="number">1</span>]</span><br><span class="line">			<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">4</span>; i++ &#123;</span><br><span class="line">				nextX := curx + dir[i][<span class="number">0</span>]</span><br><span class="line">				nextY := cury + dir[i][<span class="number">1</span>]</span><br><span class="line">				<span class="keyword">if</span> nextX &lt; <span class="number">0</span> || nextX &gt;= n || nextY &lt; <span class="number">0</span> || nextY &gt;= m &#123;</span><br><span class="line">					<span class="keyword">continue</span></span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">if</span> visited[nextX][nextY] == <span class="literal">false</span> &amp;&amp; grid[nextX][nextY] == <span class="string">&#x27;1&#x27;</span> &#123;</span><br><span class="line">					que.PushBack([<span class="number">2</span>]<span class="type">int</span>&#123;nextX, nextY&#125;)</span><br><span class="line">					visited[nextX][nextY] = <span class="literal">true</span></span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	ret := <span class="number">0</span></span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; n; i++ &#123;</span><br><span class="line">		<span class="keyword">for</span> j := <span class="number">0</span>; j &lt; m; j++ &#123;</span><br><span class="line">			<span class="keyword">if</span> visited[i][j] == <span class="literal">false</span> &amp;&amp; grid[i][j] == <span class="string">&#x27;1&#x27;</span> &#123;</span><br><span class="line">				ret++</span><br><span class="line">				bfs(i, j)</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ret</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//leetcode submit region end(Prohibit modification and deletion)</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/02/Graph-bfs/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -289,7 +377,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2023-09-02 14:39:46 / Modified: 15:32:27" itemprop="dateCreated datePublished" datetime="2023-09-02T14:39:46+08:00">2023-09-02</time>
+              <time title="Created: 2023-09-02 14:39:46 / Modified: 20:16:08" itemprop="dateCreated datePublished" datetime="2023-09-02T14:39:46+08:00">2023-09-02</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -893,98 +981,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/01/leetcode9-1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="zyuu">
-      <meta itemprop="description" content="迷惘的灵魂啊 安静的运转吧">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Accompany You Through World">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/09/01/leetcode9-1/" class="post-title-link" itemprop="url">9.1leetcode2240</a>
-        </h2>
-
-        <div class="post-meta">
-           
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2023-09-01 09:06:06" itemprop="dateCreated datePublished" datetime="2023-09-01T09:06:06+08:00">2023-09-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-09-02 15:20:11" itemprop="dateModified" datetime="2023-09-02T15:20:11+08:00">2023-09-02</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>You are given an integer <code>total</code> indicating the amount of money you have. You are also given two integers <code>cost1</code> and <code>cost2</code> indicating the price of a pen and pencil respectively. You can spend <strong>part or all</strong> of your money to buy multiple quantities (or none) of each kind of writing utensil.</p>
-<p>Return <em>the <strong>number of distinct ways</strong> you can buy some number of pens and pencils.</em></p>
-<p><strong>Example 1:</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Input: total = 20, cost1 = 10, cost2 = 5</span><br><span class="line">Output: 9</span><br><span class="line">Explanation: The price of a pen is 10 and the price of a pencil is 5.</span><br><span class="line">- If you buy 0 pens, you can buy 0, 1, 2, 3, or 4 pencils.</span><br><span class="line">- If you buy 1 pen, you can buy 0, 1, or 2 pencils.</span><br><span class="line">- If you buy 2 pens, you cannot buy any pencils.</span><br><span class="line">The total number of ways to buy pens and pencils is 5 + 3 + 1 = 9.</span><br></pre></td></tr></table></figure>
-
-<p><strong>Example 2:</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: total = 5, cost1 = 10, cost2 = 10</span><br><span class="line">Output: 1</span><br><span class="line">Explanation: The price of both pens and pencils are 10, which cost more than total, so you cannot buy any writing utensils. Therefore, there is only 1 way: buy 0 pens and 0 pencils.</span><br></pre></td></tr></table></figure>
-
-<p><strong>Constraints:</strong></p>
-<ul>
-<li><p><code>1 &lt;= total, cost1, cost2 &lt;= 106</code></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/09/01/leetcode9-1/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1056,7 +1052,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-count">12</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1108,7 +1104,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共20.9k字</span>
+  <span class="post-count">博客全站共21.6k字</span>
 </div>
 
 
