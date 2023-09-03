@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideDownIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideDownIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="GraphStart learning of Graph.Mainly refer to the following books《Hello Algorithm》《代码随想录》">
@@ -34,7 +34,7 @@
 <meta property="og:image" content="http://example.com/pic/Graph/graph05.png">
 <meta property="og:image" content="http://example.com/pic/Graph/graph06.png">
 <meta property="article:published_time" content="2023-09-01T05:29:59.000Z">
-<meta property="article:modified_time" content="2023-09-02T02:44:34.026Z">
+<meta property="article:modified_time" content="2023-09-03T02:44:12.921Z">
 <meta property="article:author" content="zyuu">
 <meta property="article:tag" content="Graph">
 <meta name="twitter:card" content="summary">
@@ -233,7 +233,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-09-02 10:44:34" itemprop="dateModified" datetime="2023-09-02T10:44:34+08:00">2023-09-02</time>
+                <time title="Modified: 2023-09-03 10:44:12" itemprop="dateModified" datetime="2023-09-03T10:44:12+08:00">2023-09-03</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -263,7 +263,7 @@
 <p><img src="/./../pic/Graph/graph01.png" alt="graph01"></p>
 <figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">V</span><span class="operator">=</span><span class="punctuation">&#123;</span><span class="number">1</span><span class="operator">,</span><span class="number">2</span><span class="operator">,</span><span class="number">3</span><span class="operator">,</span><span class="number">4</span><span class="operator">,</span><span class="number">5</span><span class="punctuation">&#125;</span></span><br><span class="line"><span class="built_in">E</span><span class="operator">=</span><span class="punctuation">&#123;</span><span class="punctuation">(</span><span class="number">1</span><span class="operator">,</span><span class="number">2</span><span class="punctuation">)</span><span class="operator">,</span><span class="punctuation">(</span><span class="number">1</span><span class="operator">,</span><span class="number">3</span><span class="punctuation">)</span><span class="operator">,</span><span class="punctuation">(</span><span class="number">1</span><span class="operator">,</span><span class="number">5</span><span class="punctuation">)</span><span class="operator">,</span><span class="punctuation">(</span><span class="number">2</span><span class="operator">,</span><span class="number">3</span><span class="punctuation">)</span><span class="operator">,</span><span class="punctuation">(</span><span class="number">2</span><span class="operator">,</span><span class="number">4</span><span class="punctuation">)</span><span class="operator">,</span><span class="punctuation">(</span><span class="number">2</span><span class="operator">,</span><span class="number">5</span><span class="punctuation">)</span><span class="operator">,</span><span class="punctuation">(</span><span class="number">4</span><span class="operator">,</span><span class="number">5</span><span class="punctuation">)</span><span class="punctuation">&#125;</span></span><br><span class="line"><span class="variable">G</span><span class="operator">=</span><span class="punctuation">&#123;</span><span class="variable">V</span><span class="operator">,</span><span class="built_in">E</span><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
 
-<p>通常表示为：<strong>G(V,E)</strong></p>
+<p>Common：<strong>G(V,E)</strong></p>
 <p><strong>G represents a graph</strong><br><strong>V is the set of vertices in figure G</strong><br><strong>E is the set of edges in Figure G</strong></p>
 <p>In the data elements in the graph, we call them Vertex, the set of vertices is infinite and not empty. In a graph, there may be a relationship between any two vertices, the logical relationship between the vertices is represented by edges, and the edge set can be empty.</p>
 <p>Graphs are divided into <strong>undirected graphs</strong> and <strong>directed graphs</strong> according to the direction of the edges.</p>
@@ -310,6 +310,23 @@
     
     
     
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>zyuu
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="http://example.com/2023/09/01/Graph01/" title="GraphIntroduce">http://example.com/2023/09/01/Graph01/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
 
       <footer class="post-footer">
           <div class="post-tags">
@@ -403,7 +420,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-count">15</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -421,6 +438,17 @@
       </div>
   </nav>
 </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Huazyuu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Huazyuu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zyuuforyu@gmail.com" title="E-Mail → mailto:zyuuforyu@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
 
 
 
@@ -449,13 +477,16 @@
   </span>
   <span class="author" itemprop="copyrightHolder">zyuu</span>
 </div>
+
+<!--
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
   </div>
+-->
 
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共22.2k字</span>
+  <span class="post-count">博客全站共22.9k字</span>
 </div>
 
 
@@ -515,26 +546,6 @@
   
 
   
-<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
-
-<script>
-var options = {
-  bottom: '64px',
-  right: 'unset',
-  left: '32px',
-  time: '0.5s',
-  mixColor: '#fff',
-  backgroundColor: 'transparent',
-  buttonColorDark: '#fff',
-  buttonColorLight: '#fff',
-  saveInCookies: true,
-  label: '🌹',
-  autoMatchOsTheme: true
-}
-const darkmode = new Darkmode(options);
-window.darkmode = darkmode;
-darkmode.showWidget();
-</script>
 
 </body>
 </html>

@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideDownIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideDownIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="迷惘的灵魂啊 安静的运转吧">
@@ -246,6 +246,85 @@
       
           <p>💮Learn Graph algorithm<br>💮Gin and Gorm<br>💮OS two chapters<br>💮Golang related books<br>💮Running more than three days<br>💮Leetcode one easy of middle problem per day<br>💮Daily learning outcomes are clocked into the Markdown document</p>
 
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/03/Graph-LC695/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="zyuu">
+      <meta itemprop="description" content="迷惘的灵魂啊 安静的运转吧">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Accompany You Through World">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/09/03/Graph-LC695/" class="post-title-link" itemprop="url">Graph-LC695</a>
+        </h2>
+
+        <div class="post-meta">
+
+	    
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2023-09-03 10:50:15 / Modified: 11:17:52" itemprop="dateCreated datePublished" datetime="2023-09-03T10:50:15+08:00">2023-09-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Leetcode-695-dfs-and-bfs"><a href="#Leetcode-695-dfs-and-bfs" class="headerlink" title="Leetcode 695-dfs and bfs"></a>Leetcode 695-<code>dfs</code> and <code>bfs</code></h1><h2 id="Max-Area-of-Island"><a href="#Max-Area-of-Island" class="headerlink" title="Max Area of Island"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/max-area-of-island/">Max Area of Island</a></h2><p>You are given an <code>m x n</code> binary matrix <code>grid</code>. An island is a group of <code>1</code>‘s (representing land) connected <strong>4-directionally</strong> (horizontal or vertical.) You may assume all four edges of the grid are surrounded by water.</p>
+<p>The <strong>area</strong> of an island is the number of cells with a value <code>1</code> in the island.</p>
+<p>Return <em>the maximum <strong>area</strong> of an island in</em> <code>grid</code>. If there is no island, return <code>0</code>.</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/09/03/Graph-LC695/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -525,10 +604,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2023-09-02 11:13:50 / Modified: 11:42:13" itemprop="dateCreated datePublished" datetime="2023-09-02T11:13:50+08:00">2023-09-02</time>
+              <time title="Created: 2023-09-02 11:13:50" itemprop="dateCreated datePublished" datetime="2023-09-02T11:13:50+08:00">2023-09-02</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-09-03 10:46:18" itemprop="dateModified" datetime="2023-09-03T10:46:18+08:00">2023-09-03</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -550,8 +635,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Leetcode-797"><a href="#Leetcode-797" class="headerlink" title="Leetcode-797"></a>Leetcode-797</h1><p><strong>给你一个有 <code>n</code> 个节点的 有向无环图（DAG），请你找出所有从节点 <code>0</code> 到节点 <code>n-1</code> 的路径并输出（不要求按特定顺序）</strong><br>Given a directed acyclic graph (DAG) of <strong>n</strong> nodes labeled from <strong>0</strong> to <strong>n - 1</strong>,<br>find all possible paths from node <strong>0</strong> to node <strong>n - 1</strong> and return them in <strong>any order</strong>.</p>
-<p><strong><code>graph[i]</code> 是一个从节点 <code>i</code> 可以访问的所有节点的列表（即从节点 <code>i</code> 到节点 <code>graph[i][j]</code>存在一条有向边）。</strong><br>The graph is given as follows: <code>graph[i]</code> is a list of all nodes you can visit from node <code>i</code><br>(i.e., there is a directed edge from node <code>i</code> to node <code>graph[i][j]</code>).</p>
+          <h1 id="Leetcode-797"><a href="#Leetcode-797" class="headerlink" title="Leetcode-797"></a>Leetcode-797</h1><p>Given a directed acyclic graph (DAG) of <strong>n</strong> nodes labeled from <strong>0</strong> to <strong>n - 1</strong>,<br>find all possible paths from node <strong>0</strong> to node <strong>n - 1</strong> and return them in <strong>any order</strong>.<br>The graph is given as follows: <code>graph[i]</code> is a list of all nodes you can visit from node <code>i</code><br>(i.e., there is a directed edge from node <code>i</code> to node <code>graph[i][j]</code>).</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2023/09/02/GraphDfs-LC797/#more" rel="contents">
@@ -850,7 +934,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-09-02 10:44:45" itemprop="dateModified" datetime="2023-09-02T10:44:45+08:00">2023-09-02</time>
+                <time title="Modified: 2023-09-03 10:45:35" itemprop="dateModified" datetime="2023-09-03T10:45:35+08:00">2023-09-03</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -877,89 +961,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2023/09/01/Graph02/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/01/Graph01/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="zyuu">
-      <meta itemprop="description" content="迷惘的灵魂啊 安静的运转吧">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Accompany You Through World">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/09/01/Graph01/" class="post-title-link" itemprop="url">GraphIntroduce</a>
-        </h2>
-
-        <div class="post-meta">
-
-	    
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2023-09-01 13:29:59" itemprop="dateCreated datePublished" datetime="2023-09-01T13:29:59+08:00">2023-09-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-09-02 10:44:34" itemprop="dateModified" datetime="2023-09-02T10:44:34+08:00">2023-09-02</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Graph"><a href="#Graph" class="headerlink" title="Graph"></a>Graph</h1><p>Start learning of Graph.<br>Mainly refer to the following books《Hello Algorithm》《代码随想录》</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/09/01/Graph01/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -1050,7 +1051,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-count">15</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1068,6 +1069,17 @@
       </div>
   </nav>
 </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Huazyuu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Huazyuu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zyuuforyu@gmail.com" title="E-Mail → mailto:zyuuforyu@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
 
 
 
@@ -1096,13 +1108,16 @@
   </span>
   <span class="author" itemprop="copyrightHolder">zyuu</span>
 </div>
+
+<!--
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
   </div>
+-->
 
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共22.2k字</span>
+  <span class="post-count">博客全站共22.9k字</span>
 </div>
 
 
@@ -1162,26 +1177,6 @@
   
 
   
-<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
-
-<script>
-var options = {
-  bottom: '64px',
-  right: 'unset',
-  left: '32px',
-  time: '0.5s',
-  mixColor: '#fff',
-  backgroundColor: 'transparent',
-  buttonColorDark: '#fff',
-  buttonColorLight: '#fff',
-  saveInCookies: true,
-  label: '🌹',
-  autoMatchOsTheme: true
-}
-const darkmode = new Darkmode(options);
-window.darkmode = darkmode;
-darkmode.showWidget();
-</script>
 
 </body>
 </html>
