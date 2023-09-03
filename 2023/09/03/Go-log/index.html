@@ -20,20 +20,20 @@
     var CONFIG = {"hostname":"zyuu.top","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideDownIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="You are given a 0-indexed integer array forts of length n representing the positions of several forts. forts[i] can be -1, 0, or 1 where:  -1 represents there is no fort at the ith position. 0 indicat">
+  <meta name="description" content="LOGGO-log Standard Libraryhe Go log  package implements a simple log service base on Standard Library. 1234567891011121314151617181920package mainimport (	&quot;log&quot;	&quot;os&quot;)func main() &amp;#">
 <meta property="og:type" content="article">
-<meta property="og:title" content="9.2leetcode2511">
-<meta property="og:url" content="http://zyuu.top/2023/09/02/leetcode9-2/index.html">
+<meta property="og:title" content="Go-log">
+<meta property="og:url" content="http://zyuu.top/2023/09/03/Go-log/index.html">
 <meta property="og:site_name" content="Accompany You Through World">
-<meta property="og:description" content="You are given a 0-indexed integer array forts of length n representing the positions of several forts. forts[i] can be -1, 0, or 1 where:  -1 represents there is no fort at the ith position. 0 indicat">
+<meta property="og:description" content="LOGGO-log Standard Libraryhe Go log  package implements a simple log service base on Standard Library. 1234567891011121314151617181920package mainimport (	&quot;log&quot;	&quot;os&quot;)func main() &amp;#">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-09-01T16:03:04.000Z">
-<meta property="article:modified_time" content="2023-09-02T15:41:31.930Z">
+<meta property="article:published_time" content="2023-09-03T13:20:50.000Z">
+<meta property="article:modified_time" content="2023-09-03T13:34:22.406Z">
 <meta property="article:author" content="zyuu">
-<meta property="article:tag" content="Traverse">
+<meta property="article:tag" content="Golang">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://zyuu.top/2023/09/02/leetcode9-2/">
+<link rel="canonical" href="http://zyuu.top/2023/09/03/Go-log/">
 
 
 <script id="page-configurations">
@@ -46,7 +46,7 @@
   };
 </script>
 
-  <title>9.2leetcode2511 | Accompany You Through World</title>
+  <title>Go-log | Accompany You Through World</title>
   
 
 
@@ -194,7 +194,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://zyuu.top/2023/09/02/leetcode9-2/">
+    <link itemprop="mainEntityOfPage" href="http://zyuu.top/2023/09/03/Go-log/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -207,7 +207,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          9.2leetcode2511
+          Go-log
         </h1>
 
         <div class="post-meta">
@@ -220,7 +220,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2023-09-02 00:03:04 / Modified: 23:41:31" itemprop="dateCreated datePublished" datetime="2023-09-02T00:03:04+08:00">2023-09-02</time>
+              <time title="Created: 2023-09-03 21:20:50 / Modified: 21:34:22" itemprop="dateCreated datePublished" datetime="2023-09-03T21:20:50+08:00">2023-09-03</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -228,7 +228,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a>
+                  <a href="/categories/Golang/" itemprop="url" rel="index"><span itemprop="name">Golang</span></a>
                 </span>
             </span>
 
@@ -243,48 +243,23 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>You are given a <strong>0-indexed</strong> integer array <code>forts</code> of length <code>n</code> representing the positions of several forts. <code>forts[i]</code> can be <code>-1</code>, <code>0</code>, or <code>1</code> where:</p>
-<ul>
-<li><code>-1</code> represents there is <strong>no fort</strong> at the <code>ith</code> position.</li>
-<li><code>0</code> indicates there is an <strong>enemy</strong> fort at the <code>ith</code> position.</li>
-<li><code>1</code> indicates the fort at the <code>ith</code> the position is under your command.</li>
-</ul>
-<p>Now you have decided to move your army from one of your forts at position <code>i</code> to an empty position <code>j</code> such that:</p>
-<ul>
-<li><code>0 &lt;= i, j &lt;= n - 1</code></li>
-<li>The army travels over enemy forts <strong>only</strong>. Formally, for all <code>k</code> where <code>min(i,j) &lt; k &lt; max(i,j)</code>, <code>forts[k] == 0.</code></li>
-</ul>
-<p>While moving the army, all the enemy forts that come in the way are <strong>captured</strong>.</p>
-<p>Return <em>the <strong>maximum</strong> number of enemy forts that can be captured</em>. In case it is <strong>impossible</strong> to move your army, or you do not have any fort under your command, return <code>0</code><em>.</em></p>
+        <h1 id="LOG"><a href="#LOG" class="headerlink" title="LOG"></a>LOG</h1><h2 id="GO-log-Standard-Library"><a href="#GO-log-Standard-Library" class="headerlink" title="GO-log Standard Library"></a>GO-log Standard Library</h2><p>he Go <code>log</code>  package implements a simple log service base on Standard Library.</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;log&quot;</span></span><br><span class="line">	<span class="string">&quot;os&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	log.SetFlags(log.Lshortfile | log.Ltime | log.Ldate | log.LUTC)</span><br><span class="line">	log.Println(<span class="string">&quot;日志1&quot;</span>)</span><br><span class="line">	log.SetPrefix(<span class="string">&quot;[log]&quot;</span>)</span><br><span class="line">	log.Println(<span class="string">&quot;日志2&quot;</span>)</span><br><span class="line">	logf, err := os.OpenFile(<span class="string">&quot;./Flog.log&quot;</span>, os.O_CREATE|os.O_APPEND, <span class="number">0644</span>)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="built_in">panic</span>(err)</span><br><span class="line">	&#125;</span><br><span class="line">	log.SetOutput(logf)</span><br><span class="line">	log.Println(<span class="string">&quot;日志3&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 <span id="more"></span>
 
-<p><strong>Example 1:</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Input: forts = [1,0,0,-1,0,0,0,0,1]</span><br><span class="line">Output: 4</span><br><span class="line">Explanation:</span><br><span class="line">- Moving the army from position 0 to position 3 captures 2 enemy forts, at 1 and 2.</span><br><span class="line">- Moving the army from position 8 to position 3 captures 4 enemy forts.</span><br><span class="line">Since 4 is the maximum number of enemy forts that can be captured, we return 4.</span><br></pre></td></tr></table></figure>
+<h3 id="func-SetFlags-flag-int"><a href="#func-SetFlags-flag-int" class="headerlink" title="func SetFlags(flag int)"></a><code>func SetFlags(flag int)</code></h3><p>Defaultly, loggers only provide log time information,<br>but in many cases we want to get more information,<br>such as the file name and line number of the log.<br><code>log</code> The standard library gives us ways to add these choices.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Ldate       				 // 2009/01/23</span><br><span class="line">   Ltime                        // 01:23:23</span><br><span class="line">   Lmicroseconds                // 01:23:23.123123</span><br><span class="line">   Llongfile                     // path+line： /a/b/c/d.go:23</span><br><span class="line">   Lshortfile                    // fileName+line：d.go:23（会覆盖掉Llongfile）</span><br><span class="line">   LUTC                         // UTCtime</span><br><span class="line">   LstdFlags    				 // Dfaultlogger</span><br></pre></td></tr></table></figure>
 
-<p><strong>Example 2:</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: forts = [0,0,1,-1]</span><br><span class="line">Output: 0</span><br><span class="line">Explanation: Since no enemy fort can be captured, 0 is returned.</span><br></pre></td></tr></table></figure>
+<h3 id="Prefix"><a href="#Prefix" class="headerlink" title="Prefix"></a>Prefix</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Prefix</span><span class="params">()</span></span> <span class="type">string</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">SetPrefix</span><span class="params">(prefix <span class="type">string</span>)</span></span></span><br></pre></td></tr></table></figure>
 
-
-
+<h3 id="OutPutLocal"><a href="#OutPutLocal" class="headerlink" title="OutPutLocal"></a>OutPutLocal</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">SetOutput</span><span class="params">(w io.Writer)</span></span></span><br></pre></td></tr></table></figure>
 
 
-<p>给你一个长度为 <code>n</code> ，下标从 <strong>0</strong> 开始的整数数组 <code>forts</code> ，表示一些城堡。<code>forts[i]</code> 可以是 <code>-1</code> ，<code>0</code> 或者 <code>1</code> ，其中：</p>
-<ul>
-<li><code>-1</code> 表示第 <code>i</code> 个位置 <strong>没有</strong> 城堡。</li>
-<li><code>0</code> 表示第 <code>i</code> 个位置有一个 <strong>敌人</strong> 的城堡。</li>
-<li><code>1</code> 表示第 <code>i</code> 个位置有一个你控制的城堡。</li>
-</ul>
-<p>现在，你需要决定，将你的军队从某个你控制的城堡位置 <code>i</code> 移动到一个空的位置 <code>j</code> ，满足：</p>
-<ul>
-<li><code>0 &lt;= i, j &lt;= n - 1</code></li>
-<li>军队经过的位置 <strong>只有</strong> 敌人的城堡。正式的，对于所有 <code>min(i,j) &lt; k &lt; max(i,j)</code> 的 <code>k</code> ，都满足 <code>forts[k] == 0</code> 。</li>
-</ul>
-<p>当军队移动时，所有途中经过的敌人城堡都会被 <strong>摧毁</strong> 。</p>
-<p><strong>Resolution</strong></p>
-<p>计算-1和1之间全是0情况下最大的0的数量</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;math&quot;</span></span><br><span class="line"><span class="comment">// 2511  2023-09-02 00:02:31</span></span><br><span class="line"><span class="comment">// leetcode submit region begin(Prohibit modification and deletion)</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">captureForts</span><span class="params">(forts []<span class="type">int</span>)</span></span> <span class="type">int</span> &#123;</span><br><span class="line">	pre := math.MinInt <span class="comment">//pre non-0 element</span></span><br><span class="line">	ret := <span class="number">0</span></span><br><span class="line">	<span class="keyword">for</span> idx, val := <span class="keyword">range</span> forts &#123;</span><br><span class="line">		<span class="keyword">if</span> val != <span class="number">0</span> &#123;</span><br><span class="line">			<span class="comment">//The subscript of the current non-0 element is idx, </span></span><br><span class="line">			<span class="comment">//and the subscript of the previous non-0 element is pre</span></span><br><span class="line">			<span class="comment">//forts[i] != forts[pre] means one is -1 and another is 1</span></span><br><span class="line">			<span class="keyword">if</span> pre &gt;= <span class="number">0</span> &amp;&amp; forts[idx] != forts[pre] &#123;</span><br><span class="line">				ret = max(ret, idx-pre<span class="number">-1</span>)</span><br><span class="line">			&#125;</span><br><span class="line">			pre = idx</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ret</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">max</span><span class="params">(a, b <span class="type">int</span>)</span></span> <span class="type">int</span> &#123;<span class="keyword">if</span> b &gt; a &#123;<span class="keyword">return</span> b&#125;;<span class="keyword">return</span> a&#125;</span><br><span class="line"><span class="comment">//leetcode submit region end(Prohibit modification and deletion)</span></span><br></pre></td></tr></table></figure>
 
 
+
+<h2 id="Logrus"><a href="#Logrus" class="headerlink" title="Logrus"></a><a target="_blank" rel="noopener" href="https://github.com/sirupsen/logrus">Logrus</a></h2><h2 id="Uber-go-zap"><a href="#Uber-go-zap" class="headerlink" title="Uber-go zap"></a>Uber-go zap</h2>
     </div>
 
     
@@ -299,7 +274,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>Post link: </strong>
-    <a href="http://zyuu.top/2023/09/02/leetcode9-2/" title="9.2leetcode2511">http://zyuu.top/2023/09/02/leetcode9-2/</a>
+    <a href="http://zyuu.top/2023/09/03/Go-log/" title="Go-log">http://zyuu.top/2023/09/03/Go-log/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
@@ -310,7 +285,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Traverse/" rel="tag"># Traverse</a>
+              <a href="/tags/Golang/" rel="tag"># Golang</a>
           </div>
 
         
@@ -319,12 +294,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2023/09/02/0X10Plan/" rel="prev" title="0X10Plan">
-      <i class="fa fa-chevron-left"></i> 0X10Plan
+    <a href="/2023/09/03/Go-redis/" rel="prev" title="Go-redis">
+      <i class="fa fa-chevron-left"></i> Go-redis
     </a></div>
       <div class="post-nav-item">
-    <a href="/2023/09/02/Graph03-Traverse/" rel="next" title="Graph-Search">
-      Graph-Search <i class="fa fa-chevron-right"></i>
+    <a href="/2023/09/03/Go-flag/" rel="next" title="GO-flag">
+      GO-flag <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -384,6 +359,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#LOG"><span class="nav-number">1.</span> <span class="nav-text">LOG</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#GO-log-Standard-Library"><span class="nav-number">1.1.</span> <span class="nav-text">GO-log Standard Library</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#func-SetFlags-flag-int"><span class="nav-number">1.1.1.</span> <span class="nav-text">func SetFlags(flag int)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Prefix"><span class="nav-number">1.1.2.</span> <span class="nav-text">Prefix</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OutPutLocal"><span class="nav-number">1.1.3.</span> <span class="nav-text">OutPutLocal</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Logrus"><span class="nav-number">1.2.</span> <span class="nav-text">Logrus</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Uber-go-zap"><span class="nav-number">1.3.</span> <span class="nav-text">Uber-go zap</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

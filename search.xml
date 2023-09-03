@@ -13,13 +13,149 @@
       </tags>
   </entry>
   <entry>
+    <title>Go-file</title>
+    <url>/2023/09/03/Go-file/</url>
+    <content><![CDATA[<h1 id="Go-File-Standard-Library"><a href="#Go-File-Standard-Library" class="headerlink" title="Go-File Standard Library"></a>Go-File Standard Library</h1><p>Golang has Standard Library to operate file<br>include create write read and so on</p>
+<span id="more"></span>
+
+<h2 id="Open-Close"><a href="#Open-Close" class="headerlink" title="Open&#x2F;Close"></a>Open&#x2F;Close</h2><figure class="highlight go"><table><tr><td class="code"><pre><span class="line">file, err := os.Open(<span class="string">&quot;./main.go&quot;</span>)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">&quot;open file failed!, err:&quot;</span>, err)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line"><span class="keyword">defer</span> file.Close()</span><br></pre></td></tr></table></figure>
+
+<h2 id="Read"><a href="#Read" class="headerlink" title="Read"></a>Read</h2><p><code>func (f *File) Read(b []byte) (n int, err error)</code></p>
+<p><code>func NewReader(rd io.Reader) *Reader </code></p>
+<p><code>func ReadFile(name string) ([]byte, error) </code></p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;bufio&quot;</span></span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">	<span class="string">&quot;io&quot;</span></span><br><span class="line">	<span class="string">&quot;os&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	f, err := os.Open(<span class="string">&quot;readfile.txt&quot;</span>)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">&quot;false&quot;</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">defer</span> f.Close()</span><br><span class="line">	<span class="comment">/*m1*/</span></span><br><span class="line">	<span class="keyword">var</span> tmp = <span class="built_in">make</span>([]<span class="type">byte</span>, <span class="number">256</span>)</span><br><span class="line">	<span class="keyword">var</span> content []<span class="type">byte</span></span><br><span class="line">	<span class="keyword">for</span> &#123;</span><br><span class="line">    <span class="comment">// loop read</span></span><br><span class="line">		n, err := f.Read(tmp)</span><br><span class="line">		<span class="keyword">if</span> err == io.EOF &#123;</span><br><span class="line">			fmt.Println(<span class="string">&quot;read all&quot;</span>)</span><br><span class="line">			<span class="keyword">break</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">			fmt.Println(<span class="string">&quot;read failed&quot;</span>)</span><br><span class="line">			<span class="keyword">return</span></span><br><span class="line">		&#125;</span><br><span class="line">		content = <span class="built_in">append</span>(content, tmp[:n]...)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//fmt.Println(string(content))</span></span><br><span class="line">	<span class="comment">/*m2*/</span></span><br><span class="line">	fmt.Println(<span class="string">&quot;m2&quot;</span>)</span><br><span class="line">	reader := bufio.NewReader(f)</span><br><span class="line">	<span class="keyword">for</span> &#123;	</span><br><span class="line">		line, err := reader.ReadString(<span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">		<span class="keyword">if</span> err == io.EOF &#123;</span><br><span class="line">			<span class="keyword">if</span> <span class="built_in">len</span>(line) != <span class="number">0</span> &#123;</span><br><span class="line">				fmt.Println(line)</span><br><span class="line">			&#125;</span><br><span class="line">			fmt.Println(<span class="string">&quot;read all&quot;</span>)</span><br><span class="line">			<span class="keyword">break</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">			fmt.Println(<span class="string">&quot;false&quot;</span>)</span><br><span class="line">			<span class="keyword">return</span></span><br><span class="line">		&#125;</span><br><span class="line">		fmt.Println(line)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">/*m3*/</span></span><br><span class="line">	readAll, err := os.ReadFile(<span class="string">&quot;./readfile.txt&quot;</span>)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">&quot;false&quot;</span>)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(<span class="type">string</span>(readAll))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Write"><a href="#Write" class="headerlink" title="Write"></a>Write</h2><p><code>os.OpenFile()</code></p>
+<table>
+<thead>
+<tr>
+<th>Modes</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>os.O_WRONLY</code></td>
+<td>只写</td>
+</tr>
+<tr>
+<td><code>os.O_CREATE</code></td>
+<td>创建文件</td>
+</tr>
+<tr>
+<td><code>os.O_RDONLY</code></td>
+<td>只读</td>
+</tr>
+<tr>
+<td><code>os.O_RDWR</code></td>
+<td>读写</td>
+</tr>
+<tr>
+<td><code>os.O_TRUNC</code></td>
+<td>清空</td>
+</tr>
+<tr>
+<td><code>os.O_APPEND</code></td>
+<td>追加</td>
+</tr>
+</tbody></table>
+<p><code>perm</code>：File permissions，Octal number。r（read）04，w（write）02，x（execute）01</p>
+<p><code>func OpenFile(name string, flag int, perm FileMode) (*File, error) </code></p>
+<p><code>func (f *File) Write(b []byte) (n int, err error)</code><br><code>func (f *File) WriteString(s string) (n int, err error)</code></p>
+<p><code>func NewWriter(w io.Writer) *Writer </code></p>
+<p><code>func WriteFile(name string, data []byte, perm FileMode) error</code></p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;bufio&quot;</span></span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">	<span class="string">&quot;os&quot;</span></span><br><span class="line">	<span class="string">&quot;strconv&quot;</span></span><br><span class="line">)</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">write1</span><span class="params">()</span></span> &#123;</span><br><span class="line">	file, err := os.OpenFile(<span class="string">&quot;write.txt&quot;</span>, os.O_CREATE|os.O_APPEND, <span class="number">0666</span>)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">&quot;open failed&quot;</span>)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">defer</span> file.Close()</span><br><span class="line">	file.Write([]<span class="type">byte</span>(<span class="string">&quot;hello world\n&quot;</span>))</span><br><span class="line">	file.WriteString(<span class="string">&quot;hello golang\n&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">write2</span><span class="params">()</span></span> &#123;</span><br><span class="line">	file, err := os.OpenFile(<span class="string">&quot;write2.txt&quot;</span>, os.O_CREATE|os.O_APPEND, <span class="number">0666</span>)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(err)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">defer</span> file.Close()</span><br><span class="line">    writer := bufio.NewWriter(file)  <span class="comment">//Write data to the cache(缓存区)</span></span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">10</span>; i++ &#123;</span><br><span class="line">		writer.WriteString(<span class="string">&quot;hello golang&quot;</span> + fmt.Sprintf(strconv.Itoa(i)) + <span class="string">&quot;\n&quot;</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	writer.Flush() <span class="comment">//Write the contents of the cache to a file</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">write3</span><span class="params">()</span></span> &#123;</span><br><span class="line">	str := <span class="string">&quot;hello world hello golang&quot;</span></span><br><span class="line">	err := os.WriteFile(<span class="string">&quot;./write3.txt&quot;</span>, []<span class="type">byte</span>(str), <span class="number">0666</span>)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">&quot;false&quot;</span>)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Golang</category>
+      </categories>
+      <tags>
+        <tag>Golang</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>GO-flag</title>
+    <url>/2023/09/03/Go-flag/</url>
+    <content><![CDATA[<h1 id="Golang-Flag-Standard-Library"><a href="#Golang-Flag-Standard-Library" class="headerlink" title="Golang-Flag Standard Library"></a>Golang-Flag Standard Library</h1><p>The Go language <code>flag</code> package implements the parsing of command line arguments</p>
+<h2 id="Get-the-command-line-arguments"><a href="#Get-the-command-line-arguments" class="headerlink" title="Get the command line arguments"></a>Get the command line arguments</h2><span id="more"></span>
+
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">//os.Args-&gt;[]string</span></span><br><span class="line">	<span class="keyword">if</span> <span class="built_in">len</span>(os.Args) &gt; <span class="number">0</span> &#123;</span><br><span class="line">		<span class="keyword">for</span> idx, arg := <span class="keyword">range</span> os.Args &#123;</span><br><span class="line">			fmt.Printf(<span class="string">&quot;args[%d]=%v\n&quot;</span>, idx, arg)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">go run osArgs.go 1 2</span></span><br><span class="line">args[0]=C:\Users\yu\AppData\Local\Temp\go-build3364657135\b001\exe\osArgs.exe</span><br><span class="line">args[1]=1</span><br><span class="line">args[2]=2</span><br></pre></td></tr></table></figure>
+
+<h2 id="Define-the-command-line-flag-parameter"><a href="#Define-the-command-line-flag-parameter" class="headerlink" title="Define the command-line flag parameter"></a>Define the command-line flag parameter</h2><p>The command line parameter types supported by the flag package are ,<br><code>bool</code> <code>int</code> , <code>int64</code> <code>uint</code> <code>uint64</code> <code>float</code> <code>float64</code> <code>string</code> <code>duration</code> </p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;flag&quot;</span></span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">	<span class="string">&quot;time&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">/*定义flag参数*/</span></span><br><span class="line">	<span class="comment">//name := flag.String(&quot;name&quot;, &quot;张三&quot;, &quot;姓名&quot;)</span></span><br><span class="line">	<span class="comment">//age := flag.Int(&quot;age&quot;, 18, &quot;年龄&quot;)</span></span><br><span class="line">	<span class="comment">//married := flag.Bool(&quot;married&quot;, false, &quot;婚否&quot;)</span></span><br><span class="line">	<span class="comment">//delay := flag.Duration(&quot;d&quot;, 0, &quot;时间间隔&quot;)</span></span><br><span class="line">	<span class="keyword">var</span> name <span class="type">string</span></span><br><span class="line">	<span class="keyword">var</span> age <span class="type">int</span></span><br><span class="line">	<span class="keyword">var</span> married <span class="type">bool</span></span><br><span class="line">	<span class="keyword">var</span> delay time.Duration</span><br><span class="line">	flag.StringVar(&amp;name, <span class="string">&quot;name&quot;</span>, <span class="string">&quot;张三&quot;</span>, <span class="string">&quot;姓名&quot;</span>)</span><br><span class="line">	flag.IntVar(&amp;age, <span class="string">&quot;age&quot;</span>, <span class="number">18</span>, <span class="string">&quot;年龄&quot;</span>)</span><br><span class="line">	flag.BoolVar(&amp;married, <span class="string">&quot;married&quot;</span>, <span class="literal">false</span>, <span class="string">&quot;婚否&quot;</span>)</span><br><span class="line">	flag.DurationVar(&amp;delay, <span class="string">&quot;d&quot;</span>, <span class="number">0</span>, <span class="string">&quot;时间间隔&quot;</span>)</span><br><span class="line">	<span class="comment">/*解析*/</span></span><br><span class="line">	flag.Parse()</span><br><span class="line">	fmt.Println(name, age, married, delay)</span><br><span class="line">	<span class="comment">//返回命令行参数后的其他参数</span></span><br><span class="line">	fmt.Println(flag.Args())</span><br><span class="line">	<span class="comment">//返回命令行参数后的其他参数个数</span></span><br><span class="line">	fmt.Println(flag.NArg())</span><br><span class="line">	<span class="comment">//返回使用的命令行参数个数</span></span><br><span class="line">	fmt.Println(flag.NFlag())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​	 	</p>
+]]></content>
+      <categories>
+        <category>Golang</category>
+      </categories>
+      <tags>
+        <tag>Golang</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Go-log</title>
+    <url>/2023/09/03/Go-log/</url>
+    <content><![CDATA[<h1 id="LOG"><a href="#LOG" class="headerlink" title="LOG"></a>LOG</h1><h2 id="GO-log-Standard-Library"><a href="#GO-log-Standard-Library" class="headerlink" title="GO-log Standard Library"></a>GO-log Standard Library</h2><p>he Go <code>log</code>  package implements a simple log service base on Standard Library.</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;log&quot;</span></span><br><span class="line">	<span class="string">&quot;os&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	log.SetFlags(log.Lshortfile | log.Ltime | log.Ldate | log.LUTC)</span><br><span class="line">	log.Println(<span class="string">&quot;日志1&quot;</span>)</span><br><span class="line">	log.SetPrefix(<span class="string">&quot;[log]&quot;</span>)</span><br><span class="line">	log.Println(<span class="string">&quot;日志2&quot;</span>)</span><br><span class="line">	logf, err := os.OpenFile(<span class="string">&quot;./Flog.log&quot;</span>, os.O_CREATE|os.O_APPEND, <span class="number">0644</span>)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="built_in">panic</span>(err)</span><br><span class="line">	&#125;</span><br><span class="line">	log.SetOutput(logf)</span><br><span class="line">	log.Println(<span class="string">&quot;日志3&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<h3 id="func-SetFlags-flag-int"><a href="#func-SetFlags-flag-int" class="headerlink" title="func SetFlags(flag int)"></a><code>func SetFlags(flag int)</code></h3><p>Defaultly, loggers only provide log time information,<br>but in many cases we want to get more information,<br>such as the file name and line number of the log.<br><code>log</code> The standard library gives us ways to add these choices.</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">Ldate       				 // 2009/01/23</span><br><span class="line">   Ltime                        // 01:23:23</span><br><span class="line">   Lmicroseconds                // 01:23:23.123123</span><br><span class="line">   Llongfile                     // path+line： /a/b/c/d.go:23</span><br><span class="line">   Lshortfile                    // fileName+line：d.go:23（会覆盖掉Llongfile）</span><br><span class="line">   LUTC                         // UTCtime</span><br><span class="line">   LstdFlags    				 // Dfaultlogger</span><br></pre></td></tr></table></figure>
+
+<h3 id="Prefix"><a href="#Prefix" class="headerlink" title="Prefix"></a>Prefix</h3><figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Prefix</span><span class="params">()</span></span> <span class="type">string</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">SetPrefix</span><span class="params">(prefix <span class="type">string</span>)</span></span></span><br></pre></td></tr></table></figure>
+
+<h3 id="OutPutLocal"><a href="#OutPutLocal" class="headerlink" title="OutPutLocal"></a>OutPutLocal</h3><figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">SetOutput</span><span class="params">(w io.Writer)</span></span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="Logrus"><a href="#Logrus" class="headerlink" title="Logrus"></a><a href="https://github.com/sirupsen/logrus">Logrus</a></h2><h2 id="Uber-go-zap"><a href="#Uber-go-zap" class="headerlink" title="Uber-go zap"></a>Uber-go zap</h2>]]></content>
+      <categories>
+        <category>Golang</category>
+      </categories>
+      <tags>
+        <tag>Golang</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Go-redis</title>
+    <url>/2023/09/03/Go-redis/</url>
+    <content><![CDATA[<h1 id="Go-redis"><a href="#Go-redis" class="headerlink" title="Go-redis"></a><a href="https://redis.io/">Go-redis</a></h1><p>Redis is an open source in-memory database,<br>Redis provides a variety of different types of data structures,<br>many business scenarios problems can be naturally reflect to these data structures.<br>In addition, with features such as replication, persistence, and client-side sharding,<br>Redis can easily scale into(扩展) a system that can contain hundreds of GB datas<br>and handle millions of requests per second.</p>
+<p>Redis supports data structures such as<br><code>string, hash list set sortedSets bitmaps  hyperloglogs geospatial  indexes with radius queries, and streams.</code></p>
+<span id="more"></span>
+
+<p>Install Redis locally or use Docker</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run --name redis507 -p 6379:6379 -d redis:5.0.7</span><br><span class="line">docker run -it --network host --<span class="built_in">rm</span> redis:5.0.7 redis-cli</span><br></pre></td></tr></table></figure>
+
+<p>Go-redis package<br><a href="https://github.com/gomodule/redigo">redigo</a> </p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">go get github.com/gomodule/redigo/redis</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://github.com/redis/go-redis">go-redis</a></p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">go</span> mod init github.com/my/repo</span><br><span class="line"><span class="keyword">go</span> get github.com/redis/<span class="keyword">go</span>-redis/v9</span><br></pre></td></tr></table></figure>
+
+<p>Here we use <code>go-redis</code>package</p>
+]]></content>
+      <categories>
+        <category>Golang</category>
+      </categories>
+      <tags>
+        <tag>Golang</tag>
+        <tag>Redis</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Graph-LC417</title>
     <url>/2023/09/03/Graph-LC417/</url>
     <content><![CDATA[<h1 id="Leetcode-417-dfs"><a href="#Leetcode-417-dfs" class="headerlink" title="Leetcode 417-dfs"></a>Leetcode 417-<code>dfs</code></h1><h2 id="Pacific-Atlantic-Water-Flow"><a href="#Pacific-Atlantic-Water-Flow" class="headerlink" title="Pacific Atlantic Water Flow"></a><a href="https://leetcode.cn/problems/pacific-atlantic-water-flow/">Pacific Atlantic Water Flow</a></h2><p><em>Becase of method of DFS and BFS are Similar,</em><br><em>therefore using dfs to solve this problem</em></p>
 <p>There is an <code>m x n</code> rectangular(矩形) island<br>that borders both the <strong>Pacific Ocean</strong>(太平洋) and <strong>Atlantic Ocean</strong>(大西洋).<br>The <strong>Pacific Ocean</strong> touches the island’s left and top edges,<br>and the <strong>Atlantic Ocean</strong> touches the island’s right and bottom edges.</p>
 <p>The island is partitioned into a grid of square cells.<br>You are given an <code>m x n</code> integer matrix <code>heights</code><br>where <code>heights[r][c]</code> represents the <strong>height above sea level</strong> of<br>the cell at coordinate(坐标) <code>(r, c)</code>.</p>
 <p>The island receives a lot of rain,<br>and the rain water can flow to neighboring cells directly north, south, east, and west<br>if the neighboring cell’s height is <strong>less than or equal to</strong> the current cell’s height.<br>Water can flow from any cell adjacent to an ocean into the ocean.</p>
-<p>Return <em>a <strong>2D list</strong> of grid coordinates</em> <code>result</code><br><em>where</em> <code>result[i] = [ri, ci]</code> *denotes that *<br><em>rain water can flow from cell</em> <code>(ri, ci)</code> <em>to <strong>both</strong> the Pacific and Atlantic oceans</em>. </p>
+<p>Return <em>a <strong>2D list</strong> of grid coordinates</em> <code>result</code><br><em>where</em> <code>result[i] = [ri, ci]</code> denotes that<br><em>rain water can flow from cell</em> <code>(ri, ci)</code> <em>to <strong>both</strong> the Pacific and Atlantic oceans</em>. </p>
 <span id="more"></span>
 
 
@@ -2062,7 +2198,9 @@
         <category>Golang</category>
       </categories>
       <tags>
+        <tag>Golang</tag>
         <tag>Gin</tag>
+        <tag>GoWeb</tag>
       </tags>
   </entry>
   <entry>
