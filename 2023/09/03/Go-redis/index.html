@@ -20,15 +20,15 @@
     var CONFIG = {"hostname":"zyuu.top","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideDownIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="Go-redisRedis is an open source in-memory database,Redis provides a variety of different types of data structures,many business scenarios problems can be naturally reflect to these data structures.In">
+  <meta name="description" content="RedisRedis (Remote Dictionary Server)key-value non-relational (NoSQL) database based on an in-memory implementation Redis provides a variety of different types of data structures,many business scenari">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Go-redis[To be continue]">
+<meta property="og:title" content="Go-redis">
 <meta property="og:url" content="http://zyuu.top/2023/09/03/Go-redis/index.html">
 <meta property="og:site_name" content="Accompany You Through World">
-<meta property="og:description" content="Go-redisRedis is an open source in-memory database,Redis provides a variety of different types of data structures,many business scenarios problems can be naturally reflect to these data structures.In">
+<meta property="og:description" content="RedisRedis (Remote Dictionary Server)key-value non-relational (NoSQL) database based on an in-memory implementation Redis provides a variety of different types of data structures,many business scenari">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-09-03T13:18:21.000Z">
-<meta property="article:modified_time" content="2023-09-03T14:14:53.197Z">
+<meta property="article:modified_time" content="2023-09-04T14:07:16.338Z">
 <meta property="article:author" content="zyuu">
 <meta property="article:tag" content="Golang">
 <meta property="article:tag" content="Redis">
@@ -47,7 +47,7 @@
   };
 </script>
 
-  <title>Go-redis[To be continue] | Accompany You Through World</title>
+  <title>Go-redis | Accompany You Through World</title>
   
 
 
@@ -208,7 +208,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Go-redis[To be continue]
+          Go-redis
         </h1>
 
         <div class="post-meta">
@@ -219,10 +219,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2023-09-03 21:18:21 / Modified: 22:14:53" itemprop="dateCreated datePublished" datetime="2023-09-03T21:18:21+08:00">2023-09-03</time>
+              <time title="Created: 2023-09-03 21:18:21" itemprop="dateCreated datePublished" datetime="2023-09-03T21:18:21+08:00">2023-09-03</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-09-04 22:07:16" itemprop="dateModified" datetime="2023-09-04T22:07:16+08:00">2023-09-04</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -244,11 +250,72 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="Go-redis"><a href="#Go-redis" class="headerlink" title="Go-redis"></a><a target="_blank" rel="noopener" href="https://redis.io/">Go-redis</a></h1><p>Redis is an open source in-memory database,<br>Redis provides a variety of different types of data structures,<br>many business scenarios problems can be naturally reflect to these data structures.<br>In addition, with features such as replication, persistence, and client-side sharding,<br>Redis can easily scale into(扩展) a system that can contain hundreds of GB datas<br>and handle millions of requests per second.</p>
+        <h1 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h1><p>Redis (<strong>Remote Dictionary Server</strong>)<br><strong>key-value</strong> non-relational (NoSQL) database based on an <strong>in-memory</strong> implementation</p>
+<p>Redis provides a variety of different types of data structures,<br>many business scenarios problems can be naturally reflect to these data structures.<br>In addition, with features such as replication, persistence, and client-side sharding,<br>Redis can easily scale into(扩展) a system that can contain hundreds of GB datas<br>and handle millions of requests per second.</p>
 <p>Redis supports data structures such as<br><code>string,hash,list,set,sortedSets,bitmaps,hyperloglogs,geospatial,streams</code></p>
 <span id="more"></span>
 
-<p>Install Redis locally or use Docker</p>
+<h2 id="NoSQL"><a href="#NoSQL" class="headerlink" title="NoSQL"></a>NoSQL</h2><p>NoSQL (Not only SQL) is a collective term for a database management system that is different from traditional relational databases</p>
+<p>Redis (<strong>Remote Dictionary Server</strong>)<br><strong>key-value</strong> non-relational (NoSQL) database based on an <strong>in-memory</strong> implementation</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>SQL</th>
+<th>NoSQL</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>dataType</td>
+<td>structured</td>
+<td>NotStructured</td>
+</tr>
+<tr>
+<td>dataRelation</td>
+<td>Relational</td>
+<td>NotRelational</td>
+</tr>
+<tr>
+<td>queryMethod</td>
+<td>SQL</td>
+<td>not-SQL</td>
+</tr>
+<tr>
+<td>transactions</td>
+<td>ACID</td>
+<td>BASE</td>
+</tr>
+</tbody></table>
+<h2 id="Commend"><a href="#Commend" class="headerlink" title="Commend"></a>Commend</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">redis-cli</span></span><br></pre></td></tr></table></figure>
+
+<p>query key</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">KEYS pattern </span><br></pre></td></tr></table></figure>
+
+<p>del key</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DEL name</span><br></pre></td></tr></table></figure>
+
+<p>insert</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SET</span> Key <span class="keyword">Value</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MSET k1 v1 k2 v3 k3 v3 [key,value...]</span><br></pre></td></tr></table></figure>
+
+<p>exist</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">EXISTS</span> key</span><br></pre></td></tr></table></figure>
+
+<p>expirationTime</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">EXPIRE key</span><br></pre></td></tr></table></figure>
+
+<p>see expire</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TTL key</span><br></pre></td></tr></table></figure>
+
+<h3 id="String"><a href="#String" class="headerlink" title="String"></a>String</h3><p> value:string int float</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">GET</span> key</span><br><span class="line">  summary: <span class="keyword">Returns</span> the string <span class="keyword">value</span> <span class="keyword">of</span> a key.</span><br><span class="line">  </span><br><span class="line">MGET key [key ...]</span><br><span class="line">  summary: Atomically <span class="keyword">returns</span> the string <span class="keyword">values</span> <span class="keyword">of</span> <span class="keyword">one</span> <span class="keyword">or</span> more keys.</span><br><span class="line">  </span><br><span class="line"><span class="keyword">SET</span> key <span class="keyword">value</span> [NX<span class="operator">|</span>XX] [<span class="keyword">GET</span>] [EX seconds<span class="operator">|</span>PX milliseconds<span class="operator">|</span>EXAT unix<span class="operator">-</span><span class="type">time</span><span class="operator">-</span>seconds<span class="operator">|</span>PXAT unix<span class="operator">-</span><span class="type">time</span><span class="operator">-</span>			milliseconds<span class="operator">|</span>KEEPTTL]</span><br><span class="line">  summary: Sets the string <span class="keyword">value</span> <span class="keyword">of</span> a key, ignoring its type. The key <span class="keyword">is</span> created if it doesn<span class="string">&#x27;t 				exist.</span></span><br><span class="line"><span class="string"> </span></span><br><span class="line"><span class="string">MSET key value [key value ...]</span></span><br><span class="line"><span class="string">  summary: Atomically creates or modifies the string values of one or more keys.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">INCR key</span></span><br><span class="line"><span class="string">  summary: Increments the integer value of a key by one. Uses 0 as initial value if the key doesn&#x27;</span>t 	 	exist.  </span><br><span class="line"></span><br><span class="line">INCRBY<span class="operator">/</span>INCRBYFLOAT key increment</span><br><span class="line">  summary: Increments the <span class="type">integer</span> <span class="keyword">value</span> <span class="keyword">of</span> a key <span class="keyword">by</span> a step. Uses <span class="number">0</span> <span class="keyword">as</span> <span class="keyword">initial</span> <span class="keyword">value</span> if the key 				doesn<span class="string">&#x27;t exist. </span></span><br><span class="line"><span class="string">  </span></span><br><span class="line"><span class="string">SETEX key seconds value</span></span><br><span class="line"><span class="string">  summary: Sets the string value and expiration time of a key. Creates the key if it doesn&#x27;</span>t exist.</span><br><span class="line"></span><br><span class="line">SETNX key <span class="keyword">value</span></span><br><span class="line">  summary: <span class="keyword">Set</span> the string <span class="keyword">value</span> <span class="keyword">of</span> a key <span class="keyword">only</span> <span class="keyword">when</span> the key doesn<span class="string">&#x27;t exist.</span></span><br></pre></td></tr></table></figure>
+
+<p>struct</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">projectName:serverName:type:id</span><br></pre></td></tr></table></figure>
+
+<h3 id="Hash"><a href="#Hash" class="headerlink" title="Hash"></a>Hash</h3><hr>
+<h1 id="Go-redis"><a href="#Go-redis" class="headerlink" title="Go-redis"></a><a target="_blank" rel="noopener" href="https://redis.io/">Go-redis</a></h1><p>Install Redis locally or use Docker</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker run --name redis507 -p 6379:6379 -d redis:5.0.7</span><br><span class="line">docker run -it --network host --<span class="built_in">rm</span> redis:5.0.7 redis-cli</span><br></pre></td></tr></table></figure>
 
 <p>Go-redis package<br><a target="_blank" rel="noopener" href="https://github.com/gomodule/redigo">redigo</a> </p>
@@ -258,7 +325,7 @@
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">go</span> mod init github.com/my/repo</span><br><span class="line"><span class="keyword">go</span> get github.com/redis/<span class="keyword">go</span>-redis/v9</span><br></pre></td></tr></table></figure>
 
 <p>Here we use <code>go-redis</code>package</p>
-
+<h2 id="Connect"><a href="#Connect" class="headerlink" title="Connect"></a>Connect</h2>
     </div>
 
     
@@ -273,7 +340,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>Post link: </strong>
-    <a href="http://zyuu.top/2023/09/03/Go-redis/" title="Go-redis[To be continue]">http://zyuu.top/2023/09/03/Go-redis/</a>
+    <a href="http://zyuu.top/2023/09/03/Go-redis/" title="Go-redis">http://zyuu.top/2023/09/03/Go-redis/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
@@ -359,7 +426,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Go-redis"><span class="nav-number">1.</span> <span class="nav-text">Go-redis</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis"><span class="nav-number">1.</span> <span class="nav-text">Redis</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#NoSQL"><span class="nav-number">1.1.</span> <span class="nav-text">NoSQL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Commend"><span class="nav-number">1.2.</span> <span class="nav-text">Commend</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#String"><span class="nav-number">1.2.1.</span> <span class="nav-text">String</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hash"><span class="nav-number">1.2.2.</span> <span class="nav-text">Hash</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Go-redis"><span class="nav-number">2.</span> <span class="nav-text">Go-redis</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Connect"><span class="nav-number">2.1.</span> <span class="nav-text">Connect</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -441,7 +508,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共31.4k字</span>
+  <span class="post-count">博客全站共31.7k字</span>
 </div>
 
 
