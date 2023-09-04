@@ -190,6 +190,714 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://zyuu.top/2023/09/03/Go-Gorm/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="zyuu">
+      <meta itemprop="description" content="迷惘的灵魂啊 安静的运转吧">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Accompany You Through World">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/09/03/Go-Gorm/" class="post-title-link" itemprop="url">GoGorm</a>
+        </h2>
+
+        <div class="post-meta">
+
+	    
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2023-09-03 22:15:44 / Modified: 22:29:52" itemprop="dateCreated datePublished" datetime="2023-09-03T22:15:44+08:00">2023-09-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Datbase/" itemprop="url" rel="index"><span itemprop="name">Datbase</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Gorm"><a href="#Gorm" class="headerlink" title="Gorm"></a><a target="_blank" rel="noopener" href="https://gorm.io/zh_CN/docs/index.html">Gorm</a></h1><p>Gorm is an ORM framework written in Go.<br>It is well-documented, developer-friendly, and supports mainstream databases.</p>
+<p>Official Quick Start Code</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">  <span class="string">&quot;gorm.io/gorm&quot;</span></span><br><span class="line">  <span class="string">&quot;gorm.io/driver/sqlite&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Product <span class="keyword">struct</span> &#123;</span><br><span class="line">  gorm.Model</span><br><span class="line">  Code  <span class="type">string</span></span><br><span class="line">  Price <span class="type">uint</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">  db, err := gorm.Open(sqlite.Open(<span class="string">&quot;test.db&quot;</span>), &amp;gorm.Config&#123;&#125;)</span><br><span class="line">  <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">    <span class="built_in">panic</span>(<span class="string">&quot;failed to connect database&quot;</span>)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 迁移 schema</span></span><br><span class="line">  db.AutoMigrate(&amp;Product&#123;&#125;)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Create</span></span><br><span class="line">  db.Create(&amp;Product&#123;Code: <span class="string">&quot;D42&quot;</span>, Price: <span class="number">100</span>&#125;)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Read</span></span><br><span class="line">  <span class="keyword">var</span> product Product</span><br><span class="line">  db.First(&amp;product, <span class="number">1</span>) <span class="comment">// 根据整型主键查找</span></span><br><span class="line">  db.First(&amp;product, <span class="string">&quot;code = ?&quot;</span>, <span class="string">&quot;D42&quot;</span>) <span class="comment">// 查找 code 字段值为 D42 的记录</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// Update - 将 product 的 price 更新为 200</span></span><br><span class="line">  db.Model(&amp;product).Update(<span class="string">&quot;Price&quot;</span>, <span class="number">200</span>)</span><br><span class="line">  <span class="comment">// Update - 更新多个字段</span></span><br><span class="line">  db.Model(&amp;product).Updates(Product&#123;Price: <span class="number">200</span>, Code: <span class="string">&quot;F42&quot;</span>&#125;) <span class="comment">// 仅更新非零值字段</span></span><br><span class="line">  db.Model(&amp;product).Updates(<span class="keyword">map</span>[<span class="type">string</span>]<span class="keyword">interface</span>&#123;&#125;&#123;<span class="string">&quot;Price&quot;</span>: <span class="number">200</span>, <span class="string">&quot;Code&quot;</span>: <span class="string">&quot;F42&quot;</span>&#125;)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Delete - 删除 product</span></span><br><span class="line">  db.Delete(&amp;product, <span class="number">1</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/09/03/Go-Gorm/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://zyuu.top/2023/09/03/Go-file/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="zyuu">
+      <meta itemprop="description" content="迷惘的灵魂啊 安静的运转吧">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Accompany You Through World">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/09/03/Go-file/" class="post-title-link" itemprop="url">Go-file</a>
+        </h2>
+
+        <div class="post-meta">
+
+	    
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2023-09-03 21:42:41 / Modified: 21:57:23" itemprop="dateCreated datePublished" datetime="2023-09-03T21:42:41+08:00">2023-09-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Golang/" itemprop="url" rel="index"><span itemprop="name">Golang</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Go-File-Standard-Library"><a href="#Go-File-Standard-Library" class="headerlink" title="Go-File Standard Library"></a>Go-File Standard Library</h1><p>Golang has Standard Library to operate file<br>include create write read and so on</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/09/03/Go-file/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://zyuu.top/2023/09/03/Go-flag/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="zyuu">
+      <meta itemprop="description" content="迷惘的灵魂啊 安静的运转吧">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Accompany You Through World">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/09/03/Go-flag/" class="post-title-link" itemprop="url">GO-flag</a>
+        </h2>
+
+        <div class="post-meta">
+
+	    
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2023-09-03 21:35:45 / Modified: 21:41:51" itemprop="dateCreated datePublished" datetime="2023-09-03T21:35:45+08:00">2023-09-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Golang/" itemprop="url" rel="index"><span itemprop="name">Golang</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Golang-Flag-Standard-Library"><a href="#Golang-Flag-Standard-Library" class="headerlink" title="Golang-Flag Standard Library"></a>Golang-Flag Standard Library</h1><p>The Go language <code>flag</code> package implements the parsing of command line arguments</p>
+<h2 id="Get-the-command-line-arguments"><a href="#Get-the-command-line-arguments" class="headerlink" title="Get the command line arguments"></a>Get the command line arguments</h2>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/09/03/Go-flag/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://zyuu.top/2023/09/03/Go-log/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="zyuu">
+      <meta itemprop="description" content="迷惘的灵魂啊 安静的运转吧">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Accompany You Through World">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/09/03/Go-log/" class="post-title-link" itemprop="url">Go-log</a>
+        </h2>
+
+        <div class="post-meta">
+
+	    
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2023-09-03 21:20:50 / Modified: 21:34:22" itemprop="dateCreated datePublished" datetime="2023-09-03T21:20:50+08:00">2023-09-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Golang/" itemprop="url" rel="index"><span itemprop="name">Golang</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="LOG"><a href="#LOG" class="headerlink" title="LOG"></a>LOG</h1><h2 id="GO-log-Standard-Library"><a href="#GO-log-Standard-Library" class="headerlink" title="GO-log Standard Library"></a>GO-log Standard Library</h2><p>he Go <code>log</code>  package implements a simple log service base on Standard Library.</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;log&quot;</span></span><br><span class="line">	<span class="string">&quot;os&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	log.SetFlags(log.Lshortfile | log.Ltime | log.Ldate | log.LUTC)</span><br><span class="line">	log.Println(<span class="string">&quot;日志1&quot;</span>)</span><br><span class="line">	log.SetPrefix(<span class="string">&quot;[log]&quot;</span>)</span><br><span class="line">	log.Println(<span class="string">&quot;日志2&quot;</span>)</span><br><span class="line">	logf, err := os.OpenFile(<span class="string">&quot;./Flog.log&quot;</span>, os.O_CREATE|os.O_APPEND, <span class="number">0644</span>)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="built_in">panic</span>(err)</span><br><span class="line">	&#125;</span><br><span class="line">	log.SetOutput(logf)</span><br><span class="line">	log.Println(<span class="string">&quot;日志3&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/09/03/Go-log/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://zyuu.top/2023/09/03/Go-redis/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="zyuu">
+      <meta itemprop="description" content="迷惘的灵魂啊 安静的运转吧">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Accompany You Through World">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/09/03/Go-redis/" class="post-title-link" itemprop="url">Go-redis[To be continue]</a>
+        </h2>
+
+        <div class="post-meta">
+
+	    
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2023-09-03 21:18:21 / Modified: 22:14:53" itemprop="dateCreated datePublished" datetime="2023-09-03T21:18:21+08:00">2023-09-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Golang/" itemprop="url" rel="index"><span itemprop="name">Golang</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Go-redis"><a href="#Go-redis" class="headerlink" title="Go-redis"></a><a target="_blank" rel="noopener" href="https://redis.io/">Go-redis</a></h1><p>Redis is an open source in-memory database,<br>Redis provides a variety of different types of data structures,<br>many business scenarios problems can be naturally reflect to these data structures.<br>In addition, with features such as replication, persistence, and client-side sharding,<br>Redis can easily scale into(扩展) a system that can contain hundreds of GB datas<br>and handle millions of requests per second.</p>
+<p>Redis supports data structures such as<br><code>string,hash,list,set,sortedSets,bitmaps,hyperloglogs,geospatial,streams</code></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/09/03/Go-redis/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://zyuu.top/2023/09/03/Graph-LC417/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="zyuu">
+      <meta itemprop="description" content="迷惘的灵魂啊 安静的运转吧">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Accompany You Through World">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/09/03/Graph-LC417/" class="post-title-link" itemprop="url">Graph-LC417</a>
+        </h2>
+
+        <div class="post-meta">
+
+	    
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2023-09-03 18:28:41 / Modified: 21:42:24" itemprop="dateCreated datePublished" datetime="2023-09-03T18:28:41+08:00">2023-09-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Leetcode-417-dfs"><a href="#Leetcode-417-dfs" class="headerlink" title="Leetcode 417-dfs"></a>Leetcode 417-<code>dfs</code></h1><h2 id="Pacific-Atlantic-Water-Flow"><a href="#Pacific-Atlantic-Water-Flow" class="headerlink" title="Pacific Atlantic Water Flow"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/pacific-atlantic-water-flow/">Pacific Atlantic Water Flow</a></h2><p><em>Becase of method of DFS and BFS are Similar,</em><br><em>therefore using dfs to solve this problem</em></p>
+<p>There is an <code>m x n</code> rectangular(矩形) island<br>that borders both the <strong>Pacific Ocean</strong>(太平洋) and <strong>Atlantic Ocean</strong>(大西洋).<br>The <strong>Pacific Ocean</strong> touches the island’s left and top edges,<br>and the <strong>Atlantic Ocean</strong> touches the island’s right and bottom edges.</p>
+<p>The island is partitioned into a grid of square cells.<br>You are given an <code>m x n</code> integer matrix <code>heights</code><br>where <code>heights[r][c]</code> represents the <strong>height above sea level</strong> of<br>the cell at coordinate(坐标) <code>(r, c)</code>.</p>
+<p>The island receives a lot of rain,<br>and the rain water can flow to neighboring cells directly north, south, east, and west<br>if the neighboring cell’s height is <strong>less than or equal to</strong> the current cell’s height.<br>Water can flow from any cell adjacent to an ocean into the ocean.</p>
+<p>Return <em>a <strong>2D list</strong> of grid coordinates</em> <code>result</code><br><em>where</em> <code>result[i] = [ri, ci]</code> denotes that<br><em>rain water can flow from cell</em> <code>(ri, ci)</code> <em>to <strong>both</strong> the Pacific and Atlantic oceans</em>. </p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/09/03/Graph-LC417/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://zyuu.top/2023/09/03/Graph-LC130/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="zyuu">
+      <meta itemprop="description" content="迷惘的灵魂啊 安静的运转吧">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Accompany You Through World">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/09/03/Graph-LC130/" class="post-title-link" itemprop="url">Graph-LC130</a>
+        </h2>
+
+        <div class="post-meta">
+
+	    
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2023-09-03 17:45:26 / Modified: 18:21:50" itemprop="dateCreated datePublished" datetime="2023-09-03T17:45:26+08:00">2023-09-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Leetcode-200-dfs-and-bfs"><a href="#Leetcode-200-dfs-and-bfs" class="headerlink" title="Leetcode 200-dfs and bfs"></a>Leetcode 200-<code>dfs</code> and <code>bfs</code></h1><h2 id="Surrounded-Regions"><a href="#Surrounded-Regions" class="headerlink" title="Surrounded Regions"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/surrounded-regions/">Surrounded Regions</a></h2><p>Given an <code>m x n</code> matrix <code>board</code> containing <code>&#39;X&#39;</code> and <code>&#39;O&#39;</code>, <em>capture all regions that are 4-directionally surrounded by</em> <code>&#39;X&#39;</code>.</p>
+<p>A region is <strong>captured</strong> by flipping all <code>&#39;O&#39;</code>s into <code>&#39;X&#39;</code>s in that surrounded region.</p>
+<p> <img src="/./../pic/Graph-LC130/image-20230903174833997.png" alt="image-20230903174833997"></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/09/03/Graph-LC130/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://zyuu.top/2023/09/03/Graph-LC1020/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="zyuu">
+      <meta itemprop="description" content="迷惘的灵魂啊 安静的运转吧">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Accompany You Through World">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/09/03/Graph-LC1020/" class="post-title-link" itemprop="url">Graph-LC1020</a>
+        </h2>
+
+        <div class="post-meta">
+
+	    
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2023-09-03 16:09:50 / Modified: 17:38:51" itemprop="dateCreated datePublished" datetime="2023-09-03T16:09:50+08:00">2023-09-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Leetcode-1020-dfs-and-bfs"><a href="#Leetcode-1020-dfs-and-bfs" class="headerlink" title="Leetcode 1020-dfs and bfs"></a>Leetcode 1020-<code>dfs</code> and <code>bfs</code></h1><h2 id="1020-Number-of-Enclaves"><a href="#1020-Number-of-Enclaves" class="headerlink" title="1020. Number of Enclaves"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/number-of-enclaves/">1020. Number of Enclaves</a></h2><p>You are given an <code>m x n</code> binary matrix <code>grid</code>, where <code>0</code> represents a sea cell and <code>1</code> represents a land cell.</p>
+<p>A <strong>move</strong> consists of walking from one land cell to another adjacent (<strong>4-directionally</strong>) land cell or walking off the boundary of the <code>grid</code>.</p>
+<p>Return <em>the number of land cells in</em> <code>grid</code> <em>for which we cannot walk off the boundary of the grid in any number of <strong>moves</strong></em>.</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/09/03/Graph-LC1020/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://zyuu.top/2023/09/03/Graph-LC695/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="zyuu">
+      <meta itemprop="description" content="迷惘的灵魂啊 安静的运转吧">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Accompany You Through World">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/09/03/Graph-LC695/" class="post-title-link" itemprop="url">Graph-LC695</a>
+        </h2>
+
+        <div class="post-meta">
+
+	    
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2023-09-03 10:50:15 / Modified: 11:17:52" itemprop="dateCreated datePublished" datetime="2023-09-03T10:50:15+08:00">2023-09-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Leetcode-695-dfs-and-bfs"><a href="#Leetcode-695-dfs-and-bfs" class="headerlink" title="Leetcode 695-dfs and bfs"></a>Leetcode 695-<code>dfs</code> and <code>bfs</code></h1><h2 id="Max-Area-of-Island"><a href="#Max-Area-of-Island" class="headerlink" title="Max Area of Island"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/max-area-of-island/">Max Area of Island</a></h2><p>You are given an <code>m x n</code> binary matrix <code>grid</code>. An island is a group of <code>1</code>‘s (representing land) connected <strong>4-directionally</strong> (horizontal or vertical.) You may assume all four edges of the grid are surrounded by water.</p>
+<p>The <strong>area</strong> of an island is the number of cells with a value <code>1</code> in the island.</p>
+<p>Return <em>the maximum <strong>area</strong> of an island in</em> <code>grid</code>. If there is no island, return <code>0</code>.</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/09/03/Graph-LC695/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://zyuu.top/2023/09/03/leetcode9-3-1921/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -267,742 +975,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://zyuu.top/2023/09/02/Graph-LC200/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="zyuu">
-      <meta itemprop="description" content="迷惘的灵魂啊 安静的运转吧">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Accompany You Through World">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/09/02/Graph-LC200/" class="post-title-link" itemprop="url">Graph-LC200</a>
-        </h2>
-
-        <div class="post-meta">
-
-	    
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2023-09-02 20:20:55" itemprop="dateCreated datePublished" datetime="2023-09-02T20:20:55+08:00">2023-09-02</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-09-03 17:46:20" itemprop="dateModified" datetime="2023-09-03T17:46:20+08:00">2023-09-03</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Leetcode-200-dfs-and-bfs"><a href="#Leetcode-200-dfs-and-bfs" class="headerlink" title="Leetcode 200-dfs and bfs"></a>Leetcode 200-<code>dfs</code> and <code>bfs</code></h1><h2 id="Number-of-Islands"><a href="#Number-of-Islands" class="headerlink" title="Number of Islands"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/number-of-islands/">Number of Islands</a></h2><p>Given an <code>m x n</code> 2D binary <code>grid</code> which represents a map of <code>1</code> (land) and <code>0</code> (water), return <em>the number of islands</em>.</p>
-<p>An <strong>island</strong> is surrounded by water and is formed by connecting adjacent(邻近的) lands horizontally(水平) or vertically(垂直). You may assume all four edges of the grid are all surrounded by water.</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/09/02/Graph-LC200/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://zyuu.top/2023/09/02/Graph-bfs/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="zyuu">
-      <meta itemprop="description" content="迷惘的灵魂啊 安静的运转吧">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Accompany You Through World">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/09/02/Graph-bfs/" class="post-title-link" itemprop="url">Graph-bfs</a>
-        </h2>
-
-        <div class="post-meta">
-
-	    
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2023-09-02 14:39:46 / Modified: 20:16:08" itemprop="dateCreated datePublished" datetime="2023-09-02T14:39:46+08:00">2023-09-02</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="BreadthFirstSearch"><a href="#BreadthFirstSearch" class="headerlink" title="BreadthFirstSearch"></a>BreadthFirstSearch</h1><h2 id="Quote-and-translate-from-Code-Caprice"><a href="#Quote-and-translate-from-Code-Caprice" class="headerlink" title="Quote and translate from  Code Caprice"></a>Quote and translate from  <em><strong><a target="_blank" rel="noopener" href="https://programmercarl.com/">Code Caprice</a></strong></em></h2><p>BFS is always used to solve the shortest path problem between two vertices.<br>BFS starts from the starting vertex, the starting vertexis the center of the circle of search,<br>once the end point is encountered, the record of the previous node is the shortest road.</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/09/02/Graph-bfs/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://zyuu.top/2023/09/02/GraphDfs-LC797/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="zyuu">
-      <meta itemprop="description" content="迷惘的灵魂啊 安静的运转吧">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Accompany You Through World">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/09/02/GraphDfs-LC797/" class="post-title-link" itemprop="url">GraphDfs-LC797</a>
-        </h2>
-
-        <div class="post-meta">
-
-	    
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2023-09-02 11:13:50" itemprop="dateCreated datePublished" datetime="2023-09-02T11:13:50+08:00">2023-09-02</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-09-03 10:46:18" itemprop="dateModified" datetime="2023-09-03T10:46:18+08:00">2023-09-03</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Leetcode-797"><a href="#Leetcode-797" class="headerlink" title="Leetcode-797"></a>Leetcode-797</h1><p>Given a directed acyclic graph (DAG) of <strong>n</strong> nodes labeled from <strong>0</strong> to <strong>n - 1</strong>,<br>find all possible paths from node <strong>0</strong> to node <strong>n - 1</strong> and return them in <strong>any order</strong>.<br>The graph is given as follows: <code>graph[i]</code> is a list of all nodes you can visit from node <code>i</code><br>(i.e., there is a directed edge from node <code>i</code> to node <code>graph[i][j]</code>).</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/09/02/GraphDfs-LC797/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://zyuu.top/2023/09/02/Graph-dfs/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="zyuu">
-      <meta itemprop="description" content="迷惘的灵魂啊 安静的运转吧">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Accompany You Through World">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/09/02/Graph-dfs/" class="post-title-link" itemprop="url">Graph-dfs</a>
-        </h2>
-
-        <div class="post-meta">
-
-	    
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2023-09-02 10:44:11 / Modified: 11:12:21" itemprop="dateCreated datePublished" datetime="2023-09-02T10:44:11+08:00">2023-09-02</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="DepthFirstSearch"><a href="#DepthFirstSearch" class="headerlink" title="DepthFirstSearch"></a>DepthFirstSearch</h1><h2 id="Quote-and-translate-from-Code-Caprice"><a href="#Quote-and-translate-from-Code-Caprice" class="headerlink" title="Quote and translate from  Code Caprice"></a>Quote and translate from  <em><strong><a target="_blank" rel="noopener" href="https://programmercarl.com/">Code Caprice</a></strong></em></h2><p><strong>A</strong> undirected graph that we want to search all pths form <code>vertex1</code> to <code>vertex6</code></p>
-<p><img src="/./../pic/Graph-dfs/image01.png" alt="image-20230902105209987"></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/09/02/Graph-dfs/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://zyuu.top/2023/09/02/Graph03-Traverse/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="zyuu">
-      <meta itemprop="description" content="迷惘的灵魂啊 安静的运转吧">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Accompany You Through World">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/09/02/Graph03-Traverse/" class="post-title-link" itemprop="url">Graph-Search</a>
-        </h2>
-
-        <div class="post-meta">
-
-	    
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2023-09-02 10:30:06 / Modified: 10:44:50" itemprop="dateCreated datePublished" datetime="2023-09-02T10:30:06+08:00">2023-09-02</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Search-Graph"><a href="#Search-Graph" class="headerlink" title="Search  Graph"></a>Search  Graph</h1><p>To traverse a graph ,we always hold <code>DepthFirstSearch(dfs)</code>and <code>BreadthFirstSearch(bfs)</code></p>
-<p><code>dfs</code>: Search in one direction, until can not search, and then change direction<br>        the process of changing direction involves backtracking</p>
-<p><code>bfs</code>: Traverse all  vertices connected by this vertex,<br>         and when you go to the next vertex then traverse all the vertices connected to the vertex,<br>         and the search direction is more like a breadth, a search process in all directions.</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://zyuu.top/2023/09/02/leetcode9-2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="zyuu">
-      <meta itemprop="description" content="迷惘的灵魂啊 安静的运转吧">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Accompany You Through World">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/09/02/leetcode9-2/" class="post-title-link" itemprop="url">9.2leetcode2511</a>
-        </h2>
-
-        <div class="post-meta">
-
-	    
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2023-09-02 00:03:04 / Modified: 23:41:31" itemprop="dateCreated datePublished" datetime="2023-09-02T00:03:04+08:00">2023-09-02</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>You are given a <strong>0-indexed</strong> integer array <code>forts</code> of length <code>n</code> representing the positions of several forts. <code>forts[i]</code> can be <code>-1</code>, <code>0</code>, or <code>1</code> where:</p>
-<ul>
-<li><code>-1</code> represents there is <strong>no fort</strong> at the <code>ith</code> position.</li>
-<li><code>0</code> indicates there is an <strong>enemy</strong> fort at the <code>ith</code> position.</li>
-<li><code>1</code> indicates the fort at the <code>ith</code> the position is under your command.</li>
-</ul>
-<p>Now you have decided to move your army from one of your forts at position <code>i</code> to an empty position <code>j</code> such that:</p>
-<ul>
-<li><code>0 &lt;= i, j &lt;= n - 1</code></li>
-<li>The army travels over enemy forts <strong>only</strong>. Formally, for all <code>k</code> where <code>min(i,j) &lt; k &lt; max(i,j)</code>, <code>forts[k] == 0.</code></li>
-</ul>
-<p>While moving the army, all the enemy forts that come in the way are <strong>captured</strong>.</p>
-<p>Return <em>the <strong>maximum</strong> number of enemy forts that can be captured</em>. In case it is <strong>impossible</strong> to move your army, or you do not have any fort under your command, return <code>0</code><em>.</em></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/09/02/leetcode9-2/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://zyuu.top/2023/09/01/Graph02/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="zyuu">
-      <meta itemprop="description" content="迷惘的灵魂啊 安静的运转吧">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Accompany You Through World">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/09/01/Graph02/" class="post-title-link" itemprop="url">Graph-The basic operation of Graph</a>
-        </h2>
-
-        <div class="post-meta">
-
-	    
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2023-09-01 18:21:26" itemprop="dateCreated datePublished" datetime="2023-09-01T18:21:26+08:00">2023-09-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-09-03 10:45:35" itemprop="dateModified" datetime="2023-09-03T10:45:35+08:00">2023-09-03</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="The-basic-operation-of-Graph"><a href="#The-basic-operation-of-Graph" class="headerlink" title="The basic operation of Graph"></a>The basic operation of Graph</h1><p>This Blog   use <strong>adjacency matrices</strong> and <strong>adjacency list</strong> to implement <strong>Graph</strong> in <code>Golang</code></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/09/01/Graph02/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://zyuu.top/2023/09/01/Graph01/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="zyuu">
-      <meta itemprop="description" content="迷惘的灵魂啊 安静的运转吧">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Accompany You Through World">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/09/01/Graph01/" class="post-title-link" itemprop="url">GraphIntroduce</a>
-        </h2>
-
-        <div class="post-meta">
-
-	    
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2023-09-01 13:29:59" itemprop="dateCreated datePublished" datetime="2023-09-01T13:29:59+08:00">2023-09-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-09-03 10:44:12" itemprop="dateModified" datetime="2023-09-03T10:44:12+08:00">2023-09-03</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Graph"><a href="#Graph" class="headerlink" title="Graph"></a>Graph</h1><p>Start learning of Graph.<br>Mainly refer to the following books《Hello Algorithm》《代码随想录》</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/09/01/Graph01/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://zyuu.top/2023/09/01/MySQL01/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="zyuu">
-      <meta itemprop="description" content="迷惘的灵魂啊 安静的运转吧">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Accompany You Through World">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/09/01/MySQL01/" class="post-title-link" itemprop="url">MySQL01</a>
-        </h2>
-
-        <div class="post-meta">
-
-	    
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2023-09-01 09:23:59" itemprop="dateCreated datePublished" datetime="2023-09-01T09:23:59+08:00">2023-09-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-09-03 22:17:53" itemprop="dateModified" datetime="2023-09-03T22:17:53+08:00">2023-09-03</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Database/" itemprop="url" rel="index"><span itemprop="name">Database</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h1><p><strong>SQL (Structured Query Language:结构化查询语言) 是用于管理关系数据库管理系统（RDBMS）。 SQL 的范围包括数据插入、查询、更新和删除，数据库模式创建和修改，以及数据访问控制。</strong></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/09/01/MySQL01/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1070,7 +1046,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-count">32</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1083,7 +1059,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -1136,7 +1112,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共27.8k字</span>
+  <span class="post-count">博客全站共31.4k字</span>
 </div>
 
 
