@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>0X10Plan</title>
+    <url>/2023/09/02/0X10Plan/</url>
+    <content><![CDATA[<p>💮Learn Graph algorithm<br>💮Gin and Gorm<br>💮OS two chapters<br>💮Golang related books<br>💮Running more than three days<br>💮Leetcode one easy of middle problem per day<br>💮Daily learning outcomes are clocked into the Markdown document</p>
+]]></content>
+      <categories>
+        <category>Planing</category>
+      </categories>
+      <tags>
+        <tag>Planing</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>9.4leetcode449</title>
     <url>/2023/09/04/9-4leetcode449/</url>
     <content><![CDATA[<h1 id="Serialize-and-Deserialize-BST"><a href="#Serialize-and-Deserialize-BST" class="headerlink" title="Serialize and Deserialize BST"></a><a href="https://leetcode.cn/problems/serialize-and-deserialize-bst/">Serialize and Deserialize BST</a></h1><p>Serialization is converting a data structure or object into a sequence of bits so that it can be stored in a file or memory buffer, or transmitted across a network connection link to be reconstructed later in the same or another computer environment.</p>
@@ -25,18 +37,6 @@
       <tags>
         <tag>Tree</tag>
         <tag>BST</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>0X10Plan</title>
-    <url>/2023/09/02/0X10Plan/</url>
-    <content><![CDATA[<p>💮Learn Graph algorithm<br>💮Gin and Gorm<br>💮OS two chapters<br>💮Golang related books<br>💮Running more than three days<br>💮Leetcode one easy of middle problem per day<br>💮Daily learning outcomes are clocked into the Markdown document</p>
-]]></content>
-      <categories>
-        <category>Planing</category>
-      </categories>
-      <tags>
-        <tag>Planing</tag>
       </tags>
   </entry>
   <entry>
@@ -235,7 +235,7 @@
 <td>BASE</td>
 </tr>
 </tbody></table>
-<h2 id="Commend"><a href="#Commend" class="headerlink" title="Commend"></a>Commend</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">redis-cli</span></span><br></pre></td></tr></table></figure>
+<h2 id="Commend"><a href="#Commend" class="headerlink" title="Commend"></a>Commend</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">redis-cli</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker run -it --network host --<span class="built_in">rm</span> redis redis-cli</span></span><br></pre></td></tr></table></figure>
 
 <p>query key</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">KEYS pattern </span><br></pre></td></tr></table></figure>
@@ -274,7 +274,26 @@
 <figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">go</span> mod init github.com/my/repo</span><br><span class="line"><span class="keyword">go</span> get github.com/redis/<span class="keyword">go</span>-redis/v9</span><br></pre></td></tr></table></figure>
 
 <p>Here we use <code>go-redis</code>package</p>
-<h2 id="Connect"><a href="#Connect" class="headerlink" title="Connect"></a>Connect</h2>]]></content>
+<h2 id="Connect"><a href="#Connect" class="headerlink" title="Connect"></a>Connect</h2><figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;context&quot;</span></span><br><span class="line">	<span class="string">&quot;errors&quot;</span></span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">	<span class="string">&quot;github.com/redis/go-redis/v9&quot;</span></span><br><span class="line">	<span class="string">&quot;time&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// $ docker run -it --network host --rm redis redis-cli</span></span><br><span class="line"><span class="keyword">var</span> rdb = redis.NewClient(&amp;redis.Options&#123;</span><br><span class="line">	Addr:     <span class="string">&quot;localhost:6379&quot;</span>,</span><br><span class="line">	Password: <span class="string">&quot;&quot;</span>, <span class="comment">// 密码</span></span><br><span class="line">	DB:       <span class="number">0</span>,  <span class="comment">// 数据库</span></span><br><span class="line">	PoolSize: <span class="number">20</span>, <span class="comment">// 连接池大小</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> redisDB *redis.Client</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	redisDB = redis.NewClient(&amp;redis.Options&#123;</span><br><span class="line">		Addr:     <span class="string">&quot;localhost:6379&quot;</span>,</span><br><span class="line">		DB:       <span class="number">3</span>,</span><br><span class="line">		Password: <span class="string">&quot;&quot;</span>,</span><br><span class="line">		PoolSize: <span class="number">20</span>,</span><br><span class="line">	&#125;)</span><br><span class="line">	ctx, cancel := context.WithTimeout(context.Background(), time.Millisecond*<span class="number">3000</span>)</span><br><span class="line">	<span class="keyword">defer</span> cancel()</span><br><span class="line">	_, err := redisDB.Ping(ctx).Result()</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="built_in">panic</span>(err)</span><br><span class="line">	&#125;</span><br><span class="line">	DoCommend1(ctx)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">DoCommend1</span><span class="params">(ctx context.Context)</span></span> &#123;</span><br><span class="line">	<span class="comment">//执行命令获取结果</span></span><br><span class="line">	val, err := redisDB.Get(ctx, <span class="string">&quot;key&quot;</span>).Result()</span><br><span class="line">	fmt.Println(val, err)</span><br><span class="line">	<span class="comment">//获取命令对象</span></span><br><span class="line">	cmder := redisDB.Get(ctx, <span class="string">&quot;key&quot;</span>)</span><br><span class="line">	fmt.Println(cmder.Val())</span><br><span class="line">	fmt.Println(cmder.Err())</span><br><span class="line">	<span class="comment">//行命令获取错误</span></span><br><span class="line">	err = redisDB.Set(ctx, <span class="string">&quot;key&quot;</span>, <span class="string">&quot;hello golang&quot;</span>, <span class="number">3</span>*time.Second).Err()</span><br><span class="line">	<span class="comment">// 直接执行命令获取值</span></span><br><span class="line">	value := redisDB.Get(ctx, <span class="string">&quot;key&quot;</span>).Val()</span><br><span class="line">	fmt.Println(value)</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="commend"><a href="#commend" class="headerlink" title="commend"></a>commend</h2><figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="comment">// DoCommend commend</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">DoCommend</span><span class="params">()</span></span> &#123;</span><br><span class="line">	ctx, cancel := context.WithTimeout(context.Background(), <span class="number">500</span>*time.Millisecond)</span><br><span class="line">	<span class="keyword">defer</span> cancel()</span><br><span class="line">	<span class="comment">//执行命令获取结果</span></span><br><span class="line">	val, err := rdb.Get(ctx, <span class="string">&quot;key&quot;</span>).Result()</span><br><span class="line">	fmt.Println(val, err)</span><br><span class="line">	<span class="comment">//获取命令对象</span></span><br><span class="line">	cmder := rdb.Get(ctx, <span class="string">&quot;key&quot;</span>)</span><br><span class="line">	fmt.Println(cmder.Val())</span><br><span class="line">	fmt.Println(cmder.Err())</span><br><span class="line">	<span class="comment">//行命令获取错误</span></span><br><span class="line">	err = rdb.Set(ctx, <span class="string">&quot;key&quot;</span>, <span class="string">&quot;hello golang&quot;</span>, <span class="number">3</span>*time.Second).Err()</span><br><span class="line">	<span class="comment">// 直接执行命令获取值</span></span><br><span class="line">	value := rdb.Get(ctx, <span class="string">&quot;key&quot;</span>).Val()</span><br><span class="line">	fmt.Println(value)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="anycommend"><a href="#anycommend" class="headerlink" title="anycommend"></a>anycommend</h2><figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="comment">// DoAny any commend</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">DoAny</span><span class="params">()</span></span> &#123;</span><br><span class="line">	ctx, cancel := context.WithTimeout(context.Background(), <span class="number">500</span>*time.Millisecond)</span><br><span class="line">	<span class="keyword">defer</span> cancel()</span><br><span class="line">	err := rdb.Do(ctx, <span class="string">&quot;set&quot;</span>, <span class="string">&quot;key&quot;</span>, <span class="string">&quot;hello,world&quot;</span>, <span class="string">&quot;EX&quot;</span>, <span class="number">3600</span>).Err()</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(err)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	val, err := rdb.Do(ctx, <span class="string">&quot;get&quot;</span>, <span class="string">&quot;key&quot;</span>).Result()</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(err)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(val)</span><br><span class="line"></span><br><span class="line">	aff, err := rdb.Do(ctx, <span class="string">&quot;EXISTS&quot;</span>, <span class="string">&quot;key&quot;</span>).Result()</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(err)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(<span class="string">&quot;aff:&quot;</span>, aff)</span><br><span class="line"></span><br><span class="line">	aff, err = rdb.Do(ctx, <span class="string">&quot;DEL&quot;</span>, <span class="string">&quot;key&quot;</span>).Result()</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(err)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(<span class="string">&quot;aff:&quot;</span>, aff)</span><br><span class="line"></span><br><span class="line">	aff, err = rdb.Do(ctx, <span class="string">&quot;EXISTS&quot;</span>, <span class="string">&quot;key&quot;</span>).Result()</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(err)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(<span class="string">&quot;aff:&quot;</span>, aff)</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="error"><a href="#error" class="headerlink" title="error"></a>error</h2><figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="comment">// RedisNil redis nil</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">RedisNil</span><span class="params">(key, defaultValue <span class="type">string</span>)</span></span> (<span class="type">string</span>, <span class="type">error</span>) &#123;</span><br><span class="line">	ctx, cancel := context.WithTimeout(context.Background(), <span class="number">500</span>*time.Millisecond)</span><br><span class="line">	<span class="keyword">defer</span> cancel()</span><br><span class="line">	val, err := rdb.Get(ctx, key).Result()</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="comment">//not exist key</span></span><br><span class="line">		<span class="keyword">if</span> errors.Is(err, redis.Nil) &#123;</span><br><span class="line">			<span class="keyword">return</span> defaultValue, <span class="literal">nil</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> <span class="string">&quot;&quot;</span>, err</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> val, <span class="literal">nil</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="Zset"><a href="#Zset" class="headerlink" title="Zset"></a>Zset</h2><figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">ZsetRedis</span><span class="params">()</span></span> &#123;</span><br><span class="line">	zsetKey := <span class="string">&quot;language_rank&quot;</span></span><br><span class="line">	<span class="comment">//value</span></span><br><span class="line">	languages := []redis.Z&#123;</span><br><span class="line">		&#123;Score: <span class="number">90.0</span>, Member: <span class="string">&quot;Go&quot;</span>&#125;,</span><br><span class="line">		&#123;Score: <span class="number">90.1</span>, Member: <span class="string">&quot;Java&quot;</span>&#125;,</span><br><span class="line">		&#123;Score: <span class="number">90.2</span>, Member: <span class="string">&quot;C&quot;</span>&#125;,</span><br><span class="line">		&#123;Score: <span class="number">90.3</span>, Member: <span class="string">&quot;cpp&quot;</span>&#125;,</span><br><span class="line">		&#123;Score: <span class="number">90.4</span>, Member: <span class="string">&quot;C#&quot;</span>&#125;,</span><br><span class="line">		&#123;Score: <span class="number">90.5</span>, Member: <span class="string">&quot;Python&quot;</span>&#125;,</span><br><span class="line">	&#125;</span><br><span class="line">	ctx, cancer := context.WithTimeout(context.Background(), <span class="number">500</span>*time.Millisecond)</span><br><span class="line">	<span class="keyword">defer</span> cancer()</span><br><span class="line"></span><br><span class="line">	<span class="comment">//ZADD</span></span><br><span class="line">	err := rdbZ.ZAdd(ctx, zsetKey, languages...).Err()</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(err)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(<span class="string">&quot;add success&quot;</span>)</span><br><span class="line"></span><br><span class="line">	<span class="comment">//add go 0.1</span></span><br><span class="line">	newScore, err := rdbZ.ZIncrBy(ctx, zsetKey, <span class="number">0.1</span>, <span class="string">&quot;Go&quot;</span>).Result()</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(err)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(newScore)</span><br><span class="line"></span><br><span class="line">	<span class="comment">//get the max3</span></span><br><span class="line">	ret := rdbZ.ZRevRangeWithScores(ctx, zsetKey, <span class="number">0</span>, <span class="number">2</span>).Val()</span><br><span class="line">	<span class="keyword">for</span> _, v := <span class="keyword">range</span> ret &#123;</span><br><span class="line">		fmt.Println(v.Member, v.Score)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//get score limit</span></span><br><span class="line">	<span class="comment">/*op := &amp;redis.ZRangeBy&#123;</span></span><br><span class="line"><span class="comment">		Min: &quot;90&quot;,</span></span><br><span class="line"><span class="comment">		Max: &quot;90.2&quot;,</span></span><br><span class="line"><span class="comment">	&#125;*/</span></span><br><span class="line">	ret, err = rdbZ.ZRevRangeByScoreWithScores(ctx, zsetKey, &amp;redis.ZRangeBy&#123;</span><br><span class="line">		Min: <span class="string">&quot;90&quot;</span>,</span><br><span class="line">		Max: <span class="string">&quot;90.2&quot;</span>,</span><br><span class="line">	&#125;).Result()</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(err)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(ret)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="KEYS"><a href="#KEYS" class="headerlink" title="KEYS *"></a>KEYS *</h2><p>prefix</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="comment">// PrefixKey Get prefix keys</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">PrefixKey</span><span class="params">()</span></span> &#123;</span><br><span class="line">	ctx, cancer := context.WithTimeout(context.Background(), <span class="number">500</span>*time.Millisecond)</span><br><span class="line">	<span class="keyword">defer</span> cancer()</span><br><span class="line">	<span class="comment">//method 1</span></span><br><span class="line">	vals, _ := rdbZ.Keys(ctx, <span class="string">&quot;*&quot;</span>).Result()</span><br><span class="line">	fmt.Println(vals)</span><br><span class="line">	<span class="comment">//method 2</span></span><br><span class="line">	iter := rdbZ.Scan(ctx, <span class="number">0</span>, <span class="string">&quot;*&quot;</span>, <span class="number">0</span>).Iterator()</span><br><span class="line">	<span class="keyword">for</span> iter.Next(ctx) &#123;</span><br><span class="line">		<span class="comment">//err:=rdbZ.Del(ctx,iter.Val())</span></span><br><span class="line">		<span class="comment">//err := rdbZ.Do(ctx, &quot;DEL&quot;, iter.Val()).Err()</span></span><br><span class="line">		<span class="comment">//if err != nil &#123;</span></span><br><span class="line">		<span class="comment">//	fmt.Println(err)</span></span><br><span class="line">		<span class="comment">//	return</span></span><br><span class="line">		<span class="comment">//&#125;</span></span><br><span class="line">		fmt.Println(iter.Val())</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> err := iter.Err(); err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="built_in">panic</span>(err)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Pipeline"><a href="#Pipeline" class="headerlink" title="Pipeline"></a>Pipeline</h2><figure class="highlight go"><table><tr><td class="code"><pre><span class="line">to be <span class="keyword">continue</span></span><br></pre></td></tr></table></figure>
+
+]]></content>
       <categories>
         <category>Golang</category>
       </categories>
@@ -427,34 +446,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Graph-LC417</title>
-    <url>/2023/09/03/Graph-LC417/</url>
-    <content><![CDATA[<h1 id="Leetcode-417-dfs"><a href="#Leetcode-417-dfs" class="headerlink" title="Leetcode 417-dfs"></a>Leetcode 417-<code>dfs</code></h1><h2 id="Pacific-Atlantic-Water-Flow"><a href="#Pacific-Atlantic-Water-Flow" class="headerlink" title="Pacific Atlantic Water Flow"></a><a href="https://leetcode.cn/problems/pacific-atlantic-water-flow/">Pacific Atlantic Water Flow</a></h2><p><em>Becase of method of DFS and BFS are Similar,</em><br><em>therefore using dfs to solve this problem</em></p>
-<p>There is an <code>m x n</code> rectangular(矩形) island<br>that borders both the <strong>Pacific Ocean</strong>(太平洋) and <strong>Atlantic Ocean</strong>(大西洋).<br>The <strong>Pacific Ocean</strong> touches the island’s left and top edges,<br>and the <strong>Atlantic Ocean</strong> touches the island’s right and bottom edges.</p>
-<p>The island is partitioned into a grid of square cells.<br>You are given an <code>m x n</code> integer matrix <code>heights</code><br>where <code>heights[r][c]</code> represents the <strong>height above sea level</strong> of<br>the cell at coordinate(坐标) <code>(r, c)</code>.</p>
-<p>The island receives a lot of rain,<br>and the rain water can flow to neighboring cells directly north, south, east, and west<br>if the neighboring cell’s height is <strong>less than or equal to</strong> the current cell’s height.<br>Water can flow from any cell adjacent to an ocean into the ocean.</p>
-<p>Return <em>a <strong>2D list</strong> of grid coordinates</em> <code>result</code><br><em>where</em> <code>result[i] = [ri, ci]</code> denotes that<br><em>rain water can flow from cell</em> <code>(ri, ci)</code> <em>to <strong>both</strong> the Pacific and Atlantic oceans</em>. </p>
-<span id="more"></span>
-
-
-
-<p><img src="/./../pic/Graph-LC417/image-20230903183542427.png" alt="image-20230903183542427"></p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">Input: heights = [[1,2,2,3,5],[3,2,3,4,4],[2,4,5,3,1],[6,7,1,4,5],[5,1,1,2,4]]</span><br><span class="line">Output: [[0,4],[1,3],[1,4],[2,2],[3,0],[3,1],[4,0]]</span><br><span class="line">Explanation: The following cells can flow to the Pacific and Atlantic oceans, as shown below:</span><br><span class="line">[0,4]: [0,4] -&gt; Pacific Ocean </span><br><span class="line">       [0,4] -&gt; Atlantic Ocean</span><br><span class="line">[1,3]: [1,3] -&gt; [0,3] -&gt; Pacific Ocean </span><br><span class="line">       [1,3] -&gt; [1,4] -&gt; Atlantic Ocean</span><br><span class="line">[1,4]: [1,4] -&gt; [1,3] -&gt; [0,3] -&gt; Pacific Ocean </span><br><span class="line">       [1,4] -&gt; Atlantic Ocean</span><br><span class="line">[2,2]: [2,2] -&gt; [1,2] -&gt; [0,2] -&gt; Pacific Ocean </span><br><span class="line">       [2,2] -&gt; [2,3] -&gt; [2,4] -&gt; Atlantic Ocean</span><br><span class="line">[3,0]: [3,0] -&gt; Pacific Ocean </span><br><span class="line">       [3,0] -&gt; [4,0] -&gt; Atlantic Ocean</span><br><span class="line">[3,1]: [3,1] -&gt; [3,0] -&gt; Pacific Ocean </span><br><span class="line">       [3,1] -&gt; [4,1] -&gt; Atlantic Ocean</span><br><span class="line">[4,0]: [4,0] -&gt; Pacific Ocean </span><br><span class="line">       [4,0] -&gt; Atlantic Ocean</span><br><span class="line">Note that there are other possible paths for these cells to flow to the Pacific and Atlantic oceans.</span><br></pre></td></tr></table></figure>
-
-<h2 id="Resolution"><a href="#Resolution" class="headerlink" title="Resolution"></a>Resolution</h2><p>这道题英语看的我头疼,我大概描述一下<br>流向太平洋只能向左向上<br>流向大西洋只能向右向下<br>从太平洋边上的节点 逆流而上，将遍历过的节点都标记上。<br>从大西洋的边上节点 逆流而长，将遍历过的节点也标记上。<br>然后两方都标记过的节点就是既可以流太平洋也可以流大西洋的节点。<br>result是一个包含可行点的二维数组</p>
-<p>由于dfs和bfs只是处理方式不一样,其他的总体代码大同小异<br>所以只写dfs</p>
-<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">pacificAtlantic</span><span class="params">(heights [][]<span class="type">int</span>)</span></span> [][]<span class="type">int</span> &#123;</span><br><span class="line">	<span class="keyword">var</span> ret [][]<span class="type">int</span></span><br><span class="line">	<span class="keyword">var</span> dir = [<span class="number">4</span>][<span class="number">2</span>]<span class="type">int</span>&#123;&#123;<span class="number">1</span>, <span class="number">0</span>&#125;, &#123;<span class="number">-1</span>, <span class="number">0</span>&#125;, &#123;<span class="number">0</span>, <span class="number">1</span>&#125;, &#123;<span class="number">0</span>, <span class="number">-1</span>&#125;&#125;</span><br><span class="line">	n, m := <span class="built_in">len</span>(heights), <span class="built_in">len</span>(heights[<span class="number">0</span>])</span><br><span class="line">	pacific, atlantic := <span class="built_in">make</span>([][]<span class="type">bool</span>, n), <span class="built_in">make</span>([][]<span class="type">bool</span>, n)</span><br><span class="line">	<span class="keyword">for</span> i := <span class="keyword">range</span> pacific &#123;</span><br><span class="line">		pacific[i], atlantic[i] = <span class="built_in">make</span>([]<span class="type">bool</span>, m), <span class="built_in">make</span>([]<span class="type">bool</span>, m)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">var</span> dfs <span class="function"><span class="keyword">func</span><span class="params">(visited [][]<span class="type">bool</span>, x, y <span class="type">int</span>)</span></span></span><br><span class="line">	dfs = <span class="function"><span class="keyword">func</span><span class="params">(visited [][]<span class="type">bool</span>, x, y <span class="type">int</span>)</span></span> &#123;</span><br><span class="line">		<span class="keyword">if</span> visited[x][y] &#123;</span><br><span class="line">			<span class="keyword">return</span></span><br><span class="line">		&#125;</span><br><span class="line">		visited[x][y] = <span class="literal">true</span></span><br><span class="line">		<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">4</span>; i++ &#123;</span><br><span class="line">			nextX := x + dir[i][<span class="number">0</span>]</span><br><span class="line">			nextY := y + dir[i][<span class="number">1</span>]</span><br><span class="line">			<span class="keyword">if</span> nextX &lt; <span class="number">0</span> || nextY &lt; <span class="number">0</span> || nextX &gt;= n || nextY &gt;= m &#123;</span><br><span class="line">				<span class="keyword">continue</span></span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span> heights[nextX][nextY] &gt;= heights[x][y] &#123;</span><br><span class="line">				dfs(visited, nextX, nextY)</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">		用于遍历矩阵的行(从上到下)</span></span><br><span class="line"><span class="comment">		调用 dfs 函数标记从当前行的第一列出发可以流向太平洋的单元格，即(i, 0)这个单元格</span></span><br><span class="line"><span class="comment">		调用 dfs 函数标记从当前行的最后一列出发可以流向大西洋的单元格，即(i, m-1)这个单元格</span></span><br><span class="line"><span class="comment">	*/</span></span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; n; i++ &#123;</span><br><span class="line">		dfs(pacific, i, <span class="number">0</span>)</span><br><span class="line">		dfs(atlantic, i, m<span class="number">-1</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">		用于遍历矩阵的列(从左到右)</span></span><br><span class="line"><span class="comment">		调用 dfs 函数标记从当前列的第一行出发可以流向太平洋的单元格，即 (0, j) 这个单元格。</span></span><br><span class="line"><span class="comment">		调用 dfs 函数标记从当前列的最后一行一行出发可以流向太平洋的单元格，即 (n-1, j) 这个单元格。</span></span><br><span class="line"><span class="comment">	*/</span></span><br><span class="line">	<span class="keyword">for</span> j := <span class="number">0</span>; j &lt; m; j++ &#123;</span><br><span class="line">		dfs(pacific, <span class="number">0</span>, j)</span><br><span class="line">		dfs(atlantic, n<span class="number">-1</span>, j)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; n; i++ &#123;</span><br><span class="line">		<span class="keyword">for</span> j := <span class="number">0</span>; j &lt; m; j++ &#123;</span><br><span class="line">			<span class="keyword">if</span> pacific[i][j] &amp;&amp; atlantic[i][j] &#123;</span><br><span class="line">				ret = <span class="built_in">append</span>(ret, []<span class="type">int</span>&#123;i, j&#125;)</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ret</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>algorithm</category>
-      </categories>
-      <tags>
-        <tag>Graph</tag>
-        <tag>dfs</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Graph-LC200</title>
     <url>/2023/09/02/Graph-LC200/</url>
     <content><![CDATA[<h1 id="Leetcode-200-dfs-and-bfs"><a href="#Leetcode-200-dfs-and-bfs" class="headerlink" title="Leetcode 200-dfs and bfs"></a>Leetcode 200-<code>dfs</code> and <code>bfs</code></h1><h2 id="Number-of-Islands"><a href="#Number-of-Islands" class="headerlink" title="Number of Islands"></a><a href="https://leetcode.cn/problems/number-of-islands/">Number of Islands</a></h2><p>Given an <code>m x n</code> 2D binary <code>grid</code> which represents a map of <code>1</code> (land) and <code>0</code> (water), return <em>the number of islands</em>.</p>
@@ -487,6 +478,34 @@
         <tag>Graph</tag>
         <tag>dfs</tag>
         <tag>bfs</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Graph-LC417</title>
+    <url>/2023/09/03/Graph-LC417/</url>
+    <content><![CDATA[<h1 id="Leetcode-417-dfs"><a href="#Leetcode-417-dfs" class="headerlink" title="Leetcode 417-dfs"></a>Leetcode 417-<code>dfs</code></h1><h2 id="Pacific-Atlantic-Water-Flow"><a href="#Pacific-Atlantic-Water-Flow" class="headerlink" title="Pacific Atlantic Water Flow"></a><a href="https://leetcode.cn/problems/pacific-atlantic-water-flow/">Pacific Atlantic Water Flow</a></h2><p><em>Becase of method of DFS and BFS are Similar,</em><br><em>therefore using dfs to solve this problem</em></p>
+<p>There is an <code>m x n</code> rectangular(矩形) island<br>that borders both the <strong>Pacific Ocean</strong>(太平洋) and <strong>Atlantic Ocean</strong>(大西洋).<br>The <strong>Pacific Ocean</strong> touches the island’s left and top edges,<br>and the <strong>Atlantic Ocean</strong> touches the island’s right and bottom edges.</p>
+<p>The island is partitioned into a grid of square cells.<br>You are given an <code>m x n</code> integer matrix <code>heights</code><br>where <code>heights[r][c]</code> represents the <strong>height above sea level</strong> of<br>the cell at coordinate(坐标) <code>(r, c)</code>.</p>
+<p>The island receives a lot of rain,<br>and the rain water can flow to neighboring cells directly north, south, east, and west<br>if the neighboring cell’s height is <strong>less than or equal to</strong> the current cell’s height.<br>Water can flow from any cell adjacent to an ocean into the ocean.</p>
+<p>Return <em>a <strong>2D list</strong> of grid coordinates</em> <code>result</code><br><em>where</em> <code>result[i] = [ri, ci]</code> denotes that<br><em>rain water can flow from cell</em> <code>(ri, ci)</code> <em>to <strong>both</strong> the Pacific and Atlantic oceans</em>. </p>
+<span id="more"></span>
+
+
+
+<p><img src="/./../pic/Graph-LC417/image-20230903183542427.png" alt="image-20230903183542427"></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">Input: heights = [[1,2,2,3,5],[3,2,3,4,4],[2,4,5,3,1],[6,7,1,4,5],[5,1,1,2,4]]</span><br><span class="line">Output: [[0,4],[1,3],[1,4],[2,2],[3,0],[3,1],[4,0]]</span><br><span class="line">Explanation: The following cells can flow to the Pacific and Atlantic oceans, as shown below:</span><br><span class="line">[0,4]: [0,4] -&gt; Pacific Ocean </span><br><span class="line">       [0,4] -&gt; Atlantic Ocean</span><br><span class="line">[1,3]: [1,3] -&gt; [0,3] -&gt; Pacific Ocean </span><br><span class="line">       [1,3] -&gt; [1,4] -&gt; Atlantic Ocean</span><br><span class="line">[1,4]: [1,4] -&gt; [1,3] -&gt; [0,3] -&gt; Pacific Ocean </span><br><span class="line">       [1,4] -&gt; Atlantic Ocean</span><br><span class="line">[2,2]: [2,2] -&gt; [1,2] -&gt; [0,2] -&gt; Pacific Ocean </span><br><span class="line">       [2,2] -&gt; [2,3] -&gt; [2,4] -&gt; Atlantic Ocean</span><br><span class="line">[3,0]: [3,0] -&gt; Pacific Ocean </span><br><span class="line">       [3,0] -&gt; [4,0] -&gt; Atlantic Ocean</span><br><span class="line">[3,1]: [3,1] -&gt; [3,0] -&gt; Pacific Ocean </span><br><span class="line">       [3,1] -&gt; [4,1] -&gt; Atlantic Ocean</span><br><span class="line">[4,0]: [4,0] -&gt; Pacific Ocean </span><br><span class="line">       [4,0] -&gt; Atlantic Ocean</span><br><span class="line">Note that there are other possible paths for these cells to flow to the Pacific and Atlantic oceans.</span><br></pre></td></tr></table></figure>
+
+<h2 id="Resolution"><a href="#Resolution" class="headerlink" title="Resolution"></a>Resolution</h2><p>这道题英语看的我头疼,我大概描述一下<br>流向太平洋只能向左向上<br>流向大西洋只能向右向下<br>从太平洋边上的节点 逆流而上，将遍历过的节点都标记上。<br>从大西洋的边上节点 逆流而长，将遍历过的节点也标记上。<br>然后两方都标记过的节点就是既可以流太平洋也可以流大西洋的节点。<br>result是一个包含可行点的二维数组</p>
+<p>由于dfs和bfs只是处理方式不一样,其他的总体代码大同小异<br>所以只写dfs</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">pacificAtlantic</span><span class="params">(heights [][]<span class="type">int</span>)</span></span> [][]<span class="type">int</span> &#123;</span><br><span class="line">	<span class="keyword">var</span> ret [][]<span class="type">int</span></span><br><span class="line">	<span class="keyword">var</span> dir = [<span class="number">4</span>][<span class="number">2</span>]<span class="type">int</span>&#123;&#123;<span class="number">1</span>, <span class="number">0</span>&#125;, &#123;<span class="number">-1</span>, <span class="number">0</span>&#125;, &#123;<span class="number">0</span>, <span class="number">1</span>&#125;, &#123;<span class="number">0</span>, <span class="number">-1</span>&#125;&#125;</span><br><span class="line">	n, m := <span class="built_in">len</span>(heights), <span class="built_in">len</span>(heights[<span class="number">0</span>])</span><br><span class="line">	pacific, atlantic := <span class="built_in">make</span>([][]<span class="type">bool</span>, n), <span class="built_in">make</span>([][]<span class="type">bool</span>, n)</span><br><span class="line">	<span class="keyword">for</span> i := <span class="keyword">range</span> pacific &#123;</span><br><span class="line">		pacific[i], atlantic[i] = <span class="built_in">make</span>([]<span class="type">bool</span>, m), <span class="built_in">make</span>([]<span class="type">bool</span>, m)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">var</span> dfs <span class="function"><span class="keyword">func</span><span class="params">(visited [][]<span class="type">bool</span>, x, y <span class="type">int</span>)</span></span></span><br><span class="line">	dfs = <span class="function"><span class="keyword">func</span><span class="params">(visited [][]<span class="type">bool</span>, x, y <span class="type">int</span>)</span></span> &#123;</span><br><span class="line">		<span class="keyword">if</span> visited[x][y] &#123;</span><br><span class="line">			<span class="keyword">return</span></span><br><span class="line">		&#125;</span><br><span class="line">		visited[x][y] = <span class="literal">true</span></span><br><span class="line">		<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">4</span>; i++ &#123;</span><br><span class="line">			nextX := x + dir[i][<span class="number">0</span>]</span><br><span class="line">			nextY := y + dir[i][<span class="number">1</span>]</span><br><span class="line">			<span class="keyword">if</span> nextX &lt; <span class="number">0</span> || nextY &lt; <span class="number">0</span> || nextX &gt;= n || nextY &gt;= m &#123;</span><br><span class="line">				<span class="keyword">continue</span></span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span> heights[nextX][nextY] &gt;= heights[x][y] &#123;</span><br><span class="line">				dfs(visited, nextX, nextY)</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">		用于遍历矩阵的行(从上到下)</span></span><br><span class="line"><span class="comment">		调用 dfs 函数标记从当前行的第一列出发可以流向太平洋的单元格，即(i, 0)这个单元格</span></span><br><span class="line"><span class="comment">		调用 dfs 函数标记从当前行的最后一列出发可以流向大西洋的单元格，即(i, m-1)这个单元格</span></span><br><span class="line"><span class="comment">	*/</span></span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; n; i++ &#123;</span><br><span class="line">		dfs(pacific, i, <span class="number">0</span>)</span><br><span class="line">		dfs(atlantic, i, m<span class="number">-1</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">		用于遍历矩阵的列(从左到右)</span></span><br><span class="line"><span class="comment">		调用 dfs 函数标记从当前列的第一行出发可以流向太平洋的单元格，即 (0, j) 这个单元格。</span></span><br><span class="line"><span class="comment">		调用 dfs 函数标记从当前列的最后一行一行出发可以流向太平洋的单元格，即 (n-1, j) 这个单元格。</span></span><br><span class="line"><span class="comment">	*/</span></span><br><span class="line">	<span class="keyword">for</span> j := <span class="number">0</span>; j &lt; m; j++ &#123;</span><br><span class="line">		dfs(pacific, <span class="number">0</span>, j)</span><br><span class="line">		dfs(atlantic, n<span class="number">-1</span>, j)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; n; i++ &#123;</span><br><span class="line">		<span class="keyword">for</span> j := <span class="number">0</span>; j &lt; m; j++ &#123;</span><br><span class="line">			<span class="keyword">if</span> pacific[i][j] &amp;&amp; atlantic[i][j] &#123;</span><br><span class="line">				ret = <span class="built_in">append</span>(ret, []<span class="type">int</span>&#123;i, j&#125;)</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ret</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>algorithm</category>
+      </categories>
+      <tags>
+        <tag>Graph</tag>
+        <tag>dfs</tag>
       </tags>
   </entry>
   <entry>
@@ -816,6 +835,22 @@
       </tags>
   </entry>
   <entry>
+    <title>Graph-Search</title>
+    <url>/2023/09/02/Graph03-Traverse/</url>
+    <content><![CDATA[<h1 id="Search-Graph"><a href="#Search-Graph" class="headerlink" title="Search  Graph"></a>Search  Graph</h1><p>To traverse a graph ,we always hold <code>DepthFirstSearch(dfs)</code>and <code>BreadthFirstSearch(bfs)</code></p>
+<p><code>dfs</code>: Search in one direction, until can not search, and then change direction<br>        the process of changing direction involves backtracking</p>
+<p><code>bfs</code>: Traverse all  vertices connected by this vertex,<br>         and when you go to the next vertex then traverse all the vertices connected to the vertex,<br>         and the search direction is more like a breadth, a search process in all directions.</p>
+]]></content>
+      <categories>
+        <category>algorithm</category>
+      </categories>
+      <tags>
+        <tag>Graph</tag>
+        <tag>dfs</tag>
+        <tag>bfs</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Graph-The basic operation of Graph</title>
     <url>/2023/09/01/Graph02/</url>
     <content><![CDATA[<h1 id="The-basic-operation-of-Graph"><a href="#The-basic-operation-of-Graph" class="headerlink" title="The basic operation of Graph"></a>The basic operation of Graph</h1><p>This Blog   use <strong>adjacency matrices</strong> and <strong>adjacency list</strong> to implement <strong>Graph</strong> in <code>Golang</code></p>
@@ -856,22 +891,6 @@
       </categories>
       <tags>
         <tag>Graph</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Graph-Search</title>
-    <url>/2023/09/02/Graph03-Traverse/</url>
-    <content><![CDATA[<h1 id="Search-Graph"><a href="#Search-Graph" class="headerlink" title="Search  Graph"></a>Search  Graph</h1><p>To traverse a graph ,we always hold <code>DepthFirstSearch(dfs)</code>and <code>BreadthFirstSearch(bfs)</code></p>
-<p><code>dfs</code>: Search in one direction, until can not search, and then change direction<br>        the process of changing direction involves backtracking</p>
-<p><code>bfs</code>: Traverse all  vertices connected by this vertex,<br>         and when you go to the next vertex then traverse all the vertices connected to the vertex,<br>         and the search direction is more like a breadth, a search process in all directions.</p>
-]]></content>
-      <categories>
-        <category>algorithm</category>
-      </categories>
-      <tags>
-        <tag>Graph</tag>
-        <tag>dfs</tag>
-        <tag>bfs</tag>
       </tags>
   </entry>
   <entry>
@@ -972,6 +991,142 @@
         <tag>Golang</tag>
         <tag>Gin</tag>
         <tag>GoWeb</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>8.24leetcode1267</title>
+    <url>/2023/08/24/leetcode8-24/</url>
+    <content><![CDATA[<h1 id="1267-Count-Servers-that-Communicate"><a href="#1267-Count-Servers-that-Communicate" class="headerlink" title="1267.Count Servers that Communicate"></a>1267.Count Servers that Communicate</h1><p>You are given a map of a server center,<br> represented as a <code>m * n</code> integer matrix <code>grid</code>,<br>where 1 means that on that cell there is a server and 0 means that it is no server.<br>Two servers are said to communicate if they are on the same row or on the same column.</p>
+<p>Return the number of servers that communicate with any other server.</p>
+<p><img src="/./../pic/leetcode8-24/image-20230903003258130.png" alt="image-20230903003258130"></p>
+<span id="more"></span>
+
+<h2 id="Resolution"><a href="#Resolution" class="headerlink" title="Resolution"></a>Resolution</h2><figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="comment">// 1267</span></span><br><span class="line"><span class="comment">// leetcode submit region begin(Prohibit modification and deletion)</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">countServers</span><span class="params">(grid [][]<span class="type">int</span>)</span></span> <span class="type">int</span> &#123;</span><br><span class="line">	ret := <span class="number">0</span></span><br><span class="line">	rowLen, colLen := <span class="built_in">len</span>(grid), <span class="built_in">len</span>(grid[<span class="number">0</span>])</span><br><span class="line">	row, col := <span class="built_in">make</span>([]<span class="type">int</span>, rowLen), <span class="built_in">make</span>([]<span class="type">int</span>, colLen)</span><br><span class="line">	<span class="comment">//Count the number of servers per row and column</span></span><br><span class="line">	<span class="keyword">for</span> rowIdx := <span class="keyword">range</span> grid &#123;</span><br><span class="line">		<span class="keyword">for</span> colIdx, v := <span class="keyword">range</span> grid[rowIdx] &#123;</span><br><span class="line">			<span class="keyword">if</span> v == <span class="number">1</span> &#123;</span><br><span class="line">				row[rowIdx]++</span><br><span class="line">				col[colIdx]++</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="comment">// Traverse per row&amp;col,check servers&#x27; nums are whether nums&gt;1</span></span><br><span class="line">	<span class="keyword">for</span> rowIdx := <span class="keyword">range</span> grid &#123;</span><br><span class="line">		<span class="keyword">for</span> colIdx, v := <span class="keyword">range</span> grid[rowIdx] &#123;</span><br><span class="line">			<span class="keyword">if</span> v == <span class="number">1</span> &amp;&amp; (row[rowIdx] &gt; <span class="number">1</span> || col[colIdx] &gt; <span class="number">1</span>) &#123;</span><br><span class="line">				ret++</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ret</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//leetcode submit region end(Prohibit modification and deletion)</span></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>algorithm</category>
+      </categories>
+      <tags>
+        <tag>Graph</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>9.1leetcode2240</title>
+    <url>/2023/09/01/leetcode9-1/</url>
+    <content><![CDATA[<p>You are given an integer <code>total</code> indicating the amount of money you have. You are also given two integers <code>cost1</code> and <code>cost2</code> indicating the price of a pen and pencil respectively. You can spend <strong>part or all</strong> of your money to buy multiple quantities (or none) of each kind of writing utensil.</p>
+<p>Return <em>the <strong>number of distinct ways</strong> you can buy some number of pens and pencils.</em></p>
+<span id="more"></span>
+
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: total = 20, cost1 = 10, cost2 = 5</span><br><span class="line">Output: 9</span><br><span class="line">Explanation: The price of a pen is 10 and the price of a pencil is 5.</span><br><span class="line">- If you buy 0 pens, you can buy 0, 1, 2, 3, or 4 pencils.</span><br><span class="line">- If you buy 1 pen, you can buy 0, 1, or 2 pencils.</span><br><span class="line">- If you buy 2 pens, you cannot buy any pencils.</span><br><span class="line">The total number of ways to buy pens and pencils is 5 + 3 + 1 = 9.</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: total = 5, cost1 = 10, cost2 = 10</span><br><span class="line">Output: 1</span><br><span class="line">Explanation: The price of both pens and pencils are 10, which cost more than total, so you cannot buy any writing utensils. Therefore, there is only 1 way: buy 0 pens and 0 pencils.</span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>1 &lt;= total, cost1, cost2 &lt;= 106</code></li>
+</ul>
+<p>一个整数 <code>total</code> ，表示你拥有的总钱数。同时给你两个整数 <code>cost1</code> 和 <code>cost2</code> ，分别表示一支钢笔和一支铅笔的价格。你可以花费你部分或者全部的钱，去买任意数目的两种笔。</p>
+<p>请你返回购买钢笔和铅笔的 <strong>不同方案数目</strong> 。</p>
+<p>Resolution</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="comment">// 2240  2023-09-01 09:08:04</span></span><br><span class="line"><span class="comment">// leetcode submit region begin(Prohibit modification and deletion)</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">waysToBuyPensPencils</span><span class="params">(total <span class="type">int</span>, cost1 <span class="type">int</span>, cost2 <span class="type">int</span>)</span></span> <span class="type">int64</span> &#123;</span><br><span class="line">	ret, nums := <span class="number">0</span>, <span class="number">0</span></span><br><span class="line">	<span class="keyword">for</span> nums*cost1 &lt;= total &#123;</span><br><span class="line">		ret += (total - nums*cost1) / cost2+<span class="number">1</span></span><br><span class="line">		nums++</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="type">int64</span>(ret)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//leetcode submit region end(Prohibit modification and deletion)</span></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>algorithm</category>
+      </categories>
+      <tags>
+        <tag>Math</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>9.2leetcode2511</title>
+    <url>/2023/09/02/leetcode9-2/</url>
+    <content><![CDATA[<p>You are given a <strong>0-indexed</strong> integer array <code>forts</code> of length <code>n</code> representing the positions of several forts. <code>forts[i]</code> can be <code>-1</code>, <code>0</code>, or <code>1</code> where:</p>
+<ul>
+<li><code>-1</code> represents there is <strong>no fort</strong> at the <code>ith</code> position.</li>
+<li><code>0</code> indicates there is an <strong>enemy</strong> fort at the <code>ith</code> position.</li>
+<li><code>1</code> indicates the fort at the <code>ith</code> the position is under your command.</li>
+</ul>
+<p>Now you have decided to move your army from one of your forts at position <code>i</code> to an empty position <code>j</code> such that:</p>
+<ul>
+<li><code>0 &lt;= i, j &lt;= n - 1</code></li>
+<li>The army travels over enemy forts <strong>only</strong>. Formally, for all <code>k</code> where <code>min(i,j) &lt; k &lt; max(i,j)</code>, <code>forts[k] == 0.</code></li>
+</ul>
+<p>While moving the army, all the enemy forts that come in the way are <strong>captured</strong>.</p>
+<p>Return <em>the <strong>maximum</strong> number of enemy forts that can be captured</em>. In case it is <strong>impossible</strong> to move your army, or you do not have any fort under your command, return <code>0</code><em>.</em></p>
+<span id="more"></span>
+
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: forts = [1,0,0,-1,0,0,0,0,1]</span><br><span class="line">Output: 4</span><br><span class="line">Explanation:</span><br><span class="line">- Moving the army from position 0 to position 3 captures 2 enemy forts, at 1 and 2.</span><br><span class="line">- Moving the army from position 8 to position 3 captures 4 enemy forts.</span><br><span class="line">Since 4 is the maximum number of enemy forts that can be captured, we return 4.</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: forts = [0,0,1,-1]</span><br><span class="line">Output: 0</span><br><span class="line">Explanation: Since no enemy fort can be captured, 0 is returned.</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>给你一个长度为 <code>n</code> ，下标从 <strong>0</strong> 开始的整数数组 <code>forts</code> ，表示一些城堡。<code>forts[i]</code> 可以是 <code>-1</code> ，<code>0</code> 或者 <code>1</code> ，其中：</p>
+<ul>
+<li><code>-1</code> 表示第 <code>i</code> 个位置 <strong>没有</strong> 城堡。</li>
+<li><code>0</code> 表示第 <code>i</code> 个位置有一个 <strong>敌人</strong> 的城堡。</li>
+<li><code>1</code> 表示第 <code>i</code> 个位置有一个你控制的城堡。</li>
+</ul>
+<p>现在，你需要决定，将你的军队从某个你控制的城堡位置 <code>i</code> 移动到一个空的位置 <code>j</code> ，满足：</p>
+<ul>
+<li><code>0 &lt;= i, j &lt;= n - 1</code></li>
+<li>军队经过的位置 <strong>只有</strong> 敌人的城堡。正式的，对于所有 <code>min(i,j) &lt; k &lt; max(i,j)</code> 的 <code>k</code> ，都满足 <code>forts[k] == 0</code> 。</li>
+</ul>
+<p>当军队移动时，所有途中经过的敌人城堡都会被 <strong>摧毁</strong> 。</p>
+<p><strong>Resolution</strong></p>
+<p>计算-1和1之间全是0情况下最大的0的数量</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;math&quot;</span></span><br><span class="line"><span class="comment">// 2511  2023-09-02 00:02:31</span></span><br><span class="line"><span class="comment">// leetcode submit region begin(Prohibit modification and deletion)</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">captureForts</span><span class="params">(forts []<span class="type">int</span>)</span></span> <span class="type">int</span> &#123;</span><br><span class="line">	pre := math.MinInt <span class="comment">//pre non-0 element</span></span><br><span class="line">	ret := <span class="number">0</span></span><br><span class="line">	<span class="keyword">for</span> idx, val := <span class="keyword">range</span> forts &#123;</span><br><span class="line">		<span class="keyword">if</span> val != <span class="number">0</span> &#123;</span><br><span class="line">			<span class="comment">//The subscript of the current non-0 element is idx, </span></span><br><span class="line">			<span class="comment">//and the subscript of the previous non-0 element is pre</span></span><br><span class="line">			<span class="comment">//forts[i] != forts[pre] means one is -1 and another is 1</span></span><br><span class="line">			<span class="keyword">if</span> pre &gt;= <span class="number">0</span> &amp;&amp; forts[idx] != forts[pre] &#123;</span><br><span class="line">				ret = max(ret, idx-pre<span class="number">-1</span>)</span><br><span class="line">			&#125;</span><br><span class="line">			pre = idx</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ret</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">max</span><span class="params">(a, b <span class="type">int</span>)</span></span> <span class="type">int</span> &#123;<span class="keyword">if</span> b &gt; a &#123;<span class="keyword">return</span> b&#125;;<span class="keyword">return</span> a&#125;</span><br><span class="line"><span class="comment">//leetcode submit region end(Prohibit modification and deletion)</span></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>algorithm</category>
+      </categories>
+      <tags>
+        <tag>Traverse</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>9.3leetcode1921</title>
+    <url>/2023/09/03/leetcode9-3-1921/</url>
+    <content><![CDATA[<h1 id="LeetCode1921-Eliminate-Max-nums-of-Monsters"><a href="#LeetCode1921-Eliminate-Max-nums-of-Monsters" class="headerlink" title="LeetCode1921-Eliminate Max nums of Monsters"></a>LeetCode1921-Eliminate Max nums of Monsters</h1><p>You are playing a video game<br>where you are defending your city from a group of <code>n</code> monsters.<br> You are given a <strong>0-indexed</strong> integer array <code>dist</code> of size <code>n</code>,<br>where <code>dist[i]</code> is the <strong>initial distance</strong> in kilometers of the <code>ith</code> monster from the city.</p>
+<p>The monsters walk toward the city at a <strong>constant</strong> speed.<br>The speed of each monster is given to you in an integer array <code>speed</code> of size <code>n</code>,<br>where <code>speed[i]</code> is the speed of the <code>ith</code> monster in kilometers per minute.</p>
+<p>You have a weapon that, can kill a <strong>single</strong> monster.<br>However, the weapon takes <strong>one minute</strong> to charge.<br>The weapon is fully charged at the very start.</p>
+<p>You lose when any monster reaches your city.<br>If a monster reaches the city at the exact moment the weapon is fully charged,<br>it counts as a <strong>loss</strong>,<br>and the game ends before you can use your weapon.</p>
+<p>Return the <strong>maximum</strong> number of monsters<br>that you can kill before you lose,<br><em>or</em> <code>n</code> if you can kill all the monsters before they reach the city.</p>
+<span id="more"></span>
+
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: dist = [1,3,4], speed = [1,1,1]</span><br><span class="line">Output: 3</span><br><span class="line">Explanation:</span><br><span class="line">In the beginning, the distances of the monsters are [1,3,4]. You eliminate the first monster.</span><br><span class="line">After a minute, the distances of the monsters are [X,2,3]. You eliminate the second monster.</span><br><span class="line">After a minute, the distances of the monsters are [X,X,2]. You eliminate the thrid monster.</span><br><span class="line">All 3 monsters can be eliminated.</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: dist = [1,1,2,3], speed = [1,1,1,1]</span><br><span class="line">Output: 1</span><br><span class="line">Explanation:</span><br><span class="line">In the beginning, the distances of the monsters are [1,1,2,3]. You eliminate the first monster.</span><br><span class="line">After a minute, the distances of the monsters are [X,0,1,2], so you lose.</span><br><span class="line">You can only eliminate 1 monster.</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 3:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: dist = [3,2,4], speed = [5,3,2]</span><br><span class="line">Output: 1</span><br><span class="line">Explanation:</span><br><span class="line">In the beginning, the distances of the monsters are [3,2,4]. You eliminate the first monster.</span><br><span class="line">After a minute, the distances of the monsters are [X,0,2], so you lose.</span><br><span class="line">You can only eliminate 1 monster. </span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>n == dist.length == speed.length</code></li>
+<li><code>1 &lt;= n &lt;= 105</code></li>
+<li><code>1 &lt;= dist[i], speed[i] &lt;= 105</code></li>
+</ul>
+<h2 id="Resolution"><a href="#Resolution" class="headerlink" title="Resolution"></a>Resolution</h2><p>greedy algorithm</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;sort&quot;</span></span><br><span class="line"><span class="comment">// leetcode submit region begin(Prohibit modification and deletion)</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">eliminateMaximum</span><span class="params">(dist []<span class="type">int</span>, speed []<span class="type">int</span>)</span></span> <span class="type">int</span> &#123;</span><br><span class="line">	n:=<span class="built_in">len</span>(dist)</span><br><span class="line">	comeTime := <span class="built_in">make</span>([]<span class="type">int</span>, n)</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; n; i++ &#123;</span><br><span class="line">		<span class="keyword">if</span> dist[i]%speed[i]==<span class="number">0</span>&#123;</span><br><span class="line">			comeTime[i]=dist[i]/speed[i]</span><br><span class="line">		&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">			comeTime[i]=dist[i]/speed[i]+<span class="number">1</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	sort.Ints(comeTime)</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; n; i++ &#123;</span><br><span class="line">		<span class="keyword">if</span> comeTime[i]&gt;=i+<span class="number">1</span>&#123;</span><br><span class="line">			<span class="keyword">continue</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> i</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> n</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//leetcode submit region end(Prohibit modification and deletion)</span></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>algorithm</category>
+      </categories>
+      <tags>
+        <tag>Greedy</tag>
       </tags>
   </entry>
   <entry>
@@ -2484,139 +2639,31 @@
       </tags>
   </entry>
   <entry>
-    <title>9.2leetcode2511</title>
-    <url>/2023/09/02/leetcode9-2/</url>
-    <content><![CDATA[<p>You are given a <strong>0-indexed</strong> integer array <code>forts</code> of length <code>n</code> representing the positions of several forts. <code>forts[i]</code> can be <code>-1</code>, <code>0</code>, or <code>1</code> where:</p>
-<ul>
-<li><code>-1</code> represents there is <strong>no fort</strong> at the <code>ith</code> position.</li>
-<li><code>0</code> indicates there is an <strong>enemy</strong> fort at the <code>ith</code> position.</li>
-<li><code>1</code> indicates the fort at the <code>ith</code> the position is under your command.</li>
-</ul>
-<p>Now you have decided to move your army from one of your forts at position <code>i</code> to an empty position <code>j</code> such that:</p>
-<ul>
-<li><code>0 &lt;= i, j &lt;= n - 1</code></li>
-<li>The army travels over enemy forts <strong>only</strong>. Formally, for all <code>k</code> where <code>min(i,j) &lt; k &lt; max(i,j)</code>, <code>forts[k] == 0.</code></li>
-</ul>
-<p>While moving the army, all the enemy forts that come in the way are <strong>captured</strong>.</p>
-<p>Return <em>the <strong>maximum</strong> number of enemy forts that can be captured</em>. In case it is <strong>impossible</strong> to move your army, or you do not have any fort under your command, return <code>0</code><em>.</em></p>
+    <title>leetcode9-5</title>
+    <url>/2023/09/05/leetcode9-5/</url>
+    <content><![CDATA[<h1 id="2605-Form-Smallest-Number-From-Two-Digit-Arrays"><a href="#2605-Form-Smallest-Number-From-Two-Digit-Arrays" class="headerlink" title="2605. Form Smallest Number From Two Digit Arrays"></a><a href="https://leetcode.cn/problems/form-smallest-number-from-two-digit-arrays/">2605. Form Smallest Number From Two Digit Arrays</a></h1><p>Given two arrays of <strong>unique</strong> digits <code>nums1</code> and <code>nums2</code>, return <em>the <strong>smallest</strong> number that contains <strong>at least</strong> one digit from each array</em>.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: nums1 = [4,1,3], nums2 = [5,7]</span><br><span class="line">Output: 15</span><br><span class="line">Explanation: The number 15 contains the digit 1 from nums1 and the digit 5 from nums2. It can be proven that 15 is the smallest number we can have.</span><br></pre></td></tr></table></figure>
+
 <span id="more"></span>
 
-<p><strong>Example 1:</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: forts = [1,0,0,-1,0,0,0,0,1]</span><br><span class="line">Output: 4</span><br><span class="line">Explanation:</span><br><span class="line">- Moving the army from position 0 to position 3 captures 2 enemy forts, at 1 and 2.</span><br><span class="line">- Moving the army from position 8 to position 3 captures 4 enemy forts.</span><br><span class="line">Since 4 is the maximum number of enemy forts that can be captured, we return 4.</span><br></pre></td></tr></table></figure>
-
 <p><strong>Example 2:</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: forts = [0,0,1,-1]</span><br><span class="line">Output: 0</span><br><span class="line">Explanation: Since no enemy fort can be captured, 0 is returned.</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<p>给你一个长度为 <code>n</code> ，下标从 <strong>0</strong> 开始的整数数组 <code>forts</code> ，表示一些城堡。<code>forts[i]</code> 可以是 <code>-1</code> ，<code>0</code> 或者 <code>1</code> ，其中：</p>
-<ul>
-<li><code>-1</code> 表示第 <code>i</code> 个位置 <strong>没有</strong> 城堡。</li>
-<li><code>0</code> 表示第 <code>i</code> 个位置有一个 <strong>敌人</strong> 的城堡。</li>
-<li><code>1</code> 表示第 <code>i</code> 个位置有一个你控制的城堡。</li>
-</ul>
-<p>现在，你需要决定，将你的军队从某个你控制的城堡位置 <code>i</code> 移动到一个空的位置 <code>j</code> ，满足：</p>
-<ul>
-<li><code>0 &lt;= i, j &lt;= n - 1</code></li>
-<li>军队经过的位置 <strong>只有</strong> 敌人的城堡。正式的，对于所有 <code>min(i,j) &lt; k &lt; max(i,j)</code> 的 <code>k</code> ，都满足 <code>forts[k] == 0</code> 。</li>
-</ul>
-<p>当军队移动时，所有途中经过的敌人城堡都会被 <strong>摧毁</strong> 。</p>
-<p><strong>Resolution</strong></p>
-<p>计算-1和1之间全是0情况下最大的0的数量</p>
-<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;math&quot;</span></span><br><span class="line"><span class="comment">// 2511  2023-09-02 00:02:31</span></span><br><span class="line"><span class="comment">// leetcode submit region begin(Prohibit modification and deletion)</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">captureForts</span><span class="params">(forts []<span class="type">int</span>)</span></span> <span class="type">int</span> &#123;</span><br><span class="line">	pre := math.MinInt <span class="comment">//pre non-0 element</span></span><br><span class="line">	ret := <span class="number">0</span></span><br><span class="line">	<span class="keyword">for</span> idx, val := <span class="keyword">range</span> forts &#123;</span><br><span class="line">		<span class="keyword">if</span> val != <span class="number">0</span> &#123;</span><br><span class="line">			<span class="comment">//The subscript of the current non-0 element is idx, </span></span><br><span class="line">			<span class="comment">//and the subscript of the previous non-0 element is pre</span></span><br><span class="line">			<span class="comment">//forts[i] != forts[pre] means one is -1 and another is 1</span></span><br><span class="line">			<span class="keyword">if</span> pre &gt;= <span class="number">0</span> &amp;&amp; forts[idx] != forts[pre] &#123;</span><br><span class="line">				ret = max(ret, idx-pre<span class="number">-1</span>)</span><br><span class="line">			&#125;</span><br><span class="line">			pre = idx</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ret</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">max</span><span class="params">(a, b <span class="type">int</span>)</span></span> <span class="type">int</span> &#123;<span class="keyword">if</span> b &gt; a &#123;<span class="keyword">return</span> b&#125;;<span class="keyword">return</span> a&#125;</span><br><span class="line"><span class="comment">//leetcode submit region end(Prohibit modification and deletion)</span></span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>algorithm</category>
-      </categories>
-      <tags>
-        <tag>Traverse</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>9.1leetcode2240</title>
-    <url>/2023/09/01/leetcode9-1/</url>
-    <content><![CDATA[<p>You are given an integer <code>total</code> indicating the amount of money you have. You are also given two integers <code>cost1</code> and <code>cost2</code> indicating the price of a pen and pencil respectively. You can spend <strong>part or all</strong> of your money to buy multiple quantities (or none) of each kind of writing utensil.</p>
-<p>Return <em>the <strong>number of distinct ways</strong> you can buy some number of pens and pencils.</em></p>
-<span id="more"></span>
-
-<p><strong>Example 1:</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: total = 20, cost1 = 10, cost2 = 5</span><br><span class="line">Output: 9</span><br><span class="line">Explanation: The price of a pen is 10 and the price of a pencil is 5.</span><br><span class="line">- If you buy 0 pens, you can buy 0, 1, 2, 3, or 4 pencils.</span><br><span class="line">- If you buy 1 pen, you can buy 0, 1, or 2 pencils.</span><br><span class="line">- If you buy 2 pens, you cannot buy any pencils.</span><br><span class="line">The total number of ways to buy pens and pencils is 5 + 3 + 1 = 9.</span><br></pre></td></tr></table></figure>
-
-<p><strong>Example 2:</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: total = 5, cost1 = 10, cost2 = 10</span><br><span class="line">Output: 1</span><br><span class="line">Explanation: The price of both pens and pencils are 10, which cost more than total, so you cannot buy any writing utensils. Therefore, there is only 1 way: buy 0 pens and 0 pencils.</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: nums1 = [3,5,2,6], nums2 = [3,1,7]</span><br><span class="line">Output: 3</span><br><span class="line">Explanation: The number 3 contains the digit 3 which exists in both arrays.</span><br></pre></td></tr></table></figure>
 
 <p><strong>Constraints:</strong></p>
 <ul>
-<li><code>1 &lt;= total, cost1, cost2 &lt;= 106</code></li>
+<li><code>1 &lt;= nums1.length, nums2.length &lt;= 9</code></li>
+<li><code>1 &lt;= nums1[i], nums2[i] &lt;= 9</code></li>
+<li>All digits in each array are <strong>unique</strong>.</li>
 </ul>
-<p>一个整数 <code>total</code> ，表示你拥有的总钱数。同时给你两个整数 <code>cost1</code> 和 <code>cost2</code> ，分别表示一支钢笔和一支铅笔的价格。你可以花费你部分或者全部的钱，去买任意数目的两种笔。</p>
-<p>请你返回购买钢笔和铅笔的 <strong>不同方案数目</strong> 。</p>
-<p>Resolution</p>
-<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="comment">// 2240  2023-09-01 09:08:04</span></span><br><span class="line"><span class="comment">// leetcode submit region begin(Prohibit modification and deletion)</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">waysToBuyPensPencils</span><span class="params">(total <span class="type">int</span>, cost1 <span class="type">int</span>, cost2 <span class="type">int</span>)</span></span> <span class="type">int64</span> &#123;</span><br><span class="line">	ret, nums := <span class="number">0</span>, <span class="number">0</span></span><br><span class="line">	<span class="keyword">for</span> nums*cost1 &lt;= total &#123;</span><br><span class="line">		ret += (total - nums*cost1) / cost2+<span class="number">1</span></span><br><span class="line">		nums++</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="type">int64</span>(ret)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//leetcode submit region end(Prohibit modification and deletion)</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;sort&quot;</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">minNumber</span><span class="params">(nums1 []<span class="type">int</span>, nums2 []<span class="type">int</span>)</span></span> <span class="type">int</span> &#123;</span><br><span class="line">	<span class="keyword">var</span> same <span class="function"><span class="keyword">func</span><span class="params">()</span></span> <span class="type">int</span></span><br><span class="line">	same = <span class="function"><span class="keyword">func</span><span class="params">()</span></span> <span class="type">int</span> &#123;</span><br><span class="line">		ret := <span class="number">10</span></span><br><span class="line">		hash := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="type">int</span>]<span class="type">bool</span>)</span><br><span class="line">		<span class="keyword">for</span> _, v := <span class="keyword">range</span> nums1 &#123;</span><br><span class="line">			hash[v] = <span class="literal">true</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span> _, v := <span class="keyword">range</span> nums2 &#123;</span><br><span class="line">			<span class="keyword">if</span> _, ok := hash[v]; ok &#123;</span><br><span class="line">				ret = min(ret, v)</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> ret == <span class="number">10</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> ret</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> ret := same(); ret != <span class="number">-1</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> ret</span><br><span class="line">	&#125;</span><br><span class="line">	sort.Ints(nums1)</span><br><span class="line">	sort.Ints(nums2)</span><br><span class="line">	<span class="keyword">return</span> min(nums1[<span class="number">0</span>]*<span class="number">10</span>+nums2[<span class="number">0</span>], nums2[<span class="number">0</span>]*<span class="number">10</span>+nums1[<span class="number">0</span>])</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">min</span><span class="params">(a, b <span class="type">int</span>)</span></span> <span class="type">int</span> &#123;</span><br><span class="line">	<span class="keyword">if</span> a &lt; b &#123;</span><br><span class="line">		<span class="keyword">return</span> a</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> b</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 ]]></content>
       <categories>
         <category>algorithm</category>
       </categories>
       <tags>
-        <tag>Math</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>8.24leetcode1267</title>
-    <url>/2023/08/24/leetcode8-24/</url>
-    <content><![CDATA[<h1 id="1267-Count-Servers-that-Communicate"><a href="#1267-Count-Servers-that-Communicate" class="headerlink" title="1267.Count Servers that Communicate"></a>1267.Count Servers that Communicate</h1><p>You are given a map of a server center,<br> represented as a <code>m * n</code> integer matrix <code>grid</code>,<br>where 1 means that on that cell there is a server and 0 means that it is no server.<br>Two servers are said to communicate if they are on the same row or on the same column.</p>
-<p>Return the number of servers that communicate with any other server.</p>
-<p><img src="/./../pic/leetcode8-24/image-20230903003258130.png" alt="image-20230903003258130"></p>
-<span id="more"></span>
-
-<h2 id="Resolution"><a href="#Resolution" class="headerlink" title="Resolution"></a>Resolution</h2><figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="comment">// 1267</span></span><br><span class="line"><span class="comment">// leetcode submit region begin(Prohibit modification and deletion)</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">countServers</span><span class="params">(grid [][]<span class="type">int</span>)</span></span> <span class="type">int</span> &#123;</span><br><span class="line">	ret := <span class="number">0</span></span><br><span class="line">	rowLen, colLen := <span class="built_in">len</span>(grid), <span class="built_in">len</span>(grid[<span class="number">0</span>])</span><br><span class="line">	row, col := <span class="built_in">make</span>([]<span class="type">int</span>, rowLen), <span class="built_in">make</span>([]<span class="type">int</span>, colLen)</span><br><span class="line">	<span class="comment">//Count the number of servers per row and column</span></span><br><span class="line">	<span class="keyword">for</span> rowIdx := <span class="keyword">range</span> grid &#123;</span><br><span class="line">		<span class="keyword">for</span> colIdx, v := <span class="keyword">range</span> grid[rowIdx] &#123;</span><br><span class="line">			<span class="keyword">if</span> v == <span class="number">1</span> &#123;</span><br><span class="line">				row[rowIdx]++</span><br><span class="line">				col[colIdx]++</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="comment">// Traverse per row&amp;col,check servers&#x27; nums are whether nums&gt;1</span></span><br><span class="line">	<span class="keyword">for</span> rowIdx := <span class="keyword">range</span> grid &#123;</span><br><span class="line">		<span class="keyword">for</span> colIdx, v := <span class="keyword">range</span> grid[rowIdx] &#123;</span><br><span class="line">			<span class="keyword">if</span> v == <span class="number">1</span> &amp;&amp; (row[rowIdx] &gt; <span class="number">1</span> || col[colIdx] &gt; <span class="number">1</span>) &#123;</span><br><span class="line">				ret++</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ret</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//leetcode submit region end(Prohibit modification and deletion)</span></span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>algorithm</category>
-      </categories>
-      <tags>
-        <tag>Graph</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>9.3leetcode1921</title>
-    <url>/2023/09/03/leetcode9-3-1921/</url>
-    <content><![CDATA[<h1 id="LeetCode1921-Eliminate-Max-nums-of-Monsters"><a href="#LeetCode1921-Eliminate-Max-nums-of-Monsters" class="headerlink" title="LeetCode1921-Eliminate Max nums of Monsters"></a>LeetCode1921-Eliminate Max nums of Monsters</h1><p>You are playing a video game<br>where you are defending your city from a group of <code>n</code> monsters.<br> You are given a <strong>0-indexed</strong> integer array <code>dist</code> of size <code>n</code>,<br>where <code>dist[i]</code> is the <strong>initial distance</strong> in kilometers of the <code>ith</code> monster from the city.</p>
-<p>The monsters walk toward the city at a <strong>constant</strong> speed.<br>The speed of each monster is given to you in an integer array <code>speed</code> of size <code>n</code>,<br>where <code>speed[i]</code> is the speed of the <code>ith</code> monster in kilometers per minute.</p>
-<p>You have a weapon that, can kill a <strong>single</strong> monster.<br>However, the weapon takes <strong>one minute</strong> to charge.<br>The weapon is fully charged at the very start.</p>
-<p>You lose when any monster reaches your city.<br>If a monster reaches the city at the exact moment the weapon is fully charged,<br>it counts as a <strong>loss</strong>,<br>and the game ends before you can use your weapon.</p>
-<p>Return the <strong>maximum</strong> number of monsters<br>that you can kill before you lose,<br><em>or</em> <code>n</code> if you can kill all the monsters before they reach the city.</p>
-<span id="more"></span>
-
-<p><strong>Example 1:</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: dist = [1,3,4], speed = [1,1,1]</span><br><span class="line">Output: 3</span><br><span class="line">Explanation:</span><br><span class="line">In the beginning, the distances of the monsters are [1,3,4]. You eliminate the first monster.</span><br><span class="line">After a minute, the distances of the monsters are [X,2,3]. You eliminate the second monster.</span><br><span class="line">After a minute, the distances of the monsters are [X,X,2]. You eliminate the thrid monster.</span><br><span class="line">All 3 monsters can be eliminated.</span><br></pre></td></tr></table></figure>
-
-<p><strong>Example 2:</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: dist = [1,1,2,3], speed = [1,1,1,1]</span><br><span class="line">Output: 1</span><br><span class="line">Explanation:</span><br><span class="line">In the beginning, the distances of the monsters are [1,1,2,3]. You eliminate the first monster.</span><br><span class="line">After a minute, the distances of the monsters are [X,0,1,2], so you lose.</span><br><span class="line">You can only eliminate 1 monster.</span><br></pre></td></tr></table></figure>
-
-<p><strong>Example 3:</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Input: dist = [3,2,4], speed = [5,3,2]</span><br><span class="line">Output: 1</span><br><span class="line">Explanation:</span><br><span class="line">In the beginning, the distances of the monsters are [3,2,4]. You eliminate the first monster.</span><br><span class="line">After a minute, the distances of the monsters are [X,0,2], so you lose.</span><br><span class="line">You can only eliminate 1 monster. </span><br></pre></td></tr></table></figure>
-
-<p><strong>Constraints:</strong></p>
-<ul>
-<li><code>n == dist.length == speed.length</code></li>
-<li><code>1 &lt;= n &lt;= 105</code></li>
-<li><code>1 &lt;= dist[i], speed[i] &lt;= 105</code></li>
-</ul>
-<h2 id="Resolution"><a href="#Resolution" class="headerlink" title="Resolution"></a>Resolution</h2><p>greedy algorithm</p>
-<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;sort&quot;</span></span><br><span class="line"><span class="comment">// leetcode submit region begin(Prohibit modification and deletion)</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">eliminateMaximum</span><span class="params">(dist []<span class="type">int</span>, speed []<span class="type">int</span>)</span></span> <span class="type">int</span> &#123;</span><br><span class="line">	n:=<span class="built_in">len</span>(dist)</span><br><span class="line">	comeTime := <span class="built_in">make</span>([]<span class="type">int</span>, n)</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; n; i++ &#123;</span><br><span class="line">		<span class="keyword">if</span> dist[i]%speed[i]==<span class="number">0</span>&#123;</span><br><span class="line">			comeTime[i]=dist[i]/speed[i]</span><br><span class="line">		&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">			comeTime[i]=dist[i]/speed[i]+<span class="number">1</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	sort.Ints(comeTime)</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; n; i++ &#123;</span><br><span class="line">		<span class="keyword">if</span> comeTime[i]&gt;=i+<span class="number">1</span>&#123;</span><br><span class="line">			<span class="keyword">continue</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> i</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> n</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//leetcode submit region end(Prohibit modification and deletion)</span></span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>algorithm</category>
-      </categories>
-      <tags>
-        <tag>Greedy</tag>
+        <tag>Hash</tag>
       </tags>
   </entry>
 </search>
