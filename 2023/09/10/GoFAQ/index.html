@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Monaco:300,300italic,400,400italic,700,700italic|Monaco monaco:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"zyuu.top","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideDownIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="翻译部分官方FAQ不要通过共享内存进行通信。相反，通过通信来共享内存。 起源生产软件通常是用C++或Java编写的，GitHub不存在，大多数计算机还没有多处理器，除了Visual Studio和Eclipse之外，几乎没有IDE或其他高级工具可用，更不用说在Internet上免费了.多处理器正在变得普遍,大多数语言在高效和安全地编程方面几乎没有帮助 多核CPU的兴起认为，一种语言应该为某种并发或">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GoFAQ">
+<meta property="og:url" content="http://zyuu.top/2023/09/10/GoFAQ/index.html">
+<meta property="og:site_name" content="Accompany You Through World">
+<meta property="og:description" content="翻译部分官方FAQ不要通过共享内存进行通信。相反，通过通信来共享内存。 起源生产软件通常是用C++或Java编写的，GitHub不存在，大多数计算机还没有多处理器，除了Visual Studio和Eclipse之外，几乎没有IDE或其他高级工具可用，更不用说在Internet上免费了.多处理器正在变得普遍,大多数语言在高效和安全地编程方面几乎没有帮助 多核CPU的兴起认为，一种语言应该为某种并发或">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-09-10T13:49:30.000Z">
+<meta property="article:modified_time" content="2023-09-10T13:51:21.520Z">
+<meta property="article:author" content="zyuu">
+<meta property="article:tag" content="Golang">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://zyuu.top/2023/09/10/GoFAQ/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>GoFAQ | Accompany You Through World</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Accompany You Through World</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://zyuu.top/2023/09/10/GoFAQ/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="zyuu">
+      <meta itemprop="description" content="迷惘的灵魂啊 安静的运转吧">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Accompany You Through World">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          GoFAQ
+        </h1>
+
+        <div class="post-meta">
+
+	    
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2023-09-10 21:49:30 / Modified: 21:51:21" itemprop="dateCreated datePublished" datetime="2023-09-10T21:49:30+08:00">2023-09-10</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Golang/" itemprop="url" rel="index"><span itemprop="name">Golang</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="翻译部分官方FAQ"><a href="#翻译部分官方FAQ" class="headerlink" title="翻译部分官方FAQ"></a><a target="_blank" rel="noopener" href="https://go.dev/doc/faq#Origins">翻译部分官方FAQ</a></h1><p><strong>不要通过共享内存进行通信。相反，通过通信来共享内存。</strong></p>
+<h2 id="起源"><a href="#起源" class="headerlink" title="起源"></a>起源</h2><p>生产软件通常是用C++或Java编写的，GitHub不存在，大多数计算机还没有多处理器，除了Visual Studio和Eclipse之外，几乎没有IDE或其他高级工具可用，更不用说在Internet上免费了.<br>多处理器正在变得普遍,大多数语言在高效和安全地编程方面几乎没有帮助</p>
+<p>多核CPU的兴起认为，一种语言应该为某种并发或并行性提供一流的支持。为了使资源管理在大型并发程序中易于处理，需要垃圾回收或至少某种安全的自动内存管理。</p>
+<span id="more"></span>
+
+<p>吉祥物和标志由Renée French设计</p>
+<p>这种语言被称为Go。<br>“golang”绰号的出现是因为该网站最初是 golang.org的.无论如何，该语言的名称只是普通的Go。</p>
+<p>Go 通过尝试将解释型动态类型语言的编程便利性与静态类型编译语言的效率和安全性相结合来解决这些问题。它还旨在实现现代化，支持网络和多核计算。最后，使用 Go 的目的是：在一台计算机上构建一个大型可执行文件最多需要几秒钟。<br>为了实现这些目标，需要解决许多语言问题：<strong>富有表现力但轻量级的类型系统;并发和垃圾回收;刚性依赖规范;</strong></p>
+<p>Go 主要属于 C 系列（基本语法），来自 Pascal&#x2F;Modula&#x2F;Oberon 家族（声明、包）的重要输入，以及受 Tony Hoare CSP 启发的语言的一些想法，如 Newsqueak 和 Limbo（并发）。但是，它是一种全面的新语言。在各个方面，语言都是通过思考程序员做什么以及如何使编程（至少我们所做的那种编程）更有效，这意味着更多的乐趣来设计的。</p>
+<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><h3 id="Go-程序是否与-C-C-程序链接？"><a href="#Go-程序是否与-C-C-程序链接？" class="headerlink" title="Go 程序是否与 C&#x2F;C++ 程序链接？"></a>Go 程序是否与 C&#x2F;C++ 程序链接？</h3><p>在同一地址空间中一起使用C和Go，但这不是天生的，可能需要特殊的接口软件。<br>此外，将 C 与 Go 代码链接会放弃 Go 提供的内存安全和堆栈管理属性。有时使用 C 库来解决问题是绝对必要的，但这样做总是会带来纯 Go 代码不存在的风险元素，因此请小心这样做。<br>如果你确实需要将 C 与 Go 一起使用，如何继续取决于 Go 编译器的实现。Go 团队支持三种 Go 编译器实现。<br>这些是 <code>gc</code> 默认编译器，它使用GCC后端，以及一个不太成熟的 <code>gollvm</code> 编译器， <code>gccgo</code> 它使用LLVM基础设施。<br><code>Gc</code> 使用与 C 不同的调用约定和链接器，因此不能直接从 C 程序调用，反之亦然。该程序 <code>cgo</code> 提供了“外部函数接口”的机制，以允许从 Go 代码安全调用 C 库。SWIG 将此功能扩展到C++库。</p>
+<h2 id="设计"><a href="#设计" class="headerlink" title="设计"></a>设计</h2><h3 id="Go有runtime吗"><a href="#Go有runtime吗" class="headerlink" title="Go有runtime吗"></a>Go有runtime吗</h3><p>Go 确实有一个广泛的库，称为运行时，它是每个 Go 程序的一部分。运行时库实现了垃圾回收、并发、堆栈管理和 Go 语言的其他关键功能。虽然它更核心于语言，但 Go 的运行时类似于 <code>libc</code> C 库。</p>
+<p>Go 的运行时不包括虚拟机，例如 Java 运行时提供的虚拟机。<br>Go 程序被提前编译为本机机器代码。因此，尽管该术语通常用于描述程序运行的虚拟环境，但在 Go 中，“运行时”一词只是提供关键语言服务的库的名称。</p>
+<h3 id="Unicode-标识符"><a href="#Unicode-标识符" class="headerlink" title="Unicode 标识符"></a>Unicode 标识符</h3><p>在设计 Go 时，确保它不会过于以 ASCII 为中心，这意味着将标识符的空间从 7 位 ASCII 的范围扩展出来。<br>Go 的规则（标识符字符必须是 Unicode 定义的字母或数字）易于理解和实现，但有限制。例如，设计排除了组合字符，这排除了某些语言，例如梵文。<br>这条规则还有一个不幸的后果。由于导出的标识符必须以大写字母开头，因此根据定义，从某些语言中的字符创建的标识符不能导出。目前唯一的解决方案是使用类似 <code>X日本語</code> 的东西</p>
+<h3 id="为什么-Go-没有exceptions"><a href="#为什么-Go-没有exceptions" class="headerlink" title="为什么 Go 没有exceptions"></a>为什么 Go 没有exceptions</h3><p>将异常耦合到控制结构（如 <code>try-catch-finally</code> 惯用语中）会导致复杂的代码。<br>它还倾向于鼓励程序员将太多的普通错误（例如无法打开文件）标记为异常。<br>Go采取了不同的方法。对于普通错误处理，Go 的多值返回可以轻松报告错误，而无需重载返回值。<br>规范的错误类型，加上 Go 的其他特性，使错误处理变得愉快，但与其他语言完全不同。<br>Go 还具有几个内置函数，可以从真正的异常条件下发出信号和恢复。恢复机制仅作为函数状态的一部分执行，该状态在出错后被拆除，这足以处理灾难，但不需要额外的控制结构，如果使用得当，可以产生干净的错误处理代码。</p>
+<h3 id="为什么要在-CSP-的理念上构建并发性"><a href="#为什么要在-CSP-的理念上构建并发性" class="headerlink" title="为什么要在 CSP 的理念上构建并发性"></a>为什么要在 CSP 的理念上构建并发性</h3><p>并发和多线程编程已经形成了困难的声誉。这部分是由于复杂的设计，如pthreads，部分是由于过分强调低级细节，如互斥体、条件变量和内存障碍。更高级别的接口使代码更简单，即使背后仍然存在互斥体等。<br>为并发提供高级语言支持的最成功的模型之一来自Hoare的通信顺序过程（CSP）。<br>Occam和Erlang是源于CSP的两种众所周知的语言。Go 的并发原语源自家谱的不同部分，其主要贡献是通道作为第一类对象的强大概念。使用几种早期语言的经验表明，CSP 模型非常适合过程语言框架。</p>
+<h3 id="为什么是-goroutines-而不是线程？"><a href="#为什么是-goroutines-而不是线程？" class="headerlink" title="为什么是 goroutines 而不是线程？"></a>为什么是 goroutines 而不是线程？</h3><p>Goroutines 是使并发易于使用的一部分，是将独立执行的函数（协程）多路复用到一组线程上。当协程阻塞（例如通过调用阻塞系统调用）时，运行时会自动将同一操作系统线程上的其他协程移动到不同的可运行线程，以便它们不会被阻塞。程序员看不到这些，这就是重点。结果，我们称之为goroutines，可能非常便宜：除了堆栈的内存（只有几千字节）之外，它们几乎没有开销。</p>
+<p>为了使堆栈变小，Go 的运行时使用可调整大小的有界堆栈。一个新铸造的goroutine被赋予几千字节，这几乎总是足够的。如果不是，运行时会自动增加（和缩小）用于存储堆栈的内存，从而允许许多 goroutines 存在于适量的内存中。CPU 开销平均每个函数调用大约三个便宜的指令。在同一地址空间中创建数十万个 goroutines 是切实可行的。如果 goroutines 只是线程，系统资源将以更少的数量耗尽。</p>
+<h2 id="Type"><a href="#Type" class="headerlink" title="Type"></a>Type</h2><h3 id="Go-是面向对象的语言吗"><a href="#Go-是面向对象的语言吗" class="headerlink" title="Go 是面向对象的语言吗"></a>Go 是面向对象的语言吗</h3><p>是又不是。尽管 Go 具有类型和方法，并允许面向对象的编程风格，但没有类型层次结构。<br>Go 中的“接口”概念提供了一种不同的方法，我们认为这种方法易于使用，并且在某些方面更通用。<br>还有一些方法可以在其他类型中嵌入类型，以提供与子类类似但不完全相同的东西。<br>此外，Go 中的方法比 C++ 或 Java 中的方法更通用：它们可以为任何类型的数据定义，甚至是内置类型，例如普通的“未装箱”整数。它们不限于结构（类）。</p>
+<h3 id="为什么没有类型继承"><a href="#为什么没有类型继承" class="headerlink" title="为什么没有类型继承"></a>为什么没有类型继承</h3><p>面向对象编程，至少在最知名的语言中，涉及太多关于类型之间关系的讨论，这些关系通常可以自动派生。Go采取了不同的方法。</p>
+<p>在 Go 中，类型自动满足指定其方法子集的任何接口，而不是要求程序员提前声明两个类型是相关的。除了减少簿记之外，这种方法还具有真正的优势。类型可以同时满足多个接口，而没有传统多重继承的复杂性。接口可以非常轻量级 - 具有一个甚至零个方法的接口可以表达一个有用的概念。如果出现新想法或进行测试，可以在事后添加接口，而无需注释原始类型。由于类型和接口之间没有显式关系，因此没有要管理或讨论的类型层次结构。</p>
+<p>可以使用这些想法来构造类似于类型安全的Unix管道的东西。例如，了解如何 <code>fmt.Fprintf</code> 启用格式化打印到任何输出（而不仅仅是文件），或者包如何 <code>bufio</code> 与文件 I&#x2F;O 完全分离，或者 <code>image</code> 包如何生成压缩的图像文件。所有这些想法都源于表示单个方法（ <code>io.Writer</code> ）的单个接口（ <code>Write</code> ）。而这只是皮毛。Go 的接口对程序的结构有着深远的影响。</p>
+<h3 id="为什么我的零错误值不等于零？"><a href="#为什么我的零错误值不等于零？" class="headerlink" title="为什么我的零错误值不等于零？"></a>为什么我的零错误值不等于零？</h3><p>接口被实现为两个元素，一个类型和 <code>T</code> 一个值 <code>V</code> 。<br><code>V</code> 是一个具体的值，例如 <code>int</code> 或 <code>struct</code> 指针，而不是接口本身，并且具有 类型 <code>T</code> 。<br>例如，如果我们将值 3 存储在接口中，则生成的接口 <code>int</code> 值示意性地具有 （ <code>T=int</code> ， <code>V=3</code> ）。<br>该值也称为接口的动态值，因为给定的接口变量在程序执行期间可能具有不同的值 <code>V</code>  （和相应的类型 <code>T</code> ）。</p>
+<p>仅当 和 都未设置时，接口值才为 <code>nil</code> （ <code>T=nil</code> ， <code>V</code> 未设置），特别是 <code>nil</code> 接口将始终保存类型 <code>nil</code> 。 <code>V</code> <code>T</code> 如果我们将类型的指针存储在接口值中，则内部类型将与 <code>nil</code> 指针的值 <code>*int</code> 无关：（ <code>T=*int</code> ， <code>V=nil</code> ）。 <code>*int</code> 因此 <code>nil</code> ，即使里面的指针值 <code>V</code> 是 <code>nil</code> 。</p>
+<h2 id="Value"><a href="#Value" class="headerlink" title="Value"></a>Value</h2><h3 id="为什么-Go-不提供隐式数字转换"><a href="#为什么-Go-不提供隐式数字转换" class="headerlink" title="为什么 Go 不提供隐式数字转换"></a>为什么 Go 不提供隐式数字转换</h3><p>在 C 中，在数值类型之间自动转换的便利性被它造成的混乱所抵消。<br>表达式何时无符号？价值有多大？它会溢出吗？结果是否可移植，独立于执行结果的计算机？它还使编译器复杂化;<br>“通常的算术转换”不容易实现，并且在架构之间不一致。出于可移植性的原因，我们决定以代码中的一些显式转换为代价，使事情变得清晰明了。<br>不过，Go 中常量的定义——没有符号和大小注释的任意精度值——大大改善了问题。</p>
+<h3 id="为什么地图不允许切片作为键？"><a href="#为什么地图不允许切片作为键？" class="headerlink" title="为什么地图不允许切片作为键？"></a>为什么地图不允许切片作为键？</h3><p>map查找需要一个相等运算符，切片不会实现该运算符。他们没有实现平等，因为平等在这些类型上没有很好的定义;<br>有多种注意事项，涉及浅比较与深比较、指针与值比较、如何处理递归类型等。<br>我们可能会重新审视这个问题——实现切片的相等性不会使任何现有程序无效——但是如果没有明确了解切片相等应该意味着什么，现在把它排除在外就更简单了。</p>
+<h3 id="为什么map、slice和chan是引用，而数组是值"><a href="#为什么map、slice和chan是引用，而数组是值" class="headerlink" title="为什么map、slice和chan是引用，而数组是值"></a>为什么map、slice和chan是引用，而数组是值</h3><p>map和chan在语法上是指针，不可能声明或使用非指针实例。<br>此外，我们还在为数组应该如何工作而苦苦挣扎。最终，我们决定指针和值的严格分离使语言更难使用。<br>更改这些类型以充当对关联的共享数据结构的引用解决了这些问题。<br>这种变化给语言增加了一些令人遗憾的复杂性，但对可用性产生了很大的影响：Go 在引入时成为一种更高效、更舒适的语言。</p>
+<h3 id="为什么-Go-没有-运算符？"><a href="#为什么-Go-没有-运算符？" class="headerlink" title="为什么 Go 没有 ?: 运算符？"></a>为什么 Go 没有 <code>?:</code> 运算符？</h3><p>Go 中没有三元测试操作,该语言的设计者已经看到该操作过于频繁地用于创建难以理解的复杂表达式。 <code>if-else</code> 形式虽然更长，但无疑更清晰。一种语言只需要一个条件控制流构造。</p>
+<h3 id="为什么是-和-语句而不是表达式？为什么是后缀，而不是前缀？"><a href="#为什么是-和-语句而不是表达式？为什么是后缀，而不是前缀？" class="headerlink" title="为什么是 ++ 和 -- 语句而不是表达式？为什么是后缀，而不是前缀？"></a>为什么是 <code>++</code> 和 <code>--</code> 语句而不是表达式？为什么是后缀，而不是前缀？</h3><p>如果没有指针算法，前缀和后缀增量运算符的便利值会下降。通过将它们从表达式层次结构中完全删除，表达式语法得到了简化，并且围绕和（考虑 <code>f(i++)</code> 和 <code>p[i] = q[++i]</code> <code>--</code> ）的 <code>++</code> 计算顺序的混乱问题也消除了。简化是重要的。至于后缀与前缀，两者都可以正常工作，但后缀版本更传统;对前缀的坚持源于STL，STL是一种语言库，具有讽刺意味的是，其名称包含后缀增量。</p>
+<h2 id="指针和分配"><a href="#指针和分配" class="headerlink" title="指针和分配"></a>指针和分配</h2><h3 id="函数参数何时按值传递"><a href="#函数参数何时按值传递" class="headerlink" title="函数参数何时按值传递"></a>函数参数何时按值传递</h3><p>Go 中的所有内容都是按值传递的。也就是说，函数总是获取要传递的事物的副本，就好像有一个赋值语句将值分配给参数一样。例如，将值传递给函数会创建 <code>int</code> 的副本，传递指针 <code>int</code> 值会创建指针的副本，但不会创建指针指向的数据。<br>map和slice的行为类似于指针：它们是包含指向基础map或切片数据的指针的描述符。复制map或剖切片值不会复制其指向的数据。复制接口值会复制存储在接口值中的事物。如果接口值包含结构，则复制接口值会复制结构。如果接口值包含指针，则复制接口值会复制指针，但同样不会复制指针指向的数据。</p>
+<h3 id="new和make有什么区别"><a href="#new和make有什么区别" class="headerlink" title="new和make有什么区别"></a>new和make有什么区别</h3><p><code>new</code> 分配内存，同时 <code>make</code> 初始化切片、映射和通道类型。</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>zyuu
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="http://zyuu.top/2023/09/10/GoFAQ/" title="GoFAQ">http://zyuu.top/2023/09/10/GoFAQ/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Golang/" rel="tag"># Golang</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/09/09/LC9-9/" rel="prev" title="LC9.9">
+      <i class="fa fa-chevron-left"></i> LC9.9
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BF%BB%E8%AF%91%E9%83%A8%E5%88%86%E5%AE%98%E6%96%B9FAQ"><span class="nav-number">1.</span> <span class="nav-text">翻译部分官方FAQ</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B5%B7%E6%BA%90"><span class="nav-number">1.1.</span> <span class="nav-text">起源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">用法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Go-%E7%A8%8B%E5%BA%8F%E6%98%AF%E5%90%A6%E4%B8%8E-C-C-%E7%A8%8B%E5%BA%8F%E9%93%BE%E6%8E%A5%EF%BC%9F"><span class="nav-number">1.2.1.</span> <span class="nav-text">Go 程序是否与 C&#x2F;C++ 程序链接？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E8%AE%A1"><span class="nav-number">1.3.</span> <span class="nav-text">设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Go%E6%9C%89runtime%E5%90%97"><span class="nav-number">1.3.1.</span> <span class="nav-text">Go有runtime吗</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Unicode-%E6%A0%87%E8%AF%86%E7%AC%A6"><span class="nav-number">1.3.2.</span> <span class="nav-text">Unicode 标识符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88-Go-%E6%B2%A1%E6%9C%89exceptions"><span class="nav-number">1.3.3.</span> <span class="nav-text">为什么 Go 没有exceptions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%9C%A8-CSP-%E7%9A%84%E7%90%86%E5%BF%B5%E4%B8%8A%E6%9E%84%E5%BB%BA%E5%B9%B6%E5%8F%91%E6%80%A7"><span class="nav-number">1.3.4.</span> <span class="nav-text">为什么要在 CSP 的理念上构建并发性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF-goroutines-%E8%80%8C%E4%B8%8D%E6%98%AF%E7%BA%BF%E7%A8%8B%EF%BC%9F"><span class="nav-number">1.3.5.</span> <span class="nav-text">为什么是 goroutines 而不是线程？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Type"><span class="nav-number">1.4.</span> <span class="nav-text">Type</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Go-%E6%98%AF%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E8%AF%AD%E8%A8%80%E5%90%97"><span class="nav-number">1.4.1.</span> <span class="nav-text">Go 是面向对象的语言吗</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%B2%A1%E6%9C%89%E7%B1%BB%E5%9E%8B%E7%BB%A7%E6%89%BF"><span class="nav-number">1.4.2.</span> <span class="nav-text">为什么没有类型继承</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E7%9A%84%E9%9B%B6%E9%94%99%E8%AF%AF%E5%80%BC%E4%B8%8D%E7%AD%89%E4%BA%8E%E9%9B%B6%EF%BC%9F"><span class="nav-number">1.4.3.</span> <span class="nav-text">为什么我的零错误值不等于零？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Value"><span class="nav-number">1.5.</span> <span class="nav-text">Value</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88-Go-%E4%B8%8D%E6%8F%90%E4%BE%9B%E9%9A%90%E5%BC%8F%E6%95%B0%E5%AD%97%E8%BD%AC%E6%8D%A2"><span class="nav-number">1.5.1.</span> <span class="nav-text">为什么 Go 不提供隐式数字转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E5%9C%B0%E5%9B%BE%E4%B8%8D%E5%85%81%E8%AE%B8%E5%88%87%E7%89%87%E4%BD%9C%E4%B8%BA%E9%94%AE%EF%BC%9F"><span class="nav-number">1.5.2.</span> <span class="nav-text">为什么地图不允许切片作为键？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88map%E3%80%81slice%E5%92%8Cchan%E6%98%AF%E5%BC%95%E7%94%A8%EF%BC%8C%E8%80%8C%E6%95%B0%E7%BB%84%E6%98%AF%E5%80%BC"><span class="nav-number">1.5.3.</span> <span class="nav-text">为什么map、slice和chan是引用，而数组是值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88-Go-%E6%B2%A1%E6%9C%89-%E8%BF%90%E7%AE%97%E7%AC%A6%EF%BC%9F"><span class="nav-number">1.5.4.</span> <span class="nav-text">为什么 Go 没有 ?: 运算符？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF-%E5%92%8C-%E8%AF%AD%E5%8F%A5%E8%80%8C%E4%B8%8D%E6%98%AF%E8%A1%A8%E8%BE%BE%E5%BC%8F%EF%BC%9F%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF%E5%90%8E%E7%BC%80%EF%BC%8C%E8%80%8C%E4%B8%8D%E6%98%AF%E5%89%8D%E7%BC%80%EF%BC%9F"><span class="nav-number">1.5.5.</span> <span class="nav-text">为什么是 ++ 和 -- 语句而不是表达式？为什么是后缀，而不是前缀？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8C%87%E9%92%88%E5%92%8C%E5%88%86%E9%85%8D"><span class="nav-number">1.6.</span> <span class="nav-text">指针和分配</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0%E4%BD%95%E6%97%B6%E6%8C%89%E5%80%BC%E4%BC%A0%E9%80%92"><span class="nav-number">1.6.1.</span> <span class="nav-text">函数参数何时按值传递</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#new%E5%92%8Cmake%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB"><span class="nav-number">1.6.2.</span> <span class="nav-text">new和make有什么区别</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="zyuu"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">zyuu</p>
+  <div class="site-description" itemprop="description">迷惘的灵魂啊 安静的运转吧</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">41</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Huazyuu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Huazyuu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zyuuforyu@gmail.com" title="E-Mail → mailto:zyuuforyu@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zyuu</span>
+</div>
+
+<!--
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+-->
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共41.6k字</span>
+</div>
+
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
