@@ -190,6 +190,166 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://zyuu.top/2023/09/10/GoFAQ/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="zyuu">
+      <meta itemprop="description" content="迷惘的灵魂啊 安静的运转吧">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Accompany You Through World">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/09/10/GoFAQ/" class="post-title-link" itemprop="url">GoFAQ</a>
+        </h2>
+
+        <div class="post-meta">
+
+	    
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2023-09-10 21:49:30 / Modified: 21:51:21" itemprop="dateCreated datePublished" datetime="2023-09-10T21:49:30+08:00">2023-09-10</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Golang/" itemprop="url" rel="index"><span itemprop="name">Golang</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="翻译部分官方FAQ"><a href="#翻译部分官方FAQ" class="headerlink" title="翻译部分官方FAQ"></a><a target="_blank" rel="noopener" href="https://go.dev/doc/faq#Origins">翻译部分官方FAQ</a></h1><p><strong>不要通过共享内存进行通信。相反，通过通信来共享内存。</strong></p>
+<h2 id="起源"><a href="#起源" class="headerlink" title="起源"></a>起源</h2><p>生产软件通常是用C++或Java编写的，GitHub不存在，大多数计算机还没有多处理器，除了Visual Studio和Eclipse之外，几乎没有IDE或其他高级工具可用，更不用说在Internet上免费了.<br>多处理器正在变得普遍,大多数语言在高效和安全地编程方面几乎没有帮助</p>
+<p>多核CPU的兴起认为，一种语言应该为某种并发或并行性提供一流的支持。为了使资源管理在大型并发程序中易于处理，需要垃圾回收或至少某种安全的自动内存管理。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/09/10/GoFAQ/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://zyuu.top/2023/09/09/LC9-9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="zyuu">
+      <meta itemprop="description" content="迷惘的灵魂啊 安静的运转吧">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Accompany You Through World">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/09/09/LC9-9/" class="post-title-link" itemprop="url">LC9.9</a>
+        </h2>
+
+        <div class="post-meta">
+
+	    
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2023-09-09 00:52:48 / Modified: 01:09:43" itemprop="dateCreated datePublished" datetime="2023-09-09T00:52:48+08:00">2023-09-09</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>There are a total of <code>numCourses</code> courses you have to take, labeled from <code>0</code> to <code>numCourses - 1</code>. You are given an array <code>prerequisites</code> where <code>prerequisites[i] = [ai, bi]</code> indicates that you <strong>must</strong> take course <code>bi</code> first if you want to take course <code>ai</code>.</p>
+<ul>
+<li>For example, the pair <code>[0, 1]</code>, indicates that to take course <code>0</code> you have to first take course <code>1</code>.</li>
+</ul>
+<p>Return <code>true</code> if you can finish all courses. Otherwise, return <code>false</code>.</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/09/09/LC9-9/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://zyuu.top/2023/09/07/lc9-7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -379,10 +539,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2023-09-06 15:28:15 / Modified: 16:23:50" itemprop="dateCreated datePublished" datetime="2023-09-06T15:28:15+08:00">2023-09-06</time>
+              <time title="Created: 2023-09-06 15:28:15" itemprop="dateCreated datePublished" datetime="2023-09-06T15:28:15+08:00">2023-09-06</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-09-18 19:25:50" itemprop="dateModified" datetime="2023-09-18T19:25:50+08:00">2023-09-18</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -404,17 +570,17 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Viper"><a href="#Viper" class="headerlink" title="Viper"></a>Viper</h1><p>管理配置文件</p>
+          <h1 id="Viper"><a href="#Viper" class="headerlink" title="Viper"></a>Viper</h1><p>operate config settings file</p>
 <p>Viper is a complete configuration solution for Go applications.<br>It is designed to work in applications and can handle all types of configuration requirements and formats.</p>
 <ul>
 <li>Set the default value</li>
 <li>Read configuration information from configuration files in<br><code>JSON</code> the format , <code>TOML</code> , <code>YAML</code> <code>HCL</code> <code>envfile</code> and <code>Java properties</code></li>
-<li>实时监控和重新读取配置文件（可选） Real-time monitoring and re-reading of configuration files (optional)</li>
+<li>Real-time monitoring and re-reading of configuration files (optional)</li>
 <li>Read from an environment path(ENV)</li>
-<li>从远程配置系统（etcd或Consul）读取并监控配置变化<br>Read and monitor configuration changes from the remote configuration system (etcd or Consul).</li>
-<li>从命令行参数读取配置 Read the configuration from the command-line arguments</li>
-<li>从buffer读取配置 Read the configuration from buffer</li>
-<li>显式配置值 Explicitly configure the value</li>
+<li>Read and monitor configuration changes from the remote configuration system (etcd or Consul).</li>
+<li>Read the configuration from the command-line arguments</li>
+<li>Read the configuration from buffer</li>
+<li>Explicitly configure the value</li>
 </ul>
           <!--noindex-->
             <div class="post-button">
@@ -841,159 +1007,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://zyuu.top/2023/09/04/Graph-LC684/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="zyuu">
-      <meta itemprop="description" content="迷惘的灵魂啊 安静的运转吧">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Accompany You Through World">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/09/04/Graph-LC684/" class="post-title-link" itemprop="url">Graph-LC684</a>
-        </h2>
-
-        <div class="post-meta">
-
-	    
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2023-09-04 18:14:11 / Modified: 18:31:15" itemprop="dateCreated datePublished" datetime="2023-09-04T18:14:11+08:00">2023-09-04</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Redundant-Connection"><a href="#Redundant-Connection" class="headerlink" title="Redundant Connection"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/redundant-connection/">Redundant Connection</a></h1><p>In this problem, a tree is an <strong>undirected graph</strong> that is connected and has no cycles.</p>
-<p>You are given a graph that started as a tree with <code>n</code> nodes labeled from <code>1</code> to <code>n</code>, with one additional edge added. The added edge has two <strong>different</strong> vertices chosen from <code>1</code> to <code>n</code>, and was not an edge that already existed. The graph is represented as an array <code>edges</code> of length <code>n</code> where <code>edges[i] = [ai, bi]</code> indicates that there is an edge between nodes <code>ai</code> and <code>bi</code> in the graph.</p>
-<p>Return <em>an edge that can be removed so that the resulting graph is a tree of</em> <code>n</code> <em>nodes</em>. If there are multiple answers, return the answer that occurs last in the input.</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/09/04/Graph-LC684/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://zyuu.top/2023/09/04/Graph-LC1971/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="zyuu">
-      <meta itemprop="description" content="迷惘的灵魂啊 安静的运转吧">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Accompany You Through World">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/09/04/Graph-LC1971/" class="post-title-link" itemprop="url">Graph-LC1971</a>
-        </h2>
-
-        <div class="post-meta">
-
-	    
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2023-09-04 17:13:55 / Modified: 18:13:29" itemprop="dateCreated datePublished" datetime="2023-09-04T17:13:55+08:00">2023-09-04</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="1971Find-if-Path-Exists-in-Graph"><a href="#1971Find-if-Path-Exists-in-Graph" class="headerlink" title="1971Find if Path Exists in Graph"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-if-path-exists-in-graph/">1971Find if Path Exists in Graph</a></h1><p>There is a <strong>bi-directional</strong>(双向图) graph with <code>n</code> vertices, where each vertex is labeled from <code>0</code> to <code>n - 1</code> (<strong>inclusive</strong>). The edges in the graph are represented as a 2D integer array <code>edges</code>, where each <code>edges[i] = [ui, vi]</code> denotes a bi-directional edge between vertex <code>ui</code> and vertex <code>vi</code>. Every vertex pair is connected by <strong>at most one</strong> edge, and no vertex has an edge to itself.</p>
-<p>You want to determine if there is a <strong>valid path</strong> that exists from vertex <code>source</code> to vertex <code>destination</code>.</p>
-<p>Given <code>edges</code> and the integers <code>n</code>, <code>source</code>, and <code>destination</code>, return <code>true</code> <em>if there is a <strong>valid path</strong> from</em> <code>source</code> <em>to</em> <code>destination</code><em>, or</em> <code>false</code> <em>otherwise</em><em>.</em></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/09/04/Graph-LC1971/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1061,20 +1078,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-count">51</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-count">22</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -1127,7 +1144,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共44.6k字</span>
+  <span class="post-count">博客全站共45.5k字</span>
 </div>
 
 
