@@ -20,24 +20,20 @@
     var CONFIG = {"hostname":"zyuu.top","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideDownIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="Redundant ConnectionIn this problem, a tree is an undirected graph that is connected and has no cycles. You are given a graph that started as a tree with n nodes labeled from 1 to n, with one addition">
+  <meta name="description" content="1993. 树上的操作123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081package main&#x2F;&#x2F; 1993  2023-09-23 09:5">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Graph-LC684">
-<meta property="og:url" content="http://zyuu.top/2023/09/04/Graph-LC684/index.html">
+<meta property="og:title" content="lc9-23">
+<meta property="og:url" content="http://zyuu.top/2023/09/23/lc9-23/index.html">
 <meta property="og:site_name" content="Accompany You Through World">
-<meta property="og:description" content="Redundant ConnectionIn this problem, a tree is an undirected graph that is connected and has no cycles. You are given a graph that started as a tree with n nodes labeled from 1 to n, with one addition">
+<meta property="og:description" content="1993. 树上的操作123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081package main&#x2F;&#x2F; 1993  2023-09-23 09:5">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://zyuu.top/pic/Graph-LC684/reduntant1-1-graph.jpg">
-<meta property="og:image" content="http://zyuu.top/pic/Graph-LC684/reduntant1-2-graph.jpg">
-<meta property="article:published_time" content="2023-09-04T10:14:11.000Z">
-<meta property="article:modified_time" content="2023-09-04T10:31:15.813Z">
+<meta property="article:published_time" content="2023-09-23T02:32:13.000Z">
+<meta property="article:modified_time" content="2023-09-23T02:33:09.843Z">
 <meta property="article:author" content="zyuu">
-<meta property="article:tag" content="DSU">
-<meta property="article:tag" content="Graph">
+<meta property="article:tag" content="Golang">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://zyuu.top/pic/Graph-LC684/reduntant1-1-graph.jpg">
 
-<link rel="canonical" href="http://zyuu.top/2023/09/04/Graph-LC684/">
+<link rel="canonical" href="http://zyuu.top/2023/09/23/lc9-23/">
 
 
 <script id="page-configurations">
@@ -50,7 +46,7 @@
   };
 </script>
 
-  <title>Graph-LC684 | Accompany You Through World</title>
+  <title>lc9-23 | Accompany You Through World</title>
   
 
 
@@ -198,7 +194,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://zyuu.top/2023/09/04/Graph-LC684/">
+    <link itemprop="mainEntityOfPage" href="http://zyuu.top/2023/09/23/lc9-23/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -211,7 +207,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Graph-LC684
+          lc9-23
         </h1>
 
         <div class="post-meta">
@@ -224,7 +220,16 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2023-09-04 18:14:11 / Modified: 18:31:15" itemprop="dateCreated datePublished" datetime="2023-09-04T18:14:11+08:00">2023-09-04</time>
+              <time title="Created: 2023-09-23 10:32:13 / Modified: 10:33:09" itemprop="dateCreated datePublished" datetime="2023-09-23T10:32:13+08:00">2023-09-23</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a>
+                </span>
             </span>
 
           
@@ -238,32 +243,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="Redundant-Connection"><a href="#Redundant-Connection" class="headerlink" title="Redundant Connection"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/redundant-connection/">Redundant Connection</a></h1><p>In this problem, a tree is an <strong>undirected graph</strong> that is connected and has no cycles.</p>
-<p>You are given a graph that started as a tree with <code>n</code> nodes labeled from <code>1</code> to <code>n</code>, with one additional edge added. The added edge has two <strong>different</strong> vertices chosen from <code>1</code> to <code>n</code>, and was not an edge that already existed. The graph is represented as an array <code>edges</code> of length <code>n</code> where <code>edges[i] = [ai, bi]</code> indicates that there is an edge between nodes <code>ai</code> and <code>bi</code> in the graph.</p>
-<p>Return <em>an edge that can be removed so that the resulting graph is a tree of</em> <code>n</code> <em>nodes</em>. If there are multiple answers, return the answer that occurs last in the input.</p>
-<span id="more"></span>
-
-
-
-<p><strong>Example 1:</strong></p>
-<p><img src="/./../pic/Graph-LC684/reduntant1-1-graph.jpg" alt="img"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: edges = [[1,2],[1,3],[2,3]]</span><br><span class="line">Output: [2,3]</span><br></pre></td></tr></table></figure>
-
-<p><strong>Example 2:</strong></p>
-<p><img src="/./../pic/Graph-LC684/reduntant1-2-graph.jpg" alt="img"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: edges = [[1,2],[2,3],[3,4],[1,4],[1,5]]</span><br><span class="line">Output: [1,4]</span><br></pre></td></tr></table></figure>
-
-<p><strong>Constraints:</strong></p>
-<ul>
-<li><code>n == edges.length</code></li>
-<li><code>3 &lt;= n &lt;= 1000</code></li>
-<li><code>edges[i].length == 2</code></li>
-<li><code>1 &lt;= ai &lt; bi &lt;= edges.length</code></li>
-<li><code>ai != bi</code></li>
-<li>There are no repeated edges.</li>
-<li>The given graph is connected.</li>
-</ul>
-<h2 id="Resolution"><a href="#Resolution" class="headerlink" title="Resolution"></a>Resolution</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">findRedundantConnection</span><span class="params">(edges [][]<span class="type">int</span>)</span></span> []<span class="type">int</span> &#123;</span><br><span class="line">	<span class="keyword">var</span> d DSU</span><br><span class="line">	d.Init(<span class="number">1005</span>)</span><br><span class="line">	<span class="keyword">for</span> _, edge := <span class="keyword">range</span> edges &#123;</span><br><span class="line">		<span class="keyword">if</span> d.IsSame(edge[<span class="number">0</span>], edge[<span class="number">1</span>]) &#123;</span><br><span class="line">			<span class="keyword">return</span> edge</span><br><span class="line">		&#125;</span><br><span class="line">		d.Union(edge[<span class="number">1</span>], edge[<span class="number">0</span>])</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> []<span class="type">int</span>&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> DSU <span class="keyword">struct</span> &#123;</span><br><span class="line">	Father []<span class="type">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(d *DSU)</span></span> Init(n <span class="type">int</span>) &#123;</span><br><span class="line">	d.Father = <span class="built_in">make</span>([]<span class="type">int</span>, n)</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; n; i++ &#123;</span><br><span class="line">		d.Father[i] = i</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(d *DSU)</span></span> Union(i, j <span class="type">int</span>) &#123;</span><br><span class="line">	iFather := d.Find(i)</span><br><span class="line">	jFather := d.Find(j)</span><br><span class="line">	<span class="keyword">if</span> iFather == jFather &#123;</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	d.Father[iFather] = jFather</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(d *DSU)</span></span> Find(i <span class="type">int</span>) <span class="type">int</span> &#123;</span><br><span class="line">	<span class="keyword">if</span> i == d.Father[i] &#123;</span><br><span class="line">		<span class="keyword">return</span> i</span><br><span class="line">	&#125;</span><br><span class="line">	d.Father[i] = d.Find(d.Father[i])</span><br><span class="line">	<span class="keyword">return</span> d.Father[i]</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(d *DSU)</span></span> IsSame(i, j <span class="type">int</span>) <span class="type">bool</span> &#123;</span><br><span class="line">	iFather := d.Find(i)</span><br><span class="line">	jFather := d.Find(j)</span><br><span class="line">	<span class="keyword">return</span> iFather == jFather</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h1 id="1993-树上的操作"><a href="#1993-树上的操作" class="headerlink" title="1993. 树上的操作"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/operations-on-tree/">1993. 树上的操作</a></h1><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="comment">// 1993  2023-09-23 09:50:46</span></span><br><span class="line"><span class="comment">// leetcode submit region begin(Prohibit modification and deletion)</span></span><br><span class="line"><span class="keyword">type</span> LockingTree <span class="keyword">struct</span> &#123;</span><br><span class="line">	locked   []<span class="type">int</span></span><br><span class="line">	parent   []<span class="type">int</span></span><br><span class="line">	children [][]<span class="type">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Constructor</span><span class="params">(parent []<span class="type">int</span>)</span></span> LockingTree &#123;</span><br><span class="line">	n := <span class="built_in">len</span>(parent)</span><br><span class="line">	Locked := <span class="built_in">make</span>([]<span class="type">int</span>, n)</span><br><span class="line">	<span class="keyword">for</span> i := <span class="keyword">range</span> Locked &#123;</span><br><span class="line">		Locked[i] = <span class="number">-1</span></span><br><span class="line">	&#125;</span><br><span class="line">	children := <span class="built_in">make</span>([][]<span class="type">int</span>, n)</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">1</span>; i &lt; n; i++ &#123;</span><br><span class="line">		children[parent[i]] = <span class="built_in">append</span>(children[parent[i]], i)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> LockingTree&#123;</span><br><span class="line">		locked:   Locked,</span><br><span class="line">		parent:   parent,</span><br><span class="line">		children: children,</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(this *LockingTree)</span></span> Lock(num <span class="type">int</span>, user <span class="type">int</span>) <span class="type">bool</span> &#123;</span><br><span class="line">	<span class="keyword">if</span> this.locked[num] == <span class="number">-1</span> &#123;</span><br><span class="line">		this.locked[num] = user</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(this *LockingTree)</span></span> Unlock(num <span class="type">int</span>, user <span class="type">int</span>) <span class="type">bool</span> &#123;</span><br><span class="line">	<span class="keyword">if</span> this.locked[num] == <span class="number">-1</span> || this.locked[num] != user &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">	&#125;</span><br><span class="line">	this.locked[num] = <span class="number">-1</span></span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(this *LockingTree)</span></span> Upgrade(num <span class="type">int</span>, user <span class="type">int</span>) <span class="type">bool</span> &#123;</span><br><span class="line">	<span class="keyword">if</span> this.locked[num] != <span class="number">-1</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">	&#125;</span><br><span class="line">	node := num</span><br><span class="line">	<span class="keyword">for</span> ; node != <span class="number">-1</span>; node = this.parent[node] &#123;</span><br><span class="line">		<span class="keyword">if</span> this.locked[node] != <span class="number">-1</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	hasLocked := <span class="literal">false</span></span><br><span class="line">	<span class="keyword">var</span> dfs <span class="function"><span class="keyword">func</span><span class="params">(<span class="type">int</span>)</span></span></span><br><span class="line">	dfs = <span class="function"><span class="keyword">func</span><span class="params">(node <span class="type">int</span>)</span></span> &#123;</span><br><span class="line">		<span class="keyword">for</span> _, child := <span class="keyword">range</span> this.children[node] &#123;</span><br><span class="line">			<span class="keyword">if</span> this.locked[child] != <span class="number">-1</span> &#123;</span><br><span class="line">				hasLocked = <span class="literal">true</span></span><br><span class="line">				this.locked[child] = <span class="number">-1</span></span><br><span class="line">			&#125;</span><br><span class="line">			dfs(child)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	dfs(num)</span><br><span class="line">	<span class="keyword">if</span> !hasLocked &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">	&#125;</span><br><span class="line">	this.locked[num] = user</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Your LockingTree object will be instantiated and called as such:</span></span><br><span class="line"><span class="comment"> * obj := Constructor(parent);</span></span><br><span class="line"><span class="comment"> * param_1 := obj.Lock(num,user);</span></span><br><span class="line"><span class="comment"> * param_2 := obj.Unlock(num,user);</span></span><br><span class="line"><span class="comment"> * param_3 := obj.Upgrade(num,user);</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">//leetcode submit region end(Prohibit modification and deletion)</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 
     </div>
@@ -280,7 +260,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>Post link: </strong>
-    <a href="http://zyuu.top/2023/09/04/Graph-LC684/" title="Graph-LC684">http://zyuu.top/2023/09/04/Graph-LC684/</a>
+    <a href="http://zyuu.top/2023/09/23/lc9-23/" title="lc9-23">http://zyuu.top/2023/09/23/lc9-23/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
@@ -291,8 +271,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/DSU/" rel="tag"># DSU</a>
-              <a href="/tags/Graph/" rel="tag"># Graph</a>
+              <a href="/tags/Golang/" rel="tag"># Golang</a>
           </div>
 
         
@@ -301,13 +280,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2023/09/04/Graph-LC1971/" rel="prev" title="Graph-LC1971">
-      <i class="fa fa-chevron-left"></i> Graph-LC1971
+    <a href="/2023/09/22/lc9-22/" rel="prev" title="lc9-22">
+      <i class="fa fa-chevron-left"></i> lc9-22
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2023/09/04/Graph-LC685/" rel="next" title="Graph-LC685(can't solve)">
-      Graph-LC685(can't solve) <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -366,7 +342,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Redundant-Connection"><span class="nav-number">1.</span> <span class="nav-text">Redundant Connection</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Resolution"><span class="nav-number">1.1.</span> <span class="nav-text">Resolution</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1993-%E6%A0%91%E4%B8%8A%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="nav-number">1.</span> <span class="nav-text">1993. 树上的操作</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
